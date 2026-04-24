@@ -1,0 +1,21 @@
+{
+  "filename": "C:\\customization\\Alvils.ru\\customthemes.css",
+  "favicon": "AlvilsFavicon.ico",
+  "allowUsersToSwitchTheme": true,
+  "allowBuiltInThemes": true,
+  "themeOverriden": true,
+  "defaultTheme": "AlvilsLight",
+  "lightMode": "AlvilsLight",
+  "darkMode": "AlvilsDark",
+  "productName": "Alvils Workspace",
+  "themes": [
+    {
+      "class": "AlvilsLight",
+      "name": "Alvils (light)"
+    },
+    {
+      "class": "AlvilsDark",
+      "name": "Alvils (dark)"
+    }
+  ]
+}

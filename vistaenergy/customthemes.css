@@ -1,0 +1,177 @@
+/* =============================================================
+   Vista Energy — Custom theme for Thinfinity Workspace
+   Brand (extracted from https://www.vistaenergy.com/):
+     Primary violet:     #6748d8
+     Dark indigo:        #1f1740
+     Darker accent:      #35227b
+     Light lavender:     #b2a5ec
+     Very light lilac:   #dad1f6
+   ============================================================= */
+
+.VistaLight {
+  /* --- Core brand --- */
+  --primary-color: #6748d8;
+  --dark-primary-color: #35227b;
+  --light-primary-color: #dad1f6;
+  --secondary-color: #1f1740;
+  --tertiary-color: #b2a5ec;
+
+  /* --- Surfaces --- */
+  --bgcolor: #1f1740;
+  --primary-bgcolor: #ffffff;
+  --secondary-bgcolor: #faf8ff;
+  --tertiary-bgcolor: #f1edff;
+  --hover-bgcolor: #ebe4fb;
+
+  --header-bgcolor: var(--primary-bgcolor);
+  --toolbar-bgcolor: var(--tertiary-bgcolor);
+  --sidepanel-header-bgcolor: var(--header-bgcolor);
+  --sidepanel-bgcolor: var(--secondary-bgcolor);
+  --menu-bgcolor: var(--secondary-bgcolor);
+  --dialog-bgcolor: var(--primary-bgcolor);
+  --submenu-bgcolor: var(--tertiary-bgcolor);
+  --light-mode-entity-bg: #6748d814;
+  --VistaLight-entity-bg: #6748d814;
+  --table-header-bgcolor: var(--hover-bgcolor);
+  --table-body-bgcolor: var(--secondary-bgcolor);
+  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+
+  /* --- Buttons --- */
+  --button-bgcolor: var(--primary-color);
+  --button-txtcolor: #ffffff;
+  --button-bgcolor-h: var(--dark-primary-color);
+  --button-txtcolor-h: #ffffff;
+  --outline-button-color: var(--button-bgcolor);
+  --outline-button-bgcolor-h: var(--button-bgcolor-h);
+  --outline-button-color-h: var(--button-txtcolor-h);
+  --special-button: #ffffff;
+  --switcher-button: #adadad;
+
+  /* --- Links & nav --- */
+  --link-color: var(--primary-color);
+  --link-color-h: var(--dark-primary-color);
+  --menu-selected-color: var(--dark-primary-color);
+  --menu-selected-bgcolor: var(--light-primary-color);
+
+  /* --- Text --- */
+  --primary-txtcolor: #1f1740;
+  --secondary-txtcolor: #6f6f6f;
+  --heading-color: var(--dark-primary-color);
+
+  /* --- Borders --- */
+  --border-color: #d7cff0;
+  --light-border-color: #ebe5fa;
+  --separator: #ddd4f3;
+
+  /* --- Status --- */
+  --disabled: #adadad;
+  --danger: #e22732;
+  --alert: #fe6862;
+  --allowed: #52a50c;
+  --shadow-color: #1f174019;
+
+  /* --- Dashboard background (real Vista hero) --- */
+  --bg-image: url("<%=@BASEURL%>__themes__/VistaHero.jpg");
+  --bg-size: cover;
+  --bg-blend-mode: none;
+
+  /* --- Logos (real Vista SVG, violet fill for light bg) --- */
+  --desktop-logo: url("<%=@BASEURL%>__themes__/VistaLogo.svg");
+  --mobile-logo:  url("<%=@BASEURL%>__themes__/VistaLogoMobile.svg");
+  --login-logo:   url("<%=@BASEURL%>__themes__/VistaLoginLogo.svg");
+  --logo-bg-size: contain;
+
+  /* --- Login brand panel (left side of /signin, v8+) --- */
+  --login-brand-bg: url("<%=@BASEURL%>__themes__/VistaHero.jpg");
+  --login-brand-bg-size: cover;
+  --login-brand-bg-repeat: no-repeat;
+  --login-brand-bg-position-x: center;
+  --login-brand-bg-position-y: center;
+  --login-brand-bg-blend-mode: normal;
+  --login-form-bg: var(--primary-bgcolor);
+  --login-box-width: 440px;
+}
+
+.VistaDark {
+  /* --- Core brand (inverted for dark surface, matches vistaenergy.com itself) --- */
+  --primary-color: #b2a5ec;
+  --dark-primary-color: #dad1f6;
+  --light-primary-color: #35227b;
+  --secondary-color: #6748d8;
+  --tertiary-color: #b2a5ec;
+
+  /* --- Surfaces (Vista's deep indigo, #1f1740) --- */
+  --bgcolor: #faf8ff;
+  --primary-bgcolor: #1f1740;
+  --secondary-bgcolor: #2a2055;
+  --tertiary-bgcolor: #352a6a;
+  --hover-bgcolor: #43358a;
+
+  --header-bgcolor: var(--primary-bgcolor);
+  --toolbar-bgcolor: var(--tertiary-bgcolor);
+  --sidepanel-header-bgcolor: var(--header-bgcolor);
+  --sidepanel-bgcolor: var(--secondary-bgcolor);
+  --menu-bgcolor: var(--secondary-bgcolor);
+  --dialog-bgcolor: var(--primary-bgcolor);
+  --submenu-bgcolor: var(--tertiary-bgcolor);
+  --light-mode-entity-bg: #b2a5ec22;
+  --VistaDark-entity-bg: #b2a5ec22;
+  --table-header-bgcolor: var(--hover-bgcolor);
+  --table-body-bgcolor: var(--secondary-bgcolor);
+  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+
+  /* --- Buttons --- */
+  --button-bgcolor: var(--secondary-color);
+  --button-txtcolor: #ffffff;
+  --button-bgcolor-h: var(--primary-color);
+  --button-txtcolor-h: #1f1740;
+  --outline-button-color: var(--primary-color);
+  --outline-button-bgcolor-h: var(--primary-color);
+  --outline-button-color-h: #1f1740;
+  --special-button: #ffffff;
+  --switcher-button: #8d82c9;
+
+  /* --- Links & nav --- */
+  --link-color: var(--primary-color);
+  --link-color-h: var(--dark-primary-color);
+  --menu-selected-color: var(--dark-primary-color);
+  --menu-selected-bgcolor: var(--light-primary-color);
+
+  /* --- Text --- */
+  --primary-txtcolor: #f5f2ff;
+  --secondary-txtcolor: #b2a5ec;
+  --heading-color: var(--primary-color);
+
+  /* --- Borders --- */
+  --border-color: #3a2d78;
+  --light-border-color: #2a2055;
+  --separator: #3a2d78;
+
+  /* --- Status --- */
+  --disabled: #8d82c9;
+  --danger: #fe6862;
+  --alert: #fe6862;
+  --allowed: #32cd32;
+  --shadow-color: #00000066;
+
+  /* --- Dashboard background --- */
+  --bg-image: url("<%=@BASEURL%>__themes__/VistaHero.jpg");
+  --bg-size: cover;
+  --bg-blend-mode: multiply;
+
+  /* --- Logos (white fill for dark surface) --- */
+  --desktop-logo: url("<%=@BASEURL%>__themes__/VistaLogoWhite.svg");
+  --mobile-logo:  url("<%=@BASEURL%>__themes__/VistaLogoMobileWhite.svg");
+  --login-logo:   url("<%=@BASEURL%>__themes__/VistaLoginLogo.svg");
+  --logo-bg-size: contain;
+
+  /* --- Login brand panel --- */
+  --login-brand-bg: url("<%=@BASEURL%>__themes__/VistaHero.jpg");
+  --login-brand-bg-size: cover;
+  --login-brand-bg-repeat: no-repeat;
+  --login-brand-bg-position-x: center;
+  --login-brand-bg-position-y: center;
+  --login-brand-bg-blend-mode: normal;
+  --login-form-bg: var(--primary-bgcolor);
+  --login-box-width: 440px;
+}

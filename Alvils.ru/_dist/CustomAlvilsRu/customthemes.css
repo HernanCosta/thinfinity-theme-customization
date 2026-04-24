@@ -1,0 +1,176 @@
+﻿/* =============================================================
+   Alvils â€” Custom theme for Thinfinity Workspace
+   Brand (from alvils.ru):
+     Primary turquoise:  #4fcbdf
+     Deep teal (hero):   #005a49
+     Accent teal:        #00b7a8
+     Dark ink:           #218d9e
+   ============================================================= */
+
+.AlvilsLight {
+  /* --- Core brand --- */
+  --primary-color: #4fcbdf;
+  --dark-primary-color: #005a49;
+  --light-primary-color: #e0f5fa;
+  --secondary-color: #00b7a8;
+  --tertiary-color: #e5a654;
+
+  /* --- Surfaces --- */
+  --bgcolor: #003a30;
+  --primary-bgcolor: #ffffff;
+  --secondary-bgcolor: #f5fafd;
+  --tertiary-bgcolor: #eaf4f8;
+  --hover-bgcolor: #e0f5fa;
+
+  --header-bgcolor: var(--primary-bgcolor);
+  --toolbar-bgcolor: var(--tertiary-bgcolor);
+  --sidepanel-header-bgcolor: var(--header-bgcolor);
+  --sidepanel-bgcolor: var(--secondary-bgcolor);
+  --menu-bgcolor: var(--secondary-bgcolor);
+  --dialog-bgcolor: var(--primary-bgcolor);
+  --submenu-bgcolor: var(--tertiary-bgcolor);
+  --light-mode-entity-bg: #4fcbdf16;
+  --AlvilsLight-entity-bg: #4fcbdf16;
+  --table-header-bgcolor: var(--hover-bgcolor);
+  --table-body-bgcolor: var(--secondary-bgcolor);
+  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+
+  /* --- Buttons --- */
+  --button-bgcolor: var(--primary-color);
+  --button-txtcolor: #ffffff;
+  --button-bgcolor-h: var(--dark-primary-color);
+  --button-txtcolor-h: #ffffff;
+  --outline-button-color: var(--button-bgcolor);
+  --outline-button-bgcolor-h: var(--button-bgcolor-h);
+  --outline-button-color-h: var(--button-txtcolor-h);
+  --special-button: #ffffff;
+  --switcher-button: #adadad;
+
+  /* --- Links & nav --- */
+  --link-color: var(--primary-color);
+  --link-color-h: var(--dark-primary-color);
+  --menu-selected-color: var(--dark-primary-color);
+  --menu-selected-bgcolor: var(--light-primary-color);
+
+  /* --- Text --- */
+  --primary-txtcolor: #003a30;
+  --secondary-txtcolor: #6b8596;
+  --heading-color: var(--dark-primary-color);
+
+  /* --- Borders --- */
+  --border-color: #c4d7d2;
+  --light-border-color: #e0ebe8;
+  --separator: #d1e0da;
+
+  /* --- Status --- */
+  --disabled: #adadad;
+  --danger: #d55050;
+  --alert: #e5a654;
+  --allowed: #8fdb39;
+  --shadow-color: #005a4919;
+
+  /* --- Login background (real Alvils hero) --- */
+  --bg-image: url("<%=@BASEURL%>__themes__/AlvilsLoginBg.jpg");
+  --bg-size: cover;
+  --bg-blend-mode: none;
+
+  /* --- Logos (real brand PNG) --- */
+  --desktop-logo: url("<%=@BASEURL%>__themes__/AlvilsLogo.png");
+  --mobile-logo:  url("<%=@BASEURL%>__themes__/AlvilsLogo.png");
+  --login-logo:   url("<%=@BASEURL%>__themes__/AlvilsLogo.png");
+  --logo-bg-size: contain;
+
+  /* --- Login brand panel (left side of /signin) --- */
+  --login-brand-bg: url("<%=@BASEURL%>__themes__/AlvilsLoginBg.jpg");
+  --login-brand-bg-size: cover;
+  --login-brand-bg-repeat: no-repeat;
+  --login-brand-bg-position-x: center;
+  --login-brand-bg-position-y: center;
+  --login-brand-bg-blend-mode: normal;
+  /* Form panel (right) stays teal via secondary-bgcolor */
+  --login-form-bg: var(--primary-bgcolor);
+}
+
+.AlvilsDark {
+  /* --- Core brand --- */
+  --primary-color: #4fcbdf;
+  --dark-primary-color: #7cdfff;
+  --light-primary-color: #0a3d35;
+  --secondary-color: #17d9c7;
+  --tertiary-color: #e5a654;
+
+  /* --- Surfaces (deep teal instead of navy) --- */
+  --bgcolor: #e8f6f2;
+  --primary-bgcolor: #002820;
+  --secondary-bgcolor: #003a30;
+  --tertiary-bgcolor: #004b3e;
+  --hover-bgcolor: #005a49;
+
+  --header-bgcolor: var(--primary-bgcolor);
+  --toolbar-bgcolor: var(--tertiary-bgcolor);
+  --sidepanel-header-bgcolor: var(--header-bgcolor);
+  --sidepanel-bgcolor: var(--secondary-bgcolor);
+  --menu-bgcolor: var(--secondary-bgcolor);
+  --dialog-bgcolor: var(--primary-bgcolor);
+  --submenu-bgcolor: var(--tertiary-bgcolor);
+  --light-mode-entity-bg: #4fcbdf22;
+  --AlvilsDark-entity-bg: #4fcbdf22;
+  --table-header-bgcolor: var(--hover-bgcolor);
+  --table-body-bgcolor: var(--secondary-bgcolor);
+  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+
+  /* --- Buttons --- */
+  --button-bgcolor: var(--primary-color);
+  --button-txtcolor: #002820;
+  --button-bgcolor-h: var(--dark-primary-color);
+  --button-txtcolor-h: #002820;
+  --outline-button-color: var(--button-bgcolor);
+  --outline-button-bgcolor-h: var(--button-bgcolor-h);
+  --outline-button-color-h: var(--button-txtcolor-h);
+  --special-button: #002820;
+  --switcher-button: #6b8596;
+
+  /* --- Links & nav --- */
+  --link-color: var(--primary-color);
+  --link-color-h: #7cdfff;
+  --menu-selected-color: var(--primary-color);
+  --menu-selected-bgcolor: var(--light-primary-color);
+
+  /* --- Text --- */
+  --primary-txtcolor: #e8f6f2;
+  --secondary-txtcolor: #8fbbb0;
+  --heading-color: var(--primary-color);
+
+  /* --- Borders --- */
+  --border-color: #2c6057;
+  --light-border-color: #1e4840;
+  --separator: #2c6057;
+
+  /* --- Status --- */
+  --disabled: #6b8596;
+  --danger: #ec4949;
+  --alert: #e5a654;
+  --allowed: #8fdb39;
+  --shadow-color: #00000066;
+
+  /* --- Login background (real Alvils hero) --- */
+  --bg-image: url("<%=@BASEURL%>__themes__/AlvilsLoginBg.jpg");
+  --bg-size: cover;
+  --bg-blend-mode: none;
+
+  /* --- Logos (same PNG, works on dark teal too) --- */
+  --desktop-logo: url("<%=@BASEURL%>__themes__/AlvilsLogo.png");
+  --mobile-logo:  url("<%=@BASEURL%>__themes__/AlvilsLogo.png");
+  --login-logo:   url("<%=@BASEURL%>__themes__/AlvilsLogo.png");
+  --logo-bg-size: contain;
+
+  /* --- Login brand panel (left side of /signin) --- */
+  --login-brand-bg: url("<%=@BASEURL%>__themes__/AlvilsLoginBg.jpg");
+  --login-brand-bg-size: cover;
+  --login-brand-bg-repeat: no-repeat;
+  --login-brand-bg-position-x: center;
+  --login-brand-bg-position-y: center;
+  --login-brand-bg-blend-mode: normal;
+  /* Form panel (right) stays teal via secondary-bgcolor */
+  --login-form-bg: var(--primary-bgcolor);
+}

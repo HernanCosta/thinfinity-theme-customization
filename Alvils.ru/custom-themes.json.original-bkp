@@ -1,0 +1,15 @@
+{
+  "filename": "path_and_name.css",
+  "allowUsersToSwitchTheme": true,
+  "allowBuiltInThemes": true,
+  "favicon": "favicon.ico",
+  "defaultTheme": "light-mode",
+  "lightMode": "light-mode",
+  "darkMode": "dark-mode",
+  "themes": [
+    {
+      "name": "Custom Mode",
+      "class": "custom-mode"
+    }
+  ]
+}

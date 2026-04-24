@@ -1,0 +1,21 @@
+{
+  "filename": "C:\\customization\\vistaenergy\\customthemes.css",
+  "favicon": "VistaFavicon.ico",
+  "allowUsersToSwitchTheme": true,
+  "allowBuiltInThemes": false,
+  "themeOverriden": true,
+  "defaultTheme": "VistaLight",
+  "lightMode": "VistaLight",
+  "darkMode": "VistaDark",
+  "productName": "Vista Workspace",
+  "themes": [
+    {
+      "class": "VistaLight",
+      "name": "Vista (light)"
+    },
+    {
+      "class": "VistaDark",
+      "name": "Vista (dark)"
+    }
+  ]
+}
