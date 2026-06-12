@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" width="220" height="200">
+  <!-- Vector recreation of the ACA mark (colors sampled from the official
+       color logo: blue #2b3b89, orange #f5951d). The arc pair orbits once
+       around the letters on load; CSS animations inside an SVG run even
+       when the file is used as a CSS background-image. -->
+  <style>
+    #arcs {
+      transform-origin: 110px 100px;
+      animation: aca-orbit 1.6s cubic-bezier(0.22, 1, 0.36, 1) 1 both;
+    }
+    #letters {
+      animation: aca-fade 0.8s ease-out 1 both;
+    }
+    @keyframes aca-orbit {
+      from { transform: rotate(-360deg); }
+      to   { transform: rotate(0deg); }
+    }
+    @keyframes aca-fade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #arcs, #letters { animation: none; }
+    }
+  </style>
+  <g id="arcs" fill="none" stroke-width="22" stroke-linecap="round">
+    <path d="M 40 63 A 80 80 0 0 1 180 63" stroke="#f5951d"/>
+    <path d="M 40 137 A 80 80 0 0 0 180 137" stroke="#2b3b89"/>
+  </g>
+  <g id="letters">
+    <text x="110" y="128" text-anchor="middle"
+          font-family="Arial, Helvetica, sans-serif" font-weight="800"
+          font-size="82" letter-spacing="-3" fill="#2b3b89">ACA</text>
+  </g>
+</svg>

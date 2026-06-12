@@ -29,8 +29,11 @@ I need a theme customization for **Thinfinity Workspace** based on the branding 
    - `<Brand>\customthemes.css` — classes `.<Brand>Light` and `.<Brand>Dark`
    - `custom-themes.json` — config (see step 4)
    - Favicon `.ico` (convert if the site's isn't ICO; **never SVG as favicon**, Thinfinity serves it with ICO MIME and it won't render)
-   - Logos: real PNG/SVG from the site (no placeholders). `--login-logo` renders on the brand panel (primary-color gradient): use the **white/negative variant** there.
-   - Login logo entrance animation on `#customized-logo .logo-img`: cartoonish scale-up with overshoot (0 → 1.12 → 0.94 → 1, ~0.9s ease-out), scoped to the theme classes, disabled under `@media (prefers-reduced-motion: reduce)`.
+   - Logos: real PNG/SVG from the site (no placeholders).
+   - **Header mirrors the site**: if the site's header/top bar is brand-colored, set `--header-bgcolor` to that color with the white logo variant — don't default to a white header.
+   - **`--login-logo` must be the brand's REAL color logo** — never a white/monochrome recolor. If the site only ships a white logo, ask for the color version or recreate the mark as SVG with colors sampled from the official logo. Pick the brand-panel background to complement it: light brand tint behind a color logo, brand gradient behind a white logo.
+   - Login logo animation **inside the SVG** (CSS animations in an SVG run even as a `background-image`), matching the logo's geometry — e.g., arcs/orbital elements rotate once around the mark (~1.5s, ease-out). Reserve cartoonish scale-pop for marks with no animatable geometry. Always include `@media (prefers-reduced-motion: reduce)` inside the SVG.
+   - Verify rendering with Chrome headless screenshots (`Start-Process chrome --headless --screenshot ... -Wait`; add `--force-prefers-reduced-motion` to capture the animation's resting state).
    - `README.md` with the manual install/uninstall steps (below). **No install.bat / apply-refresh.ps1 / service scripts.**
 
 3. **CSS must cover all variables (including those NOT in the KB)**:
