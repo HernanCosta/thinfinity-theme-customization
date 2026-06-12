@@ -145,37 +145,42 @@
 }
 
 /* =============================================================
-   cybelesoft.com signature: floating pill header + pill buttons.
-   .top-bar is the Workspace header (uses --header-bgcolor, see
-   _topBarHeader.scss); .p-button is the PrimeVue button base.
+   cybelesoft.com signature: pill buttons (.p-button is the
+   PrimeVue button base). The top bar stays a full-width solid
+   navy band — no rounding (operator decision after live test).
    ============================================================= */
-.CybeleLight .top-bar,
-.CybeleDark  .top-bar {
-  border-radius: 9999px;
-  margin: 0.75rem 1rem 0.25rem 1rem;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
 .CybeleLight .p-button,
 .CybeleDark  .p-button {
   border-radius: 9999px;
 }
 
-/* Settings side menu (PrimeVue PanelMenu, see _panelMenu.scss):
-   pill-button items following the standard sidebar pattern
-   (idle items transparent, ONLY active/hover get the filled
-   rounded highlight — Bootstrap nav-pills / UX Planet sidebar
-   guidance). !important throughout: stock rules use !important
-   and the custom CSS load order vs the bundle is not guaranteed. */
+/* =============================================================
+   Settings panel (PrimeVue PanelMenu — Account / Configuration).
+   Items become pill buttons: idle transparent, ONLY active/hover
+   filled (Bootstrap nav-pills / UX Planet sidebar guidance).
+   ============================================================= */
+
+/* ROOT-CAUSE FIX (dark-mode invisible text): PrimeVue's base theme
+   hard-codes `.p-panelmenu-content { background:#ffffff }`. With an
+   idle-transparent pill, the link shows that WHITE card through, so
+   the dark theme's near-white idle text (#eff7fe) became invisible.
+   Pin the content surface to a theme variable instead. Light = white
+   (unchanged), dark = #021425 — idle text now contrasts in both. */
+.CybeleLight .p-panelmenu .p-panelmenu-content,
+.CybeleDark  .p-panelmenu .p-panelmenu-content {
+  background: var(--primary-bgcolor) !important;
+  border-color: var(--border-color) !important;
+}
+
 .CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem-link,
 .CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link {
   border-radius: 9999px !important;
-  margin: 2px 14px !important;
+  margin: 2px 12px !important;
   padding: 10px 18px !important; /* stock is "10px 0 !important" */
   border-right: 0 !important;
   width: auto !important;
-  background-color: transparent !important; /* idle blends with panel */
+  background-color: transparent !important;      /* idle: blends with content */
+  color: var(--primary-txtcolor) !important;     /* idle text: readable on content */
   transition: background-color 0.15s ease-out;
 }
 
@@ -186,7 +191,84 @@
 .CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link:hover {
   background-color: var(--menu-selected-bgcolor) !important;
   color: var(--menu-selected-color) !important;
-  border-right: 0 !important;
+  border-color: transparent !important;
+}
+
+/* ROOT-CAUSE FIX (grey band behind the pill): PrimeVue base paints
+   #e9ecef on the wrapping .p-menuitem-content for hover/highlight/
+   focus. Selectors below mirror PrimeVue's exact specificity so the
+   neutralization wins in every state — only the link pill shows. */
+.CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content,
+.CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight > .p-menuitem-content,
+.CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover,
+.CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content,
+.CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content,
+.CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight > .p-menuitem-content,
+.CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover,
+.CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content {
+  background: transparent !important;
+}
+
+/* =============================================================
+   Left side nav (Home / Favorites / Settings). This is custom
+   `.menu-item` markup (SideMenuItem.vue), NOT a PanelMenu — the
+   highlight lives on `.menu-item:hover` / `.menu-item.selected`.
+   Make each a pill button.
+   ============================================================= */
+.CybeleLight .side-menu .menu-item,
+.CybeleDark  .side-menu .menu-item {
+  border-radius: 9999px;
+  margin: 2px 10px;
+  transition: background-color 0.15s ease-out;
+}
+.CybeleLight .side-menu .menu-item:hover,
+.CybeleLight .side-menu .menu-item.selected,
+.CybeleDark  .side-menu .menu-item:hover,
+.CybeleDark  .side-menu .menu-item.selected {
+  background-color: var(--menu-selected-bgcolor) !important;
+  color: var(--menu-selected-color) !important;
+  border-radius: 9999px !important;
+}
+
+/* Side-menu close "X": replace the full-height dark navy bar
+   (.right-bar.closable, bg = --menu-selected-color) with a small
+   circular chip that fills on hover — "little circle with the X". */
+.CybeleLight .side-menu .menu-item .right-bar.closable,
+.CybeleDark  .side-menu .menu-item .right-bar.closable {
+  background-color: transparent !important;
+}
+.CybeleLight .side-menu .menu-item .close-profile .cyb-cross,
+.CybeleDark  .side-menu .menu-item .close-profile .cyb-cross {
+  border-radius: 50%;
+  padding: 0.35rem;
+  line-height: 1;
+  color: var(--menu-selected-color) !important;
+  transition: background-color 0.15s ease-out;
+}
+.CybeleLight .side-menu .menu-item .close-profile .cyb-cross:hover,
+.CybeleDark  .side-menu .menu-item .close-profile .cyb-cross:hover {
+  background-color: var(--menu-selected-bgcolor) !important;
+  color: var(--menu-selected-color) !important;
+}
+
+/* Close "X" buttons in dialogs / side panels: circular hover chip,
+   standard icon-button affordance. */
+.CybeleLight .p-dialog-header-icon,
+.CybeleLight .p-sidebar-close,
+.CybeleLight .p-panel-header-icon,
+.CybeleDark  .p-dialog-header-icon,
+.CybeleDark  .p-sidebar-close,
+.CybeleDark  .p-panel-header-icon {
+  border-radius: 50% !important;
+  transition: background-color 0.15s ease-out;
+}
+.CybeleLight .p-dialog-header-icon:hover,
+.CybeleLight .p-sidebar-close:hover,
+.CybeleLight .p-panel-header-icon:hover,
+.CybeleDark  .p-dialog-header-icon:hover,
+.CybeleDark  .p-sidebar-close:hover,
+.CybeleDark  .p-panel-header-icon:hover {
+  background-color: var(--hover-bgcolor) !important;
 }
 
 /* Avatar/top dropdown menus (PrimeVue Menu/TieredMenu overlays,
@@ -215,6 +297,32 @@
   .CybeleDark  #customized-logo .logo-img {
     animation: none;
   }
+}
+
+/* =============================================================
+   Narrow-window / mobile login header (#login-header, shown at
+   the tablet-v breakpoint when the brand panel is hidden).
+   ROOT CAUSE of the "tiny butterfly only" bug: this element reuses
+   var(--login-logo) — our NEGATIVE (white) logo — on top of the
+   white form, so the white "CYBELE software" wordmark vanished and
+   only the multicolor mark survived; with no explicit height it
+   rendered tiny. Give it real height, and use the logo whose
+   wordmark contrasts with the form background per theme:
+     light form (white)  -> positive (dark) logo
+     dark form (#021425) -> negative (white) logo (the default)   */
+.CybeleLight #login-header .logo-img,
+.CybeleDark  #login-header .logo-img {
+  background-size: contain !important;
+  background-position: center !important;
+  height: 64px !important;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.CybeleLight #login-header .logo-img {
+  background-image: url("<%=@BASEURL%>__themes__/CybeleLogoPositive.svg") !important;
+}
+.CybeleDark #login-header .logo-img {
+  background-image: url("<%=@BASEURL%>__themes__/CybeleLogoWhite.svg") !important;
 }
 
 .CybeleDark {

@@ -33,10 +33,13 @@ virtual alias the server creates pointing at the folder that contains
 4. Open the Workspace URL and hard-refresh (**Ctrl+Shift+R**), or use an
    incognito window. Check `/signin`: Cybele logo (white + multicolor
    mark) popping in over the navy gradient panel, blue Sign in button,
-   Cybele favicon, tab title "Cybele Workspace", footer reading
-   "Cybele Workspace v<version>". After login: dark navy **floating
-   pill header** with the negative logo and pill-shaped buttons,
-   matching cybelesoft.com.
+   Cybele favicon, tab title "Cybele Software Workspace", footer reading
+   "Cybele Software Workspace v<version>". Narrow the window until the
+   brand panel collapses: the top logo should show the full dark
+   wordmark on white (not just the butterfly). After login: dark navy
+   solid header with the negative logo; settings menu, side nav and
+   avatar dropdown items are pill buttons (idle transparent, filled on
+   hover/active); close "X" buttons are circular on hover.
 
 ## Uninstall
 
@@ -54,7 +57,8 @@ Nothing else is touched: no files in `Program Files`, no registry changes.
 | `customthemes.css` | Theme classes `CybeleLight` / `CybeleDark` (all v8+ variables incl. undocumented `--login-brand-bg*`), pill header/buttons, logo pop animation |
 | `custom-themes.json` | Theme config (goes in the DB folder, not inside `Cybele\`) |
 | `CybeleFavicon.ico` | Real favicon from cybelesoft.com |
-| `CybeleLogoWhite.svg` | Official negative logo (white wordmark + multicolor butterfly mark) |
+| `CybeleLogoWhite.svg` | Official negative logo (white wordmark + multicolor butterfly mark) — header / dark surfaces |
+| `CybeleLogoPositive.svg` | Official positive logo (dark wordmark) — used by the narrow/mobile login header on the white form so the wordmark stays visible |
 | `CybeleLogoMobileWhite.svg` | Same mark for the mobile header |
 | `CybeleLoginLogo.svg` | Login brand-panel logo (official negative SVG) |
 
