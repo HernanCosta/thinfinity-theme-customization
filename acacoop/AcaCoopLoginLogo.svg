@@ -1,35 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" width="220" height="200">
-  <!-- Vector recreation of the ACA mark (colors sampled from the official
-       color logo: blue #2b3b89, orange #f5951d). The arc pair orbits once
-       around the letters on load; CSS animations inside an SVG run even
-       when the file is used as a CSS background-image. -->
-  <style>
-    #arcs {
-      transform-origin: 110px 100px;
-      animation: aca-orbit 1.6s cubic-bezier(0.22, 1, 0.36, 1) 1 both;
-    }
-    #letters {
-      animation: aca-fade 0.8s ease-out 1 both;
-    }
-    @keyframes aca-orbit {
-      from { transform: rotate(-360deg); }
-      to   { transform: rotate(0deg); }
-    }
-    @keyframes aca-fade {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      #arcs, #letters { animation: none; }
-    }
-  </style>
-  <g id="arcs" fill="none" stroke-width="22" stroke-linecap="round">
-    <path d="M 40 63 A 80 80 0 0 1 180 63" stroke="#f5951d"/>
-    <path d="M 40 137 A 80 80 0 0 0 180 137" stroke="#2b3b89"/>
+  <!-- ACA mark, negative variant for the indigo brand panel:
+       white letters + bottom arc, orange top arc (#f5951d kept from
+       the official color logo). Geometry matches the site's white
+       mark: large letters, arcs hugging the central C. -->
+  <g fill="none" stroke-width="15" stroke-linecap="round">
+    <path d="M 54.3 65 A 68 68 0 0 1 165.7 65" stroke="#f5951d"/>
+    <path d="M 54.3 143 A 68 68 0 0 0 165.7 143" stroke="#ffffff"/>
   </g>
-  <g id="letters">
-    <text x="110" y="128" text-anchor="middle"
-          font-family="Arial, Helvetica, sans-serif" font-weight="800"
-          font-size="82" letter-spacing="-3" fill="#2b3b89">ACA</text>
-  </g>
+  <text x="110" y="138" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-weight="800"
+        font-size="95" letter-spacing="-4" fill="#ffffff">ACA</text>
 </svg>

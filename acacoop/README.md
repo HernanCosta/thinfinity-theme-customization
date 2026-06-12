@@ -31,11 +31,12 @@ config JSON is read only from the DB folder.
    ```
 
 4. Open the Workspace URL and hard-refresh (**Ctrl+Shift+R**), or use an
-   incognito window. Check `/signin`: color ACA mark on the light brand
-   panel with the orange/blue arcs orbiting the letters once, indigo
-   Sign in button, ACA favicon, tab title "ACA Coop Workspace". After
-   login the header bar is brand indigo with the white logo, like the
-   site.
+   incognito window. Check `/signin`: ACA mark (white + orange arc)
+   popping in over the indigo gradient panel, indigo Sign in button,
+   ACA favicon, tab title "ACA Coop Workspace". After login the header
+   bar is brand indigo with the white logo, like the site, and the
+   footer reads "ACA Coop Workspace v<version>" (the `productName`
+   field drives the tab title AND the footer text — no file edits).
 
 ## Uninstall
 
@@ -55,12 +56,13 @@ Nothing else is touched: no files in `Program Files`, no registry changes.
 | `AcaCoopFavicon.ico` | Real favicon from acacoop.com.ar (16/32px multi-icon) |
 | `AcaCoopLogoWhite.png` | Original white wordmark from the site — on the indigo header, like the site |
 | `AcaCoopLogoMobileWhite.png` | Same mark for the mobile header |
-| `AcaCoopLoginLogo.svg` | Vector recreation of the official color mark (blue `#2b3b89` / orange `#f5951d`); the arcs orbit the letters once on load, `prefers-reduced-motion` aware |
+| `AcaCoopLoginLogo.svg` | Vector recreation of the ACA mark, negative variant (white letters/bottom arc, official orange `#f5951d` top arc) |
 
 Style-only theme: no background images are shipped. The header bar is
 brand indigo with the white logo (matching acacoop.com.ar); the login
-brand panel is a light indigo-tinted gradient so the color mark reads;
-the dashboard background is a flat brand surface.
+brand panel is an indigo gradient with the mark popping in on load
+(`prefers-reduced-motion` aware); the dashboard background is a flat
+brand surface.
 
 Brand sources: acacoop.com.ar inline styles + `hello.css` overrides
 (`#282c87` indigo, `#ff9100` orange — the teal in `style.css` is the stock

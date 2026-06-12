@@ -13,9 +13,9 @@
    panel uses a CSS gradient. Logos + favicon are the only binaries.
    Site ships only the white wordmark (transparent header over dark
    hero), used on the indigo header like the site itself. The login
-   logo is a vector recreation of the official color mark (blue
-   #2b3b89 / orange #f5951d, sampled from the brand logo) with the
-   arc pair orbiting the letters once on load.
+   logo is a vector recreation of the ACA mark in its negative
+   variant (white letters/bottom arc, official orange #f5951d top
+   arc) sitting on the indigo gradient panel.
 
    Contrast verified against WCAG 2.1 AA (SC 1.4.3: text >= 4.5:1,
    SC 1.4.11: UI components >= 3:1):
@@ -102,16 +102,16 @@
   --bg-blend-mode: normal;
 
   /* --- Logos. White wordmark on the indigo header (site-accurate);
-     login logo is the real color mark (self-animating SVG: arcs
-     orbit the letters once on load), so the brand panel is a light
-     tint for it to read. --- */
+     login logo is the ACA mark in its negative variant (white
+     letters/bottom arc, official orange top arc) on the indigo
+     gradient panel. --- */
   --desktop-logo: url("<%=@BASEURL%>__themes__/AcaCoopLogoWhite.png");
   --mobile-logo:  url("<%=@BASEURL%>__themes__/AcaCoopLogoMobileWhite.png");
   --login-logo:   url("<%=@BASEURL%>__themes__/AcaCoopLoginLogo.svg");
   --logo-bg-size: contain;
 
-  /* --- Login brand panel: light indigo-tinted gradient, no image file --- */
-  --login-brand-bg: linear-gradient(135deg, #ffffff 0%, #eef0fa 55%, #d4d9f2 100%);
+  /* --- Login brand panel: indigo gradient, no image file --- */
+  --login-brand-bg: linear-gradient(135deg, #1a1d5e 0%, #282c87 60%, #565ed0 100%);
   --login-brand-bg-size: cover;
   --login-brand-bg-repeat: no-repeat;
   --login-brand-bg-position-x: center;
@@ -122,12 +122,29 @@
 }
 
 /* =============================================================
-   Login logo animation lives INSIDE AcaCoopLoginLogo.svg: the
-   orange/blue arc pair orbits the ACA letters once on load
-   (CSS animation in an SVG runs even as a background-image).
-   No pop/scale on the container — subtle and on-brand.
-   The SVG honors prefers-reduced-motion internally.
+   Login logo entrance animation (both themes): cartoonish pop
+   from zero with overshoot — same as the Entel pack.
+   Disabled under prefers-reduced-motion.
    ============================================================= */
+@keyframes acacoop-logo-pop {
+  0%   { transform: scale(0);    opacity: 0; }
+  55%  { transform: scale(1.12); opacity: 1; }
+  75%  { transform: scale(0.94); }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+.AcaCoopLight #customized-logo .logo-img,
+.AcaCoopDark  #customized-logo .logo-img {
+  animation: acacoop-logo-pop 0.9s ease-out both;
+  transform-origin: center center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .AcaCoopLight #customized-logo .logo-img,
+  .AcaCoopDark  #customized-logo .logo-img {
+    animation: none;
+  }
+}
 
 .AcaCoopDark {
   /* --- Core brand (lightened for dark surfaces) --- */
@@ -204,9 +221,8 @@
   --login-logo:   url("<%=@BASEURL%>__themes__/AcaCoopLoginLogo.svg");
   --logo-bg-size: contain;
 
-  /* --- Login brand panel: same light tint as light theme so the
-     color logo reads (pre-auth screen, consistent branding) --- */
-  --login-brand-bg: linear-gradient(135deg, #ffffff 0%, #eef0fa 55%, #d4d9f2 100%);
+  /* --- Login brand panel: deep indigo gradient --- */
+  --login-brand-bg: linear-gradient(135deg, #0d0f33 0%, #1a1d5e 60%, #282c87 100%);
   --login-brand-bg-size: cover;
   --login-brand-bg-repeat: no-repeat;
   --login-brand-bg-position-x: center;
