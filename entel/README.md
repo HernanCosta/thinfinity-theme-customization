@@ -32,9 +32,9 @@ is read only from the DB folder (source: `IISServer.Themes.pas` —
    ```
 
 4. Open the Workspace URL in the browser and hard-refresh (**Ctrl+Shift+R**),
-   or use an incognito window. Check `/signin`: Entel logo, Torre Entel photo
-   on the left panel, blue Sign in button, Entel favicon, tab title
-   "Entel Workspace".
+   or use an incognito window. Check `/signin`: white Entel logo popping in
+   over the blue gradient panel, blue Sign in button, Entel favicon, tab
+   title "Entel Workspace".
 
 ## Uninstall
 
@@ -49,14 +49,20 @@ Nothing else is touched: no files in `Program Files`, no registry changes.
 
 | File | Purpose |
 |---|---|
-| `customthemes.css` | Theme classes `EntelLight` / `EntelDark` (all v8+ variables incl. undocumented `--login-brand-bg*`) |
+| `customthemes.css` | Theme classes `EntelLight` / `EntelDark` (all v8+ variables incl. undocumented `--login-brand-bg*`), login logo entrance animation |
 | `custom-themes.json` | Theme config (goes in the DB folder, not inside `Entel\`) |
 | `EntelFavicon.ico` | Real favicon from entel.cl |
 | `EntelLogo.svg` / `EntelLogoWhite.svg` | Official "e)" symbol, color / negative |
 | `EntelLogoMobile*.svg` | Compact mark for mobile header |
-| `EntelLoginLogo.svg` | Login box logo |
-| `EntelHero.jpg` | Torre Entel photo (login left panel + dashboard background) |
+| `EntelLoginLogo.svg` | Login brand-panel logo (white variant, sits on the blue gradient) |
+
+Style-only theme: no background images are shipped. The login brand panel
+uses a CSS gradient in Entel blues; the dashboard background is a flat
+brand surface. The login logo animates in (scale-up pop) and respects
+`prefers-reduced-motion`.
 
 Brand sources: entel.cl production CSS (`#002eff` primary, `#ff3d00` accent),
 official symbol SVG from Entel's CDN icon library, favicon from site
-`<link rel="icon">`.
+`<link rel="icon">`. Contrast validated against WCAG 2.1 AA (ratios
+documented in `customthemes.css`); dark surfaces follow Material Design
+dark-theme guidance (near-black, desaturated primaries).

@@ -11,6 +11,22 @@
      Success green:      #1ea67b
      Alert yellow:       #f5b207
    Fonts on site: "Inter", "Barlow" (no Thinfinity var; informative only)
+
+   Policy: style-only theme. No image files are shipped or referenced
+   for backgrounds; the login brand panel uses a CSS gradient.
+   Logos + favicon are the only binary assets.
+
+   Contrast verified against WCAG 2.1 AA (SC 1.4.3: text >= 4.5:1,
+   SC 1.4.11: UI components >= 3:1):
+     #002eff on #ffffff = 7.4:1   (links, outline buttons)
+     #ffffff on #002eff = 7.4:1   (button text)
+     #66686c on #ffffff = 5.7:1   (secondary text)
+     #916802 on #ffffff = 5.0:1   (alert, light)
+     #8097ff on #121217 = 6.9:1   (links, dark)
+     #ffffff on #4062ff = 4.8:1   (button text, dark)
+     #4062ff vs #121217 = 3.9:1   (button surface vs bg, dark)
+   Dark surfaces follow Material dark-theme guidance: near-black
+   #121217 base (not #000), desaturated/lightened primaries.
    ============================================================= */
 
 .EntelLight {
@@ -71,23 +87,27 @@
   /* --- Status --- */
   --disabled: #a4a4a6;
   --danger: #db110a;
-  --alert: #f5b207;
+  --alert: #916802; /* site's own dark amber; #f5b207 fails 3:1 on white */
   --allowed: #1ea67b;
   --shadow-color: #0c0c0c19;
 
-  /* --- Dashboard background (Torre Entel, real site asset) --- */
-  --bg-image: url("<%=@BASEURL%>__themes__/EntelHero.jpg");
-  --bg-size: cover;
-  --bg-blend-mode: none;
+  /* --- Dashboard background: none (style-only; 60-30-10 neutral dominant) --- */
+  --bg-image: none;
+  --bg-size: auto;
+  --bg-blend-mode: normal;
 
-  /* --- Logos (official Entel "e)" symbol, site CDN SVG) --- */
+  /* --- Logos (official Entel "e)" symbol, site CDN SVG).
+     Login logo is the negative (white) variant: it renders on the
+     blue gradient brand panel, not on the white form. --- */
   --desktop-logo: url("<%=@BASEURL%>__themes__/EntelLogo.svg");
   --mobile-logo:  url("<%=@BASEURL%>__themes__/EntelLogoMobile.svg");
   --login-logo:   url("<%=@BASEURL%>__themes__/EntelLoginLogo.svg");
   --logo-bg-size: contain;
 
-  /* --- Login brand panel (left side of /signin, v8+) --- */
-  --login-brand-bg: url("<%=@BASEURL%>__themes__/EntelHero.jpg");
+  /* --- Login brand panel (left side of /signin, v8+) ---
+     CSS gradient, no image file: Entel blue ramp, dark-to-light.
+     Form panel stays solid for distraction-free sign-in. */
+  --login-brand-bg: linear-gradient(135deg, #0022bf 0%, #002eff 55%, #4062ff 100%);
   --login-brand-bg-size: cover;
   --login-brand-bg-repeat: no-repeat;
   --login-brand-bg-position-x: center;
@@ -95,6 +115,35 @@
   --login-brand-bg-blend-mode: normal;
   --login-form-bg: var(--primary-bgcolor);
   --login-box-width: 440px;
+}
+
+/* =============================================================
+   Login logo entrance animation (both themes).
+   The built-in Thinfinity logo animates via Lottie
+   (LogoAnimated.vue); custom logos render statically in
+   #customized-logo .logo-img — this restores an equivalent
+   entrance: pop from zero with a cartoonish overshoot
+   ("back" easing, scale 0 -> 1.12 -> 0.94 -> 1).
+   prefers-reduced-motion disables it (WCAG 2.3.3 / SC 2.2.2).
+   ============================================================= */
+@keyframes entel-logo-pop {
+  0%   { transform: scale(0);    opacity: 0; }
+  55%  { transform: scale(1.12); opacity: 1; }
+  75%  { transform: scale(0.94); }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+.EntelLight #customized-logo .logo-img,
+.EntelDark  #customized-logo .logo-img {
+  animation: entel-logo-pop 0.9s ease-out both;
+  transform-origin: center center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .EntelLight #customized-logo .logo-img,
+  .EntelDark  #customized-logo .logo-img {
+    animation: none;
+  }
 }
 
 .EntelDark {
@@ -125,11 +174,12 @@
   --table-body-bgcolor: var(--secondary-bgcolor);
   --table-body-bgcolor-h: var(--tertiary-bgcolor);
 
-  /* --- Buttons (vivid Entel blue reads well on dark) --- */
-  --button-bgcolor: #002eff;
+  /* --- Buttons: lightened blue; saturated #002eff is only 2.5:1
+     against #121217 (fails SC 1.4.11) and vibrates on dark --- */
+  --button-bgcolor: #4062ff;
   --button-txtcolor: #ffffff;
-  --button-bgcolor-h: #4062ff;
-  --button-txtcolor-h: #ffffff;
+  --button-bgcolor-h: #8097ff;
+  --button-txtcolor-h: #121217;
   --outline-button-color: var(--primary-color);
   --outline-button-bgcolor-h: var(--primary-color);
   --outline-button-color-h: #121217;
@@ -159,10 +209,10 @@
   --allowed: #42e8b4;
   --shadow-color: #00000066;
 
-  /* --- Dashboard background --- */
-  --bg-image: url("<%=@BASEURL%>__themes__/EntelHero.jpg");
-  --bg-size: cover;
-  --bg-blend-mode: multiply;
+  /* --- Dashboard background: none (style-only) --- */
+  --bg-image: none;
+  --bg-size: auto;
+  --bg-blend-mode: normal;
 
   /* --- Logos (white "e" + red arc: Entel negative version) --- */
   --desktop-logo: url("<%=@BASEURL%>__themes__/EntelLogoWhite.svg");
@@ -170,8 +220,8 @@
   --login-logo:   url("<%=@BASEURL%>__themes__/EntelLoginLogo.svg");
   --logo-bg-size: contain;
 
-  /* --- Login brand panel --- */
-  --login-brand-bg: url("<%=@BASEURL%>__themes__/EntelHero.jpg");
+  /* --- Login brand panel: deep Entel blue gradient, no image file --- */
+  --login-brand-bg: linear-gradient(135deg, #0c0c2a 0%, #0022bf 60%, #002eff 100%);
   --login-brand-bg-size: cover;
   --login-brand-bg-repeat: no-repeat;
   --login-brand-bg-position-x: center;

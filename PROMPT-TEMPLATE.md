@@ -16,15 +16,18 @@ Necesito crear una customización de tema para **Thinfinity Workspace** basada e
 
 1. **Extraer branding del site**:
    - Descargar HTML + CSS del site usando `curl` (User-Agent de browser real).
-   - Identificar: favicon real (`<link rel="icon">`), logo real (`<img>` o `background-image` del `#logo`, `.logo`, `.navbar-brand`), paleta primaria (hex codes más frecuentes en CSS), font-family, y una imagen representativa para hero/login background.
+   - Identificar: favicon real (`<link rel="icon">`), logo real (`<img>` o `background-image` del `#logo`, `.logo`, `.navbar-brand`), paleta primaria (hex codes más frecuentes en CSS), font-family.
    - Descargar los archivos reales (no generarlos) y renombrarlos con prefix de marca.
+   - **Política de imágenes: el tema es solo estilo.** No incluir imágenes de fondo (hero/dashboard/login) salvo que se pida explícitamente. Los únicos binarios del pack son logos y favicon. El panel de marca del login usa un gradiente CSS con los colores primarios; `--bg-image: none`.
+   - **Accesibilidad**: validar la paleta contra WCAG 2.1 AA (texto ≥ 4.5:1, componentes UI ≥ 3:1) y documentar los ratios en el CSS. Para el tema dark seguir Material Design dark theme: superficies near-black (no #000) y primarios desaturados/aclarados (los saturados fallan contraste y "vibran" sobre fondos oscuros).
 
 2. **Crear los assets en `C:\customization\<BrandName>\`**:
    - `customthemes.css` — clases `.<Brand>Light` y `.<Brand>Dark`
    - `custom-themes.json` — config apuntando al CSS
    - Favicon `.ico` (si el del site no es ICO, convertirlo o generar uno con PowerShell GDI+; **no usar SVG como favicon**, Thinfinity lo sirve con MIME ICO y no renderiza)
-   - Logos: PNG reales del site (no placeholders)
-   - Imagen hero para `--login-brand-bg`
+   - Logos: PNG/SVG reales del site (no placeholders). El `--login-logo` va sobre el panel de marca (gradiente de color primario): usar la **versión negativa/blanca** del logo ahí.
+   - `--login-brand-bg`: gradiente CSS con la paleta de la marca (NO imagen, salvo pedido explícito)
+   - Animación de entrada del logo del login (`#customized-logo .logo-img`): scale-up con overshoot, scoped a las clases del tema, con `@media (prefers-reduced-motion: reduce)` para deshabilitarla
    - `apply-refresh.ps1` con self-elevation UAC que: detiene `ThinfinitySvcMgr`, sincroniza assets a `C:\Program Files\Thinfinity\Workspace\web\__themes__\` (copia todos los .css/.svg/.png/.jpg/.ico + alias `custom-theme.css`), copia el JSON a `C:\Program Files\Thinfinity\Workspace\custom-themes.json` y a `C:\ProgramData\Cybele Software\Thinfinity\Workspace\DB\custom-themes.json`, arranca el servicio.
    - `install.bat` y `uninstall.bat` launchers.
 
