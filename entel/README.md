@@ -8,10 +8,10 @@ is read only from the DB folder (source: `IISServer.Themes.pas` —
 
 ## Install
 
-1. Copy the **`entel`** folder (this whole folder: CSS + SVG/ICO/JPG assets) to:
+1. Copy the **`Entel`** folder (CSS + SVG/ICO/JPG assets) to:
 
    ```
-   C:\ProgramData\Cybele Software\Thinfinity\Workspace\DB\entel\
+   C:\ProgramData\Cybele Software\Thinfinity\Workspace\DB\Entel\
    ```
 
 2. Copy **`custom-themes.json`** to the DB folder (one level above):
@@ -21,8 +21,9 @@ is read only from the DB folder (source: `IISServer.Themes.pas` —
    ```
 
    If a `custom-themes.json` already exists there, back it up first.
-   The `filename` field is relative (`entel\customthemes.css`) and resolves
-   against the DB folder — no path editing needed.
+   The `filename` field already points to
+   `C:\ProgramData\Cybele Software\Thinfinity\Workspace\DB\Entel\customthemes.css` —
+   if you copy the files exactly as above, no editing is needed.
 
 3. Restart the service:
 
@@ -39,7 +40,7 @@ is read only from the DB folder (source: `IISServer.Themes.pas` —
 
 1. Delete `C:\ProgramData\Cybele Software\Thinfinity\Workspace\DB\custom-themes.json`
    (or restore your backup).
-2. Delete the folder `C:\ProgramData\Cybele Software\Thinfinity\Workspace\DB\entel\`.
+2. Delete the folder `C:\ProgramData\Cybele Software\Thinfinity\Workspace\DB\Entel\`.
 3. `Restart-Service ThinfinitySvcMgr` and hard-refresh the browser.
 
 Nothing else is touched: no files in `Program Files`, no registry changes.
@@ -49,7 +50,7 @@ Nothing else is touched: no files in `Program Files`, no registry changes.
 | File | Purpose |
 |---|---|
 | `customthemes.css` | Theme classes `EntelLight` / `EntelDark` (all v8+ variables incl. undocumented `--login-brand-bg*`) |
-| `custom-themes.json` | Theme config (goes in the DB folder, not inside `entel\`) |
+| `custom-themes.json` | Theme config (goes in the DB folder, not inside `Entel\`) |
 | `EntelFavicon.ico` | Real favicon from entel.cl |
 | `EntelLogo.svg` / `EntelLogoWhite.svg` | Official "e)" symbol, color / negative |
 | `EntelLogoMobile*.svg` | Compact mark for mobile header |
