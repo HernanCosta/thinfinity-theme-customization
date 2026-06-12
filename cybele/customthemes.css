@@ -78,7 +78,13 @@
   --outline-button-bgcolor-h: var(--button-bgcolor-h);
   --outline-button-color-h: var(--button-txtcolor-h);
   --special-button: #ffffff;
-  --switcher-button: #9c9c9c;
+  /* Toggle / InputSwitch: -bgcolor is the ON track (was falling back to
+     the built-in green); brand-blue it. before = knob. */
+  --switcher-button: #c2c2c2;                          /* OFF track */
+  --switcher-button-before: #ffffff;                   /* knob */
+  --switcher-button-bgcolor: var(--primary-color);     /* ON track */
+  --switcher-button-bgcolor-h: #b0b0b0;                /* OFF hover */
+  --switcher-button-h: var(--dark-primary-color);      /* ON hover */
 
   /* --- Links & nav --- */
   --link-color: var(--primary-color);
@@ -239,16 +245,25 @@
 }
 .CybeleLight .side-menu .menu-item .close-profile .cyb-cross,
 .CybeleDark  .side-menu .menu-item .close-profile .cyb-cross {
-  border-radius: 50%;
-  padding: 0.35rem;
+  display: inline-flex !important;        /* clean centered circle (was a */
+  align-items: center !important;         /* padded inline icon -> oval) */
+  justify-content: center !important;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
   line-height: 1;
   color: var(--menu-selected-color) !important;
-  transition: background-color 0.15s ease-out;
+  transition: background-color 0.15s ease-out, transform 0.12s ease-out;
 }
 .CybeleLight .side-menu .menu-item .close-profile .cyb-cross:hover,
 .CybeleDark  .side-menu .menu-item .close-profile .cyb-cross:hover {
   background-color: var(--menu-selected-bgcolor) !important;
   color: var(--menu-selected-color) !important;
+}
+.CybeleLight .side-menu .menu-item .close-profile .cyb-cross:active,
+.CybeleDark  .side-menu .menu-item .close-profile .cyb-cross:active {
+  transform: scale(0.82);                 /* press feedback */
 }
 
 /* Close "X" buttons in dialogs / side panels: circular hover chip,
@@ -326,6 +341,55 @@
 }
 
 /* =============================================================
+   Graceful motion. PrimeVue already animates connected overlays
+   (.p-connected-overlay: scaleY .8->1, .12s). Make menus/dropdowns
+   pop more — scale + slight rise with a spring easing, origin at
+   the top so they grow out of their trigger. Pure CSS, runs on
+   every open. Honored: the leave keeps PrimeVue's fade.
+   prefers-reduced-motion strips it.
+   ============================================================= */
+.CybeleLight .p-connected-overlay-enter-from,
+.CybeleDark  .p-connected-overlay-enter-from {
+  opacity: 0 !important;
+  transform: scale(0.9) translateY(-6px) !important;
+}
+.CybeleLight .p-connected-overlay-visible,
+.CybeleDark  .p-connected-overlay-visible {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+}
+.CybeleLight .p-connected-overlay-enter-active,
+.CybeleDark  .p-connected-overlay-enter-active {
+  transform-origin: top center;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.16s ease-out !important;
+}
+
+/* Press feedback on buttons + close icons — a small "pop" on click,
+   the graceful touch where CSS can't animate element removal. */
+.CybeleLight .p-button:active,
+.CybeleDark  .p-button:active,
+.CybeleLight .p-dialog-header-icon:active,
+.CybeleLight .p-sidebar-close:active,
+.CybeleDark  .p-dialog-header-icon:active,
+.CybeleDark  .p-sidebar-close:active {
+  transform: scale(0.94);
+  transition: transform 0.1s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .CybeleLight .p-connected-overlay-enter-active,
+  .CybeleDark  .p-connected-overlay-enter-active {
+    transition: none !important;
+  }
+  .CybeleLight .p-button:active, .CybeleDark .p-button:active,
+  .CybeleLight .p-dialog-header-icon:active, .CybeleDark .p-dialog-header-icon:active,
+  .CybeleLight .p-sidebar-close:active, .CybeleDark .p-sidebar-close:active {
+    transform: none;
+  }
+}
+
+/* =============================================================
    Footer: "Powered by Cybele Software".
    The footer attribution is product copy rendered by the Workspace
    layout (FlexSideNavHeader.vue post-login, LauncherPage.vue on
@@ -389,7 +453,12 @@
   --outline-button-bgcolor-h: var(--primary-color);
   --outline-button-color-h: #021425;
   --special-button: #ffffff;
-  --switcher-button: #6b6b6b;
+  /* Toggle / InputSwitch (dark): ON = vivid brand blue, white knob */
+  --switcher-button: #4a5a6e;                          /* OFF track */
+  --switcher-button-before: #ffffff;                   /* knob */
+  --switcher-button-bgcolor: #0b84f4;                  /* ON track */
+  --switcher-button-bgcolor-h: #5a6a7e;                /* OFF hover */
+  --switcher-button-h: #5dadf7;                        /* ON hover */
 
   /* --- Links & nav. Selected bg is a derived mid-blue (#0966c2,
      between tokens 400/500): the token #053b6d collides with the
