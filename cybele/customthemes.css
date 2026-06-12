@@ -237,11 +237,24 @@
 }
 
 /* Side-menu close "X": replace the full-height dark navy bar
-   (.right-bar.closable, bg = --menu-selected-color) with a small
-   circular chip that fills on hover — "little circle with the X". */
+   (.right-bar, bg = --menu-selected-color in EVERY state — bare,
+   .closable, and .selected) with a small circular chip on the X.
+   Also kill the scrollbar the .closable.auto (overflow:auto) variant
+   spawns on hover (the two grey --border-color thumbs). */
+.CybeleLight .side-menu .menu-item .right-bar,
 .CybeleLight .side-menu .menu-item .right-bar.closable,
-.CybeleDark  .side-menu .menu-item .right-bar.closable {
+.CybeleLight .side-menu .menu-item.selected .right-bar,
+.CybeleLight .side-menu .menu-item.selected .right-bar.closable,
+.CybeleDark  .side-menu .menu-item .right-bar,
+.CybeleDark  .side-menu .menu-item .right-bar.closable,
+.CybeleDark  .side-menu .menu-item.selected .right-bar,
+.CybeleDark  .side-menu .menu-item.selected .right-bar.closable {
   background-color: transparent !important;
+  overflow: hidden !important;          /* no scrollbar from .auto/overflow:auto */
+}
+.CybeleLight .side-menu .menu-item .right-bar::-webkit-scrollbar,
+.CybeleDark  .side-menu .menu-item .right-bar::-webkit-scrollbar {
+  display: none !important;
 }
 .CybeleLight .side-menu .menu-item .close-profile .cyb-cross,
 .CybeleDark  .side-menu .menu-item .close-profile .cyb-cross {
