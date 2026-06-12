@@ -325,6 +325,32 @@
   background-image: url("<%=@BASEURL%>__themes__/CybeleLogoWhite.svg") !important;
 }
 
+/* =============================================================
+   Footer: "Powered by Cybele Software".
+   The footer attribution is product copy rendered by the Workspace
+   layout (FlexSideNavHeader.vue post-login, LauncherPage.vue on
+   /signin) — i18n + a hardcoded "© 2010-2026 by Cybele Software,
+   Inc." link, NOT a theme variable. Style-only override: collapse
+   the stock copyright line (font-size:0 on the <small>, which hides
+   the bare text node + link that CSS can't target individually) and
+   inject the vendor line via ::after. The dynamic product name +
+   version (.hiddenThin, shown post-login on wide) is preserved.
+   NOTE: CSS content-injection workaround — verify on a live footer.
+   ============================================================= */
+.CybeleLight .app-footer small, .CybeleDark .app-footer small,
+.CybeleLight footer small,      .CybeleDark footer small {
+  font-size: 0 !important;
+}
+.CybeleLight .app-footer small .hiddenThin,
+.CybeleDark  .app-footer small .hiddenThin {
+  font-size: 0.8rem !important;
+}
+.CybeleLight .app-footer small::after, .CybeleDark .app-footer small::after,
+.CybeleLight footer small::after,      .CybeleDark footer small::after {
+  content: "Powered by Cybele Software";
+  font-size: 0.8rem;
+}
+
 .CybeleDark {
   /* --- Core brand (lightened blues for dark surfaces) --- */
   --primary-color: #5dadf7;
