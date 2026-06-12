@@ -1,0 +1,255 @@
+/* =============================================================
+   Cybele Software — Custom theme for Thinfinity Workspace
+   Brand (extracted from https://www.cybelesoft.com/ design tokens
+   in the site's entry.css — --blue-cybele-* / --water-green-*):
+     Blue ramp:   #eff7fe 50 / #d0e7fd 100 / #99cbfa 200 / #5dadf7 300
+                  #0b84f4 400 / #085dac 500 / #074f91 600 / #053b6d 700
+                  #032748 800 / #021425 900
+     Water green: #3dcca1 500 / #69d8b6 400 / #238568 700
+     Greys:       #f9f9f9 50 / #d6d6d6 200 / #9c9c9c 400 / #515151 700
+   Logos: official site SVGs (cybele-negative-logo.svg — white
+   wordmark + multicolor butterfly mark, the site's own dark-surface
+   variant). Favicon: real site ICO.
+
+   Policy: style-only theme. No background images; the login brand
+   panel uses a CSS gradient. Logos + favicon are the only binaries.
+
+   Signature touches matching cybelesoft.com:
+     - Dark navy header (#032748) with the negative logo, like the
+       site's top bar — in BOTH themes
+     - Floating pill header + pill buttons (the site's rounded
+       look), done with plain CSS on .top-bar / .p-button
+     - Brand CTA blue reserved for accents; AA-safe #085dac carries
+       text/buttons on light surfaces
+
+   Contrast verified against WCAG 2.1 AA (SC 1.4.3: text >= 4.5:1,
+   SC 1.4.11: UI components >= 3:1):
+     #085dac on #ffffff = 6.6:1   (links, buttons; #0b84f4 is 3.7:1
+                                   and is NOT used for normal text)
+     #ffffff on #085dac = 6.6:1   (button text)
+     #515151 on #ffffff = 7.9:1   (secondary text)
+     #b93a29 on #ffffff = 5.7:1   (danger)
+     #9a5b00 on #ffffff = 5.4:1   (alert)
+     #238568 on #ffffff = 4.5:1   (allowed)
+     #5dadf7 on #021425 = 7.8:1   (links, dark)
+     #021425 on #0b84f4 = 5.0:1   (button text, dark)
+     #0b84f4 vs #021425 = 5.0:1   (button surface vs bg, dark)
+   Dark surfaces follow Material dark-theme guidance using the
+   brand's own navy ramp (#021425 base, not #000), lightened
+   primaries (#5dadf7) for text.
+   ============================================================= */
+
+.CybeleLight {
+  /* --- Core brand --- */
+  --primary-color: #085dac;
+  --dark-primary-color: #053b6d;
+  --light-primary-color: #d0e7fd;
+  --secondary-color: #0b84f4;
+  --tertiary-color: #3dcca1;
+
+  /* --- Surfaces --- */
+  --bgcolor: #021425;
+  --primary-bgcolor: #ffffff;
+  --secondary-bgcolor: #f9f9f9;
+  --tertiary-bgcolor: #eff7fe;
+  --hover-bgcolor: #d0e7fd;
+
+  /* Site-accurate header: cybelesoft.com top bar is dark navy with
+     the negative logo */
+  --header-bgcolor: #032748;
+  --toolbar-bgcolor: var(--tertiary-bgcolor);
+  --sidepanel-header-bgcolor: var(--header-bgcolor);
+  --sidepanel-bgcolor: var(--secondary-bgcolor);
+  --menu-bgcolor: var(--secondary-bgcolor);
+  --dialog-bgcolor: var(--primary-bgcolor);
+  --submenu-bgcolor: var(--tertiary-bgcolor);
+  --light-mode-entity-bg: #085dac14;
+  --CybeleLight-entity-bg: #085dac14;
+  --table-header-bgcolor: var(--hover-bgcolor);
+  --table-body-bgcolor: var(--secondary-bgcolor);
+  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+
+  /* --- Buttons --- */
+  --button-bgcolor: var(--primary-color);
+  --button-txtcolor: #ffffff;
+  --button-bgcolor-h: var(--dark-primary-color);
+  --button-txtcolor-h: #ffffff;
+  --outline-button-color: var(--button-bgcolor);
+  --outline-button-bgcolor-h: var(--button-bgcolor-h);
+  --outline-button-color-h: var(--button-txtcolor-h);
+  --special-button: #ffffff;
+  --switcher-button: #9c9c9c;
+
+  /* --- Links & nav --- */
+  --link-color: var(--primary-color);
+  --link-color-h: var(--dark-primary-color);
+  --menu-selected-color: var(--dark-primary-color);
+  --menu-selected-bgcolor: var(--light-primary-color);
+
+  /* --- Text --- */
+  --primary-txtcolor: #021425;
+  --secondary-txtcolor: #515151;
+  --heading-color: var(--dark-primary-color);
+
+  /* --- Borders --- */
+  --border-color: #d6d6d6;
+  --light-border-color: #ececec;
+  --separator: #e0e0e0;
+
+  /* --- Status --- */
+  --disabled: #9c9c9c;
+  --danger: #b93a29;
+  --alert: #9a5b00;
+  --allowed: #238568;
+  --shadow-color: #02142519;
+
+  /* --- Dashboard background: none (style-only) --- */
+  --bg-image: none;
+  --bg-size: auto;
+  --bg-blend-mode: normal;
+
+  /* --- Logos: official negative SVG (white + multicolor mark) on
+     the navy header and the navy login panel --- */
+  --desktop-logo: url("<%=@BASEURL%>__themes__/CybeleLogoWhite.svg");
+  --mobile-logo:  url("<%=@BASEURL%>__themes__/CybeleLogoMobileWhite.svg");
+  --login-logo:   url("<%=@BASEURL%>__themes__/CybeleLoginLogo.svg");
+  --logo-bg-size: contain;
+
+  /* --- Login brand panel: navy gradient, no image file --- */
+  --login-brand-bg: linear-gradient(135deg, #021425 0%, #032748 60%, #074f91 100%);
+  --login-brand-bg-size: cover;
+  --login-brand-bg-repeat: no-repeat;
+  --login-brand-bg-position-x: center;
+  --login-brand-bg-position-y: center;
+  --login-brand-bg-blend-mode: normal;
+  --login-form-bg: var(--primary-bgcolor);
+  --login-box-width: 440px;
+}
+
+/* =============================================================
+   Login logo entrance animation (both themes): cartoonish pop
+   from zero with overshoot — same as the Entel pack.
+   Disabled under prefers-reduced-motion.
+   ============================================================= */
+@keyframes cybele-logo-pop {
+  0%   { transform: scale(0);    opacity: 0; }
+  55%  { transform: scale(1.12); opacity: 1; }
+  75%  { transform: scale(0.94); }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+.CybeleLight #customized-logo .logo-img,
+.CybeleDark  #customized-logo .logo-img {
+  animation: cybele-logo-pop 0.9s ease-out both;
+  transform-origin: center center;
+}
+
+/* =============================================================
+   cybelesoft.com signature: floating pill header + pill buttons.
+   .top-bar is the Workspace header (uses --header-bgcolor, see
+   _topBarHeader.scss); .p-button is the PrimeVue button base.
+   ============================================================= */
+.CybeleLight .top-bar,
+.CybeleDark  .top-bar {
+  border-radius: 9999px;
+  margin: 0.75rem 1rem 0.25rem 1rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.CybeleLight .p-button,
+.CybeleDark  .p-button {
+  border-radius: 9999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .CybeleLight #customized-logo .logo-img,
+  .CybeleDark  #customized-logo .logo-img {
+    animation: none;
+  }
+}
+
+.CybeleDark {
+  /* --- Core brand (lightened blues for dark surfaces) --- */
+  --primary-color: #5dadf7;
+  --dark-primary-color: #99cbfa;
+  --light-primary-color: #053b6d;
+  --secondary-color: #0b84f4;
+  --tertiary-color: #69d8b6;
+
+  /* --- Surfaces: the brand's own navy ramp --- */
+  --bgcolor: #f9f9f9;
+  --primary-bgcolor: #021425;
+  --secondary-bgcolor: #032748;
+  --tertiary-bgcolor: #053b6d;
+  --hover-bgcolor: #074f91;
+
+  --header-bgcolor: var(--secondary-bgcolor);
+  --toolbar-bgcolor: var(--tertiary-bgcolor);
+  --sidepanel-header-bgcolor: var(--header-bgcolor);
+  --sidepanel-bgcolor: var(--secondary-bgcolor);
+  --menu-bgcolor: var(--secondary-bgcolor);
+  --dialog-bgcolor: var(--primary-bgcolor);
+  --submenu-bgcolor: var(--tertiary-bgcolor);
+  --light-mode-entity-bg: #5dadf722;
+  --CybeleDark-entity-bg: #5dadf722;
+  --table-header-bgcolor: var(--hover-bgcolor);
+  --table-body-bgcolor: var(--secondary-bgcolor);
+  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+
+  /* --- Buttons: brand CTA blue with navy text (white text on
+     #0b84f4 is 3.7:1 and fails SC 1.4.3) --- */
+  --button-bgcolor: #0b84f4;
+  --button-txtcolor: #021425;
+  --button-bgcolor-h: #5dadf7;
+  --button-txtcolor-h: #021425;
+  --outline-button-color: var(--primary-color);
+  --outline-button-bgcolor-h: var(--primary-color);
+  --outline-button-color-h: #021425;
+  --special-button: #ffffff;
+  --switcher-button: #6b6b6b;
+
+  /* --- Links & nav --- */
+  --link-color: var(--primary-color);
+  --link-color-h: var(--dark-primary-color);
+  --menu-selected-color: var(--dark-primary-color);
+  --menu-selected-bgcolor: var(--light-primary-color);
+
+  /* --- Text --- */
+  --primary-txtcolor: #eff7fe;
+  --secondary-txtcolor: #9c9c9c;
+  --heading-color: var(--primary-color);
+
+  /* --- Borders --- */
+  --border-color: #053b6d;
+  --light-border-color: #032748;
+  --separator: #053b6d;
+
+  /* --- Status --- */
+  --disabled: #6b6b6b;
+  --danger: #e9695a;
+  --alert: #f5b207;
+  --allowed: #69d8b6;
+  --shadow-color: #00000066;
+
+  /* --- Dashboard background: none (style-only) --- */
+  --bg-image: none;
+  --bg-size: auto;
+  --bg-blend-mode: normal;
+
+  /* --- Logos (official negative SVG everywhere on dark) --- */
+  --desktop-logo: url("<%=@BASEURL%>__themes__/CybeleLogoWhite.svg");
+  --mobile-logo:  url("<%=@BASEURL%>__themes__/CybeleLogoMobileWhite.svg");
+  --login-logo:   url("<%=@BASEURL%>__themes__/CybeleLoginLogo.svg");
+  --logo-bg-size: contain;
+
+  /* --- Login brand panel: navy gradient --- */
+  --login-brand-bg: linear-gradient(135deg, #021425 0%, #032748 60%, #074f91 100%);
+  --login-brand-bg-size: cover;
+  --login-brand-bg-repeat: no-repeat;
+  --login-brand-bg-position-x: center;
+  --login-brand-bg-position-y: center;
+  --login-brand-bg-blend-mode: normal;
+  --login-form-bg: var(--primary-bgcolor);
+  --login-box-width: 440px;
+}

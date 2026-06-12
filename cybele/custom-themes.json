@@ -1,0 +1,20 @@
+{
+  "filename": "C:\\ProgramData\\Cybele Software\\Thinfinity\\Workspace\\DB\\Cybele\\customthemes.css",
+  "favicon": "CybeleFavicon.ico",
+  "allowUsersToSwitchTheme": true,
+  "allowBuiltInThemes": false,
+  "defaultTheme": "CybeleLight",
+  "lightMode": "CybeleLight",
+  "darkMode": "CybeleDark",
+  "productName": "Cybele Workspace",
+  "themes": [
+    {
+      "class": "CybeleLight",
+      "name": "Cybele (light)"
+    },
+    {
+      "class": "CybeleDark",
+      "name": "Cybele (dark)"
+    }
+  ]
+}
