@@ -162,6 +162,57 @@
   border-radius: 9999px;
 }
 
+/* Settings side menu (PrimeVue PanelMenu, see _panelMenu.scss):
+   items are real pill BUTTONS. !important throughout: the stock
+   rules also use !important and the custom CSS load order vs the
+   app bundle is not guaranteed. */
+.CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem-link,
+.CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link {
+  border-radius: 9999px !important;
+  margin: 3px 14px !important;
+  padding: 10px 18px !important; /* stock is "10px 0 !important" */
+  border-right: 0 !important;
+  width: auto !important;
+  transition: background-color 0.15s ease-out;
+}
+
+/* Active route and hover: filled pill, like a highlighted button */
+.CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem-link.router-link-active-exact,
+.CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem-link:hover,
+.CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link.router-link-active-exact,
+.CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link:hover {
+  background-color: var(--menu-selected-bgcolor) !important;
+  color: var(--menu-selected-color) !important;
+  border-right: 0 !important;
+}
+
+/* cybelesoft.com hero gradient on the top bar and the left side
+   menu (site token: linear-gradient(180deg,#000e1c 9.66%,#074c8d)
+   from entry.css). Both themes. */
+.CybeleLight .top-bar,
+.CybeleDark  .top-bar,
+.CybeleLight .side-menu,
+.CybeleDark  .side-menu {
+  background-image: linear-gradient(180deg, #000e1c 9.66%, #074c8d) !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Keep the side menu legible on the dark gradient (light theme
+   vars assume a light menu background) */
+.CybeleLight .side-menu,
+.CybeleLight .side-menu .p-tree {
+  color: #eff7fe;
+}
+.CybeleLight .side-menu .p-tree-wrapper,
+.CybeleDark  .side-menu .p-tree-wrapper {
+  background-color: transparent !important;
+}
+.CybeleLight .side-menu .side-menu-header,
+.CybeleDark  .side-menu .side-menu-header {
+  background-color: transparent;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .CybeleLight #customized-logo .logo-img,
   .CybeleDark  #customized-logo .logo-img {
