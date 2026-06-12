@@ -3,9 +3,9 @@
        white letters + bottom arc, orange top arc (#f5951d kept from
        the official color logo). Geometry matches the site's white
        mark: large letters, arcs hugging the central C. -->
-  <g fill="none" stroke-width="15" stroke-linecap="round">
-    <path d="M 54.3 65 A 68 68 0 0 1 165.7 65" stroke="#f5951d"/>
-    <path d="M 54.3 143 A 68 68 0 0 0 165.7 143" stroke="#ffffff"/>
+  <g fill="none" stroke-width="22" stroke-linecap="butt">
+    <path d="M 58 56 A 70 70 0 0 1 162 56" stroke="#f5951d"/>
+    <path d="M 58 150 A 70 70 0 0 0 162 150" stroke="#ffffff"/>
   </g>
   <text x="110" y="138" text-anchor="middle"
         font-family="Arial, Helvetica, sans-serif" font-weight="800"
