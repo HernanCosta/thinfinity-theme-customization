@@ -1,0 +1,226 @@
+/* =============================================================
+   ACA Coop — Custom theme for Thinfinity Workspace
+   Brand (extracted from https://www.acacoop.com.ar/):
+     Primary indigo:     #282c87  (inline styles + hello.css overrides;
+                                   the teal #1abc9c in style.css is the
+                                   stock template default, not brand)
+     Light blue:         #69b3e7  (site bot widget)
+     Orange accent:      #ff9100
+     Neutral grays:      #f5f5f5 / #e5e5e5 / #666666
+   Site fonts: Open Sans, Heebo (no Thinfinity var; informative only)
+
+   Policy: style-only theme. No background images; the login brand
+   panel uses a CSS gradient. Logos + favicon are the only binaries.
+   Site ships only the white wordmark (transparent header over dark
+   hero); the indigo variant is the same PNG recolored to #282c87
+   with alpha preserved.
+
+   Contrast verified against WCAG 2.1 AA (SC 1.4.3: text >= 4.5:1,
+   SC 1.4.11: UI components >= 3:1):
+     #282c87 on #ffffff = 11.7:1  (links, headings)
+     #ffffff on #282c87 = 11.7:1  (button text)
+     #666666 on #ffffff = 5.7:1   (secondary text)
+     #b93a29 on #ffffff = 5.7:1   (danger; darkened from site #dd4b39)
+     #9a5b00 on #ffffff = 5.4:1   (alert; darkened from site #ff9100)
+     #3e8a2c on #ffffff = 4.3:1   (allowed; darkened from #59ba41)
+     #69b3e7 on #121218 = 8.2:1   (links, dark)
+     #ffffff on #565ed0 = 5.4:1   (button text, dark)
+     #565ed0 vs #121218 = 3.5:1   (button surface vs bg, dark)
+   Dark surfaces follow Material dark-theme guidance: near-black
+   indigo-tinted base (not #000), desaturated/lightened primaries.
+   ============================================================= */
+
+.AcaCoopLight {
+  /* --- Core brand --- */
+  --primary-color: #282c87;
+  --dark-primary-color: #1a1d5e;
+  --light-primary-color: #c9cce9;
+  --secondary-color: #69b3e7;
+  --tertiary-color: #ff9100;
+
+  /* --- Surfaces --- */
+  --bgcolor: #1a1d5e;
+  --primary-bgcolor: #ffffff;
+  --secondary-bgcolor: #f9f9f9;
+  --tertiary-bgcolor: #eef0fa;
+  --hover-bgcolor: #e0e3f5;
+
+  --header-bgcolor: var(--primary-bgcolor);
+  --toolbar-bgcolor: var(--tertiary-bgcolor);
+  --sidepanel-header-bgcolor: var(--header-bgcolor);
+  --sidepanel-bgcolor: var(--secondary-bgcolor);
+  --menu-bgcolor: var(--secondary-bgcolor);
+  --dialog-bgcolor: var(--primary-bgcolor);
+  --submenu-bgcolor: var(--tertiary-bgcolor);
+  --light-mode-entity-bg: #282c8714;
+  --AcaCoopLight-entity-bg: #282c8714;
+  --table-header-bgcolor: var(--hover-bgcolor);
+  --table-body-bgcolor: var(--secondary-bgcolor);
+  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+
+  /* --- Buttons --- */
+  --button-bgcolor: var(--primary-color);
+  --button-txtcolor: #ffffff;
+  --button-bgcolor-h: var(--dark-primary-color);
+  --button-txtcolor-h: #ffffff;
+  --outline-button-color: var(--button-bgcolor);
+  --outline-button-bgcolor-h: var(--button-bgcolor-h);
+  --outline-button-color-h: var(--button-txtcolor-h);
+  --special-button: #ffffff;
+  --switcher-button: #a4a4a6;
+
+  /* --- Links & nav --- */
+  --link-color: var(--primary-color);
+  --link-color-h: var(--dark-primary-color);
+  --menu-selected-color: var(--dark-primary-color);
+  --menu-selected-bgcolor: var(--light-primary-color);
+
+  /* --- Text --- */
+  --primary-txtcolor: #1c1d22;
+  --secondary-txtcolor: #666666;
+  --heading-color: var(--dark-primary-color);
+
+  /* --- Borders --- */
+  --border-color: #d8d8d8;
+  --light-border-color: #e5e5e5;
+  --separator: #e0e0e0;
+
+  /* --- Status --- */
+  --disabled: #a4a4a6;
+  --danger: #b93a29;
+  --alert: #9a5b00;
+  --allowed: #3e8a2c;
+  --shadow-color: #1c1d2219;
+
+  /* --- Dashboard background: none (style-only) --- */
+  --bg-image: none;
+  --bg-size: auto;
+  --bg-blend-mode: normal;
+
+  /* --- Logos. Login logo is the white variant: it renders on the
+     indigo gradient brand panel, not on the white form. --- */
+  --desktop-logo: url("<%=@BASEURL%>__themes__/AcaCoopLogo.png");
+  --mobile-logo:  url("<%=@BASEURL%>__themes__/AcaCoopLogoMobile.png");
+  --login-logo:   url("<%=@BASEURL%>__themes__/AcaCoopLoginLogo.png");
+  --logo-bg-size: contain;
+
+  /* --- Login brand panel: indigo gradient, no image file --- */
+  --login-brand-bg: linear-gradient(135deg, #1a1d5e 0%, #282c87 60%, #565ed0 100%);
+  --login-brand-bg-size: cover;
+  --login-brand-bg-repeat: no-repeat;
+  --login-brand-bg-position-x: center;
+  --login-brand-bg-position-y: center;
+  --login-brand-bg-blend-mode: normal;
+  --login-form-bg: var(--primary-bgcolor);
+  --login-box-width: 440px;
+}
+
+/* =============================================================
+   Login logo entrance animation (both themes): cartoonish pop
+   from zero with overshoot, equivalent of the built-in Lottie
+   logo animation. Disabled under prefers-reduced-motion.
+   ============================================================= */
+@keyframes acacoop-logo-pop {
+  0%   { transform: scale(0);    opacity: 0; }
+  55%  { transform: scale(1.12); opacity: 1; }
+  75%  { transform: scale(0.94); }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+.AcaCoopLight #customized-logo .logo-img,
+.AcaCoopDark  #customized-logo .logo-img {
+  animation: acacoop-logo-pop 0.9s ease-out both;
+  transform-origin: center center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .AcaCoopLight #customized-logo .logo-img,
+  .AcaCoopDark  #customized-logo .logo-img {
+    animation: none;
+  }
+}
+
+.AcaCoopDark {
+  /* --- Core brand (lightened for dark surfaces) --- */
+  --primary-color: #69b3e7;
+  --dark-primary-color: #a3d2f2;
+  --light-primary-color: #1a1d5e;
+  --secondary-color: #565ed0;
+  --tertiary-color: #ff9100;
+
+  /* --- Surfaces (near-black with indigo cast) --- */
+  --bgcolor: #f9f9f9;
+  --primary-bgcolor: #121218;
+  --secondary-bgcolor: #1a1a24;
+  --tertiary-bgcolor: #232333;
+  --hover-bgcolor: #2c2c44;
+
+  --header-bgcolor: var(--primary-bgcolor);
+  --toolbar-bgcolor: var(--tertiary-bgcolor);
+  --sidepanel-header-bgcolor: var(--header-bgcolor);
+  --sidepanel-bgcolor: var(--secondary-bgcolor);
+  --menu-bgcolor: var(--secondary-bgcolor);
+  --dialog-bgcolor: var(--primary-bgcolor);
+  --submenu-bgcolor: var(--tertiary-bgcolor);
+  --light-mode-entity-bg: #69b3e722;
+  --AcaCoopDark-entity-bg: #69b3e722;
+  --table-header-bgcolor: var(--hover-bgcolor);
+  --table-body-bgcolor: var(--secondary-bgcolor);
+  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+
+  /* --- Buttons: lightened indigo; #282c87 is only 1.6:1 vs the
+     dark bg (fails SC 1.4.11) --- */
+  --button-bgcolor: #565ed0;
+  --button-txtcolor: #ffffff;
+  --button-bgcolor-h: #69b3e7;
+  --button-txtcolor-h: #121218;
+  --outline-button-color: var(--primary-color);
+  --outline-button-bgcolor-h: var(--primary-color);
+  --outline-button-color-h: #121218;
+  --special-button: #ffffff;
+  --switcher-button: #666666;
+
+  /* --- Links & nav --- */
+  --link-color: var(--primary-color);
+  --link-color-h: var(--dark-primary-color);
+  --menu-selected-color: var(--dark-primary-color);
+  --menu-selected-bgcolor: var(--light-primary-color);
+
+  /* --- Text --- */
+  --primary-txtcolor: #f2f3fa;
+  --secondary-txtcolor: #a4a4a6;
+  --heading-color: var(--primary-color);
+
+  /* --- Borders --- */
+  --border-color: #2f2f46;
+  --light-border-color: #232333;
+  --separator: #2f2f46;
+
+  /* --- Status --- */
+  --disabled: #666666;
+  --danger: #e9695a;
+  --alert: #ff9100;
+  --allowed: #59ba41;
+  --shadow-color: #00000066;
+
+  /* --- Dashboard background: none (style-only) --- */
+  --bg-image: none;
+  --bg-size: auto;
+  --bg-blend-mode: normal;
+
+  /* --- Logos (white wordmark for dark surfaces) --- */
+  --desktop-logo: url("<%=@BASEURL%>__themes__/AcaCoopLogoWhite.png");
+  --mobile-logo:  url("<%=@BASEURL%>__themes__/AcaCoopLogoMobileWhite.png");
+  --login-logo:   url("<%=@BASEURL%>__themes__/AcaCoopLoginLogo.png");
+  --logo-bg-size: contain;
+
+  /* --- Login brand panel: deep indigo gradient --- */
+  --login-brand-bg: linear-gradient(135deg, #0d0f33 0%, #1a1d5e 60%, #282c87 100%);
+  --login-brand-bg-size: cover;
+  --login-brand-bg-repeat: no-repeat;
+  --login-brand-bg-position-x: center;
+  --login-brand-bg-position-y: center;
+  --login-brand-bg-blend-mode: normal;
+  --login-form-bg: var(--primary-bgcolor);
+  --login-box-width: 440px;
+}

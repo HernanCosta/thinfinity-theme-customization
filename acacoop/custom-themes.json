@@ -1,0 +1,20 @@
+{
+  "filename": "C:\\ProgramData\\Cybele Software\\Thinfinity\\Workspace\\DB\\AcaCoop\\customthemes.css",
+  "favicon": "AcaCoopFavicon.ico",
+  "allowUsersToSwitchTheme": true,
+  "allowBuiltInThemes": false,
+  "defaultTheme": "AcaCoopLight",
+  "lightMode": "AcaCoopLight",
+  "darkMode": "AcaCoopDark",
+  "productName": "ACA Coop Workspace",
+  "themes": [
+    {
+      "class": "AcaCoopLight",
+      "name": "ACA Coop (light)"
+    },
+    {
+      "class": "AcaCoopDark",
+      "name": "ACA Coop (dark)"
+    }
+  ]
+}
