@@ -1,0 +1,20 @@
+{
+  "filename": "C:\\customization\\entel\\customthemes.css",
+  "favicon": "EntelFavicon.ico",
+  "allowUsersToSwitchTheme": true,
+  "allowBuiltInThemes": false,
+  "defaultTheme": "EntelLight",
+  "lightMode": "EntelLight",
+  "darkMode": "EntelDark",
+  "productName": "Entel Workspace",
+  "themes": [
+    {
+      "class": "EntelLight",
+      "name": "Entel (light)"
+    },
+    {
+      "class": "EntelDark",
+      "name": "Entel (dark)"
+    }
+  ]
+}

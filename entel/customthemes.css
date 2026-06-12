@@ -1,0 +1,182 @@
+/* =============================================================
+   Entel — Custom theme for Thinfinity Workspace
+   Brand (extracted from https://www.entel.cl/ — main.css v1.5.8.4.2):
+     Primary blue:       #002eff  (296 hits in site CSS)
+     Dark blue:          #0022bf
+     Light blue:         #8097ff
+     Pale blue tint:     #f3f5ff / #bfcbff
+     Brand red accent:   #ff3d00  (arc of the "e)" symbol)
+     Near-black text:    #0c0c0c
+     Danger red:         #db110a
+     Success green:      #1ea67b
+     Alert yellow:       #f5b207
+   Fonts on site: "Inter", "Barlow" (no Thinfinity var; informative only)
+   ============================================================= */
+
+.EntelLight {
+  /* --- Core brand --- */
+  --primary-color: #002eff;
+  --dark-primary-color: #0022bf;
+  --light-primary-color: #bfcbff;
+  --secondary-color: #0c0c0c;
+  --tertiary-color: #ff3d00;
+
+  /* --- Surfaces --- */
+  --bgcolor: #0c0c0c;
+  --primary-bgcolor: #ffffff;
+  --secondary-bgcolor: #f7f7f7;
+  --tertiary-bgcolor: #f3f5ff;
+  --hover-bgcolor: #e4e9ff;
+
+  --header-bgcolor: var(--primary-bgcolor);
+  --toolbar-bgcolor: var(--tertiary-bgcolor);
+  --sidepanel-header-bgcolor: var(--header-bgcolor);
+  --sidepanel-bgcolor: var(--secondary-bgcolor);
+  --menu-bgcolor: var(--secondary-bgcolor);
+  --dialog-bgcolor: var(--primary-bgcolor);
+  --submenu-bgcolor: var(--tertiary-bgcolor);
+  --light-mode-entity-bg: #002eff14;
+  --EntelLight-entity-bg: #002eff14;
+  --table-header-bgcolor: var(--hover-bgcolor);
+  --table-body-bgcolor: var(--secondary-bgcolor);
+  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+
+  /* --- Buttons --- */
+  --button-bgcolor: var(--primary-color);
+  --button-txtcolor: #ffffff;
+  --button-bgcolor-h: var(--dark-primary-color);
+  --button-txtcolor-h: #ffffff;
+  --outline-button-color: var(--button-bgcolor);
+  --outline-button-bgcolor-h: var(--button-bgcolor-h);
+  --outline-button-color-h: var(--button-txtcolor-h);
+  --special-button: #ffffff;
+  --switcher-button: #a4a4a6;
+
+  /* --- Links & nav --- */
+  --link-color: var(--primary-color);
+  --link-color-h: var(--dark-primary-color);
+  --menu-selected-color: var(--dark-primary-color);
+  --menu-selected-bgcolor: var(--light-primary-color);
+
+  /* --- Text --- */
+  --primary-txtcolor: #0c0c0c;
+  --secondary-txtcolor: #66686c;
+  --heading-color: var(--dark-primary-color);
+
+  /* --- Borders --- */
+  --border-color: #d7d7d7;
+  --light-border-color: #e9e9e9;
+  --separator: #e0e0e0;
+
+  /* --- Status --- */
+  --disabled: #a4a4a6;
+  --danger: #db110a;
+  --alert: #f5b207;
+  --allowed: #1ea67b;
+  --shadow-color: #0c0c0c19;
+
+  /* --- Dashboard background (Torre Entel, real site asset) --- */
+  --bg-image: url("<%=@BASEURL%>__themes__/EntelHero.jpg");
+  --bg-size: cover;
+  --bg-blend-mode: none;
+
+  /* --- Logos (official Entel "e)" symbol, site CDN SVG) --- */
+  --desktop-logo: url("<%=@BASEURL%>__themes__/EntelLogo.svg");
+  --mobile-logo:  url("<%=@BASEURL%>__themes__/EntelLogoMobile.svg");
+  --login-logo:   url("<%=@BASEURL%>__themes__/EntelLoginLogo.svg");
+  --logo-bg-size: contain;
+
+  /* --- Login brand panel (left side of /signin, v8+) --- */
+  --login-brand-bg: url("<%=@BASEURL%>__themes__/EntelHero.jpg");
+  --login-brand-bg-size: cover;
+  --login-brand-bg-repeat: no-repeat;
+  --login-brand-bg-position-x: center;
+  --login-brand-bg-position-y: center;
+  --login-brand-bg-blend-mode: normal;
+  --login-form-bg: var(--primary-bgcolor);
+  --login-box-width: 440px;
+}
+
+.EntelDark {
+  /* --- Core brand (lightened blues for dark surfaces) --- */
+  --primary-color: #8097ff;
+  --dark-primary-color: #bfcbff;
+  --light-primary-color: #0022bf;
+  --secondary-color: #4062ff;
+  --tertiary-color: #ff3d00;
+
+  /* --- Surfaces (Entel near-black, like entel.cl dark sections) --- */
+  --bgcolor: #f7f7f7;
+  --primary-bgcolor: #121217;
+  --secondary-bgcolor: #1a1a22;
+  --tertiary-bgcolor: #23232e;
+  --hover-bgcolor: #2c2c3a;
+
+  --header-bgcolor: var(--primary-bgcolor);
+  --toolbar-bgcolor: var(--tertiary-bgcolor);
+  --sidepanel-header-bgcolor: var(--header-bgcolor);
+  --sidepanel-bgcolor: var(--secondary-bgcolor);
+  --menu-bgcolor: var(--secondary-bgcolor);
+  --dialog-bgcolor: var(--primary-bgcolor);
+  --submenu-bgcolor: var(--tertiary-bgcolor);
+  --light-mode-entity-bg: #8097ff22;
+  --EntelDark-entity-bg: #8097ff22;
+  --table-header-bgcolor: var(--hover-bgcolor);
+  --table-body-bgcolor: var(--secondary-bgcolor);
+  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+
+  /* --- Buttons (vivid Entel blue reads well on dark) --- */
+  --button-bgcolor: #002eff;
+  --button-txtcolor: #ffffff;
+  --button-bgcolor-h: #4062ff;
+  --button-txtcolor-h: #ffffff;
+  --outline-button-color: var(--primary-color);
+  --outline-button-bgcolor-h: var(--primary-color);
+  --outline-button-color-h: #121217;
+  --special-button: #ffffff;
+  --switcher-button: #66686c;
+
+  /* --- Links & nav --- */
+  --link-color: var(--primary-color);
+  --link-color-h: var(--dark-primary-color);
+  --menu-selected-color: var(--dark-primary-color);
+  --menu-selected-bgcolor: var(--light-primary-color);
+
+  /* --- Text --- */
+  --primary-txtcolor: #f5f6ff;
+  --secondary-txtcolor: #a4a4a6;
+  --heading-color: var(--primary-color);
+
+  /* --- Borders --- */
+  --border-color: #2f2f3a;
+  --light-border-color: #23232e;
+  --separator: #2f2f3a;
+
+  /* --- Status --- */
+  --disabled: #66686c;
+  --danger: #ff6259;
+  --alert: #f5b207;
+  --allowed: #42e8b4;
+  --shadow-color: #00000066;
+
+  /* --- Dashboard background --- */
+  --bg-image: url("<%=@BASEURL%>__themes__/EntelHero.jpg");
+  --bg-size: cover;
+  --bg-blend-mode: multiply;
+
+  /* --- Logos (white "e" + red arc: Entel negative version) --- */
+  --desktop-logo: url("<%=@BASEURL%>__themes__/EntelLogoWhite.svg");
+  --mobile-logo:  url("<%=@BASEURL%>__themes__/EntelLogoMobileWhite.svg");
+  --login-logo:   url("<%=@BASEURL%>__themes__/EntelLoginLogo.svg");
+  --logo-bg-size: contain;
+
+  /* --- Login brand panel --- */
+  --login-brand-bg: url("<%=@BASEURL%>__themes__/EntelHero.jpg");
+  --login-brand-bg-size: cover;
+  --login-brand-bg-repeat: no-repeat;
+  --login-brand-bg-position-x: center;
+  --login-brand-bg-position-y: center;
+  --login-brand-bg-blend-mode: normal;
+  --login-form-bg: var(--primary-bgcolor);
+  --login-box-width: 440px;
+}
