@@ -1,37 +1,39 @@
 # Prompt template — Thinfinity Workspace theme from a corporate site
 
-Copy-paste este prompt a Claude reemplazando `<URL>` y los placeholders opcionales.
+Copy-paste this prompt to Claude replacing `<URL>` and the optional placeholders.
 
 ---
 
-Necesito crear una customización de tema para **Thinfinity Workspace** basada en el branding del site corporativo `<URL>`.
+I need a theme customization for **Thinfinity Workspace** based on the branding of the corporate site `<URL>`.
 
-**Contexto:**
-- Tengo Thinfinity Workspace instalado localmente en `C:\Program Files\Thinfinity\Workspace\`.
-- Referencia oficial (obsoleta en partes): https://kb.cybelesoft.com/portal/en/kb/articles/new-theme-customization-api-in-thinfinity-workspace
-- Versión: <correr `(Get-Item "C:\Program Files\Thinfinity\Workspace\bin64\Thinfinity.VirtualUI.Server.exe").VersionInfo.ProductVersion` y pegar aquí>
-- Servicio: `ThinfinitySvcMgr` (v8+).
+**Context:**
+- Target install: `C:\Program Files\Thinfinity\Workspace\` (v8+), service `ThinfinitySvcMgr`.
+- Official KB (outdated in parts): https://kb.cybelesoft.com/portal/en/kb/articles/new-theme-customization-api-in-thinfinity-workspace
+- **Verified server behavior** (source: `dev-main\Units\IISServer\IISServer.Themes.pas`):
+  - `custom-themes.json` is read **only** from the DB folder: `C:\ProgramData\Cybele Software\Thinfinity\Workspace\DB\custom-themes.json`. Copies under Program Files are ignored.
+  - `/__themes__/` is a **virtual web alias** to the folder containing the CSS referenced by `filename` — no physical folder under `web\` is needed and nothing is ever copied into Program Files.
+  - `favicon` resolves relative to the CSS folder; `productName` is injected server-side into `<title><%=@PRODUCTNAME%></title>` — never edit HTML files.
+- Only read/write inside the working folder; do not analyze other directories.
 
-**Lo que quiero que hagas (en este orden):**
+**What I want you to do (in this order):**
 
-1. **Extraer branding del site**:
-   - Descargar HTML + CSS del site usando `curl` (User-Agent de browser real).
-   - Identificar: favicon real (`<link rel="icon">`), logo real (`<img>` o `background-image` del `#logo`, `.logo`, `.navbar-brand`), paleta primaria (hex codes más frecuentes en CSS), font-family.
-   - Descargar los archivos reales (no generarlos) y renombrarlos con prefix de marca.
-   - **Política de imágenes: el tema es solo estilo.** No incluir imágenes de fondo (hero/dashboard/login) salvo que se pida explícitamente. Los únicos binarios del pack son logos y favicon. El panel de marca del login usa un gradiente CSS con los colores primarios; `--bg-image: none`.
-   - **Accesibilidad**: validar la paleta contra WCAG 2.1 AA (texto ≥ 4.5:1, componentes UI ≥ 3:1) y documentar los ratios en el CSS. Para el tema dark seguir Material Design dark theme: superficies near-black (no #000) y primarios desaturados/aclarados (los saturados fallan contraste y "vibran" sobre fondos oscuros).
+1. **Extract branding from the site**:
+   - Download HTML + CSS with `curl` (real browser User-Agent).
+   - Identify: real favicon (`<link rel="icon">`), real logo (`<img>` or `background-image` of `#logo`, `.logo`, `.navbar-brand`), primary palette (most frequent hex codes in CSS), font-family.
+   - Download the real files (do not generate them) and rename with the brand prefix.
+   - **Image policy: the theme is style-only.** No background images (hero/dashboard/login) unless explicitly requested. The only binaries in the pack are logos and the favicon. The login brand panel uses a CSS gradient built from the primary palette; `--bg-image: none`.
+   - **Accessibility**: validate the palette against WCAG 2.1 AA (text ≥ 4.5:1, UI components ≥ 3:1) and document the ratios in the CSS header. For the dark theme follow Material Design dark-theme guidance: near-black surfaces (not #000) and desaturated/lightened primaries (saturated colors fail contrast and "vibrate" on dark surfaces).
+   - If I give you a **brand manual / guidelines PDF**, it is authoritative over CSS-extracted colors: take the declared HEX/CMYK values from it.
 
-2. **Crear los assets en `C:\customization\<BrandName>\`**:
-   - `customthemes.css` — clases `.<Brand>Light` y `.<Brand>Dark`
-   - `custom-themes.json` — config apuntando al CSS
-   - Favicon `.ico` (si el del site no es ICO, convertirlo o generar uno con PowerShell GDI+; **no usar SVG como favicon**, Thinfinity lo sirve con MIME ICO y no renderiza)
-   - Logos: PNG/SVG reales del site (no placeholders). El `--login-logo` va sobre el panel de marca (gradiente de color primario): usar la **versión negativa/blanca** del logo ahí.
-   - `--login-brand-bg`: gradiente CSS con la paleta de la marca (NO imagen, salvo pedido explícito)
-   - Animación de entrada del logo del login (`#customized-logo .logo-img`): scale-up con overshoot, scoped a las clases del tema, con `@media (prefers-reduced-motion: reduce)` para deshabilitarla
-   - `apply-refresh.ps1` con self-elevation UAC que: detiene `ThinfinitySvcMgr`, sincroniza assets a `C:\Program Files\Thinfinity\Workspace\web\__themes__\` (copia todos los .css/.svg/.png/.jpg/.ico + alias `custom-theme.css`), copia el JSON a `C:\Program Files\Thinfinity\Workspace\custom-themes.json` y a `C:\ProgramData\Cybele Software\Thinfinity\Workspace\DB\custom-themes.json`, arranca el servicio.
-   - `install.bat` y `uninstall.bat` launchers.
+2. **Create the deliverables (no installer — manual copy)**:
+   - `<Brand>\customthemes.css` — classes `.<Brand>Light` and `.<Brand>Dark`
+   - `custom-themes.json` — config (see step 4)
+   - Favicon `.ico` (convert if the site's isn't ICO; **never SVG as favicon**, Thinfinity serves it with ICO MIME and it won't render)
+   - Logos: real PNG/SVG from the site (no placeholders). `--login-logo` renders on the brand panel (primary-color gradient): use the **white/negative variant** there.
+   - Login logo entrance animation on `#customized-logo .logo-img`: cartoonish scale-up with overshoot (0 → 1.12 → 0.94 → 1, ~0.9s ease-out), scoped to the theme classes, disabled under `@media (prefers-reduced-motion: reduce)`.
+   - `README.md` with the manual install/uninstall steps (below). **No install.bat / apply-refresh.ps1 / service scripts.**
 
-3. **CSS debe cubrir todas las variables (incluyendo las que NO están en la KB)**:
+3. **CSS must cover all variables (including those NOT in the KB)**:
    - Core: `--primary-color`, `--dark-primary-color`, `--light-primary-color`, `--secondary-color`, `--tertiary-color`
    - Backgrounds: `--primary-bgcolor`, `--secondary-bgcolor`, `--tertiary-bgcolor`, `--hover-bgcolor`, `--header-bgcolor`, `--toolbar-bgcolor`, `--sidepanel-bgcolor`, `--sidepanel-header-bgcolor`, `--menu-bgcolor`, `--dialog-bgcolor`, `--submenu-bgcolor`, `--table-header-bgcolor`, `--table-body-bgcolor`, `--table-body-bgcolor-h`, `--<ClassName>-entity-bg`
    - Buttons: `--button-bgcolor`, `--button-txtcolor`, `--button-bgcolor-h`, `--button-txtcolor-h`, `--outline-button-color`, `--outline-button-bgcolor-h`, `--outline-button-color-h`, `--special-button`, `--switcher-button`
@@ -39,15 +41,15 @@ Necesito crear una customización de tema para **Thinfinity Workspace** basada e
    - Text: `--primary-txtcolor`, `--secondary-txtcolor`, `--heading-color`
    - Borders: `--border-color`, `--light-border-color`, `--separator`
    - Status: `--disabled`, `--danger`, `--alert`, `--allowed`, `--shadow-color`
-   - Background (dashboard): `--bg-image`, `--bg-size`, `--bg-blend-mode`
+   - Background (dashboard): `--bg-image: none`, `--bg-size`, `--bg-blend-mode`
    - Logos: `--desktop-logo`, `--mobile-logo`, `--login-logo`, `--logo-bg-size`
-   - **Login panel (no documentado en KB, aplica al `/signin` de v8+)**: `--login-brand-bg`, `--login-brand-bg-size`, `--login-brand-bg-repeat`, `--login-brand-bg-position-x`, `--login-brand-bg-position-y`, `--login-brand-bg-blend-mode`, `--login-form-bg` (+ modificadores), `--login-box-width`
-   - URLs con el prefix `url("<%=@BASEURL%>__themes__/<archivo>")`.
+   - **Login panel (not in the KB, applies to `/signin` v8+)**: `--login-brand-bg` (CSS gradient), `--login-brand-bg-size`, `--login-brand-bg-repeat`, `--login-brand-bg-position-x`, `--login-brand-bg-position-y`, `--login-brand-bg-blend-mode`, `--login-form-bg` (+ modifiers), `--login-box-width`
+   - Asset URLs use the prefix `url("<%=@BASEURL%>__themes__/<file>")`.
 
-4. **JSON config** debe incluir:
+4. **JSON config** must include:
    ```json
    {
-     "filename": "C:\\customization\\<BrandName>\\customthemes.css",
+     "filename": "C:\\ProgramData\\Cybele Software\\Thinfinity\\Workspace\\DB\\<Brand>\\customthemes.css",
      "favicon": "<Brand>Favicon.ico",
      "allowUsersToSwitchTheme": true,
      "allowBuiltInThemes": false,
@@ -61,23 +63,31 @@ Necesito crear una customización de tema para **Thinfinity Workspace** basada e
      ]
    }
    ```
+   `productName` becomes the browser tab title (server-side token replacement — no HTML edits).
 
-5. **No creés placeholders genéricos** (círculo con letra) si el site tiene los assets reales. Bajá los PNG/SVG/ICO originales.
+5. **No generic placeholders** (circle with a letter) if the site has real assets. Download the original PNG/SVG/ICO.
 
-6. **No asumas** que las rutas de la KB son correctas en v8: antes de escribir el JSON, verificá dónde existe el archivo activo (`Test-Path "C:\Program Files\Thinfinity\Workspace\custom-themes.json"` y `...ProgramData\DB\...`).
+6. **Package as `.zip`** named `<Brand>-Thinfinity-Theme.zip`, mirroring the install destination:
+   ```
+   README.md               <- manual steps
+   custom-themes.json      <- goes to ...\Workspace\DB\
+   <Brand>\                <- goes to ...\Workspace\DB\<Brand>\  (css + svg + ico)
+   ```
+   Exclude `_scratch\`, `.git\`, temp files. Report final path and size.
 
-7. **Al terminar**, corré el `apply-refresh.ps1` y pedime un hard-refresh (Ctrl+Shift+R) para validar. Si algo no aparece, pedí captura de `/signin` y los headers/response de `custom-theme.css` en DevTools → Network.
+7. **README.md install steps** (the only "installer"):
+   1. Copy `<Brand>\` to `C:\ProgramData\Cybele Software\Thinfinity\Workspace\DB\<Brand>\`
+   2. Copy `custom-themes.json` to `C:\ProgramData\Cybele Software\Thinfinity\Workspace\DB\` (back up any existing one)
+   3. `Restart-Service ThinfinitySvcMgr`
+   4. Hard-refresh (`Ctrl+Shift+R`) or incognito; verify `/signin`: logo pop animation over gradient panel, brand button color, favicon, tab title.
 
-8. **Empaquetar el theme pack como `.zip`** en `C:\customization\<BrandName>-Thinfinity-Theme.zip`:
-   - Incluir todo el contenido de `C:\customization\<BrandName>\` **excepto** carpetas auxiliares tipo `_scratch\`, `.git\`, `node_modules\` o archivos temporales.
-   - Debe incluir: `customthemes.css`, `custom-themes.json`, todos los assets (`.ico`, `.svg`, `.png`, `.jpg`), `apply-refresh.ps1`, `install.bat`, `uninstall.bat`, `uninstall.ps1`.
-   - Usar `Compress-Archive -Path ... -DestinationPath ... -Force` desde PowerShell. Si ya existe un `.zip` previo con ese nombre, sobrescribirlo.
-   - Reportar el path final y el tamaño del `.zip` generado para confirmar.
+   Uninstall = delete the JSON + the `<Brand>\` folder, restart service. Nothing in Program Files, no registry.
 
-**Contexto opcional que puedo darte:**
-- Empresa: `<nombre + industria>`
-- Tagline/slogan preferido para el login: `<texto>`
-- Si querés forzar solo un tema (no dejar switcher): `allowUsersToSwitchTheme: false`
-- Si querés mantener los built-in disponibles además del custom: `allowBuiltInThemes: true`
+**Optional context I can give you:**
+- Company: `<name + industry>`
+- Preferred login tagline: `<text>`
+- Force a single theme (no switcher): `allowUsersToSwitchTheme: false`
+- Keep built-in themes available too: `allowBuiltInThemes: true`
+- Background images (hero/dashboard): only if I explicitly provide/request them here.
 
 ---

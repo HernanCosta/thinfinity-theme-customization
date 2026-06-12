@@ -1,5 +1,14 @@
 # Customización de Thinfinity Workspace — pasos completos
 
+> **⚠️ OUTDATED (2026-06-12).** The deployment model in this guide (assets
+> synced to `Program Files\...\web\__themes__\`, JSON in Program Files,
+> installer scripts) was disproven against server source
+> (`dev-main\Units\IISServer\IISServer.Themes.pas`): the JSON is read only
+> from the ProgramData DB folder and `/__themes__/` is a virtual alias to
+> the CSS's own folder — nothing is copied to Program Files, no installer
+> is needed. **Use the root `PROMPT-TEMPLATE.md` as the current process.**
+> The CSS variable reference below (sections 3 and 7.3) is still valid.
+
 Guía práctica para crear un tema basado en el branding de un site corporativo. Actualizada para v8.5 (marzo 2026). Complementa y corrige la KB oficial (https://kb.cybelesoft.com/portal/en/kb/articles/new-theme-customization-api-in-thinfinity-workspace).
 
 ---
