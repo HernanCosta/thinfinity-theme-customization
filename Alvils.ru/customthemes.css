@@ -11,7 +11,7 @@
    for policy parity); login brand panel is a teal CSS gradient. Carries
    the full perk set (pills, brand toggles, circular close-X, graceful
    motion, responsive login logo, refined login, SSO hover/click,
-   "Powered by Cybele Software" footer).
+   stock "by Cybele Software, Inc." footer).
 
    WCAG 2.1 AA (text >= 4.5:1, UI >= 3:1):
      #008a9e on #ffffff = 3.9:1 (large/UI only); #005a49 = 6.7:1 (text)
@@ -320,21 +320,6 @@
 .AlvilsLight #login-container .header, .AlvilsDark #login-container .header {
   margin-bottom: 0.25rem !important;
 }
-
-/* =============================================================
-   Footer: "<product> v<ver>. Powered by Cybele Software, Inc."
-   Keep the product name + version (.hiddenThin, post-login) AND the
-   app's real <a> (exact label + UTM link). Collapse only the stock
-   "All rights reserved (c)..." copyright text and inject "Powered by "
-   in front of the link.
-   ============================================================= */
-.AlvilsLight .app-footer small, .AlvilsDark .app-footer small,
-.AlvilsLight footer small,      .AlvilsDark footer small { font-size: 0 !important; }
-.AlvilsLight .app-footer small .hiddenThin, .AlvilsDark .app-footer small .hiddenThin { font-size: 0.8rem !important; }
-.AlvilsLight .app-footer small .hiddenThin::after, .AlvilsDark .app-footer small .hiddenThin::after { content: "Powered by "; font-size: 0.8rem; }
-.AlvilsLight footer small::before, .AlvilsDark footer small::before { content: "Powered by "; font-size: 0.8rem; }
-.AlvilsLight .app-footer small a, .AlvilsDark .app-footer small a,
-.AlvilsLight footer small a,      .AlvilsDark footer small a { font-size: 0.8rem !important; }
 
 .AlvilsDark {
   /* --- Core brand --- */

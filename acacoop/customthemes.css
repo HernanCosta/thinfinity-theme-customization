@@ -9,7 +9,7 @@
    Style-only theme: no background images; login brand panel is a CSS
    gradient. Carries the full perk set (pills, brand toggles, circular
    close-X, graceful motion, responsive login logo, refined login,
-   SSO hover/click, "Powered by Cybele Software" footer).
+   SSO hover/click, stock "by Cybele Software, Inc." footer).
 
    Login uses the official COLOR lockup (ACA mark + "AsociaciÃ³n de
    Cooperativas Argentinas") on a LIGHT indigo-tinted panel so the
@@ -325,21 +325,6 @@
 .AcaCoopLight #login-container .header, .AcaCoopDark #login-container .header {
   margin-bottom: 0.25rem !important;
 }
-
-/* =============================================================
-   Footer: "<product> v<ver>. Powered by Cybele Software, Inc."
-   Keep the product name + version (.hiddenThin, post-login) AND the
-   app's real <a> (exact label + UTM link). Collapse only the stock
-   "All rights reserved (c)..." copyright text and inject "Powered by "
-   in front of the link.
-   ============================================================= */
-.AcaCoopLight .app-footer small, .AcaCoopDark .app-footer small,
-.AcaCoopLight footer small,      .AcaCoopDark footer small { font-size: 0 !important; }
-.AcaCoopLight .app-footer small .hiddenThin, .AcaCoopDark .app-footer small .hiddenThin { font-size: 0.8rem !important; }
-.AcaCoopLight .app-footer small .hiddenThin::after, .AcaCoopDark .app-footer small .hiddenThin::after { content: "Powered by "; font-size: 0.8rem; }
-.AcaCoopLight footer small::before, .AcaCoopDark footer small::before { content: "Powered by "; font-size: 0.8rem; }
-.AcaCoopLight .app-footer small a, .AcaCoopDark .app-footer small a,
-.AcaCoopLight footer small a,      .AcaCoopDark footer small a { font-size: 0.8rem !important; }
 
 .AcaCoopDark {
   /* --- Core brand (lightened for dark surfaces) --- */

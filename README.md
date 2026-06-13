@@ -38,7 +38,9 @@ dark themes are switchable from the Workspace UI.
    wordmark when the window is narrow.
 8. **Refined login form** — cleaner heading, boxed inputs, native font.
 9. **Header-icon contrast** — header icons pinned to read on the branded header.
-10. **"Powered by Cybele Software" footer.**
+
+The footer is left stock (`<Brand> Workspace v… © by Cybele Software, Inc.`)
+— correct vendor attribution, branded with the product name, no override.
 
 All motion respects `prefers-reduced-motion`.
 

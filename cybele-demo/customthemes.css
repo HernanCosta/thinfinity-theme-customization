@@ -427,21 +427,6 @@
   margin-bottom: 0.25rem !important;
 }
 
-/* =============================================================
-   Footer: "<product> v<ver>. Powered by Cybele Software, Inc."
-   Keep the product name + version (.hiddenThin, post-login) AND the
-   app's real <a> (exact label + UTM link). Collapse only the stock
-   "All rights reserved (c)..." copyright text and inject "Powered by "
-   in front of the link.
-   ============================================================= */
-.CybeleLight .app-footer small, .CybeleDark .app-footer small,
-.CybeleLight footer small,      .CybeleDark footer small { font-size: 0 !important; }
-.CybeleLight .app-footer small .hiddenThin, .CybeleDark .app-footer small .hiddenThin { font-size: 0.8rem !important; }
-.CybeleLight .app-footer small .hiddenThin::after, .CybeleDark .app-footer small .hiddenThin::after { content: "Powered by "; font-size: 0.8rem; }
-.CybeleLight footer small::before, .CybeleDark footer small::before { content: "Powered by "; font-size: 0.8rem; }
-.CybeleLight .app-footer small a, .CybeleDark .app-footer small a,
-.CybeleLight footer small a,      .CybeleDark footer small a { font-size: 0.8rem !important; }
-
 .CybeleDark {
   /* --- Core brand (lightened blues for dark surfaces) --- */
   --primary-color: #5dadf7;

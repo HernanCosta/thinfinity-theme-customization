@@ -12,8 +12,9 @@
    Style-only theme: no background images; login brand panel is a CSS
    gradient. Logos + favicon are the only binaries. Carries the full
    perk set (pills, brand toggles, circular close-X, graceful motion,
-   responsive login logo, refined login, "Powered by Cybele Software"
-   footer) per the thinfinity-theme-customization skill.
+   responsive login logo, refined login) per the
+   thinfinity-theme-customization skill. Footer is left stock
+   ("<Brand> Workspace v… © by Cybele Software, Inc.").
 
    Contrast verified against WCAG 2.1 AA (text >= 4.5:1, UI >= 3:1):
      #002eff on #ffffff = 7.4:1   (links, buttons, toggle ON)
@@ -385,21 +386,6 @@
 .EntelLight #login-container .header, .EntelDark #login-container .header {
   margin-bottom: 0.25rem !important;
 }
-
-/* =============================================================
-   Footer: "<product> v<ver>. Powered by Cybele Software, Inc."
-   Keep the product name + version (.hiddenThin, post-login) AND the
-   app's real <a> (exact label + UTM link). Collapse only the stock
-   "All rights reserved (c)..." copyright text and inject "Powered by "
-   in front of the link.
-   ============================================================= */
-.EntelLight .app-footer small, .EntelDark .app-footer small,
-.EntelLight footer small,      .EntelDark footer small { font-size: 0 !important; }
-.EntelLight .app-footer small .hiddenThin, .EntelDark .app-footer small .hiddenThin { font-size: 0.8rem !important; }
-.EntelLight .app-footer small .hiddenThin::after, .EntelDark .app-footer small .hiddenThin::after { content: "Powered by "; font-size: 0.8rem; }
-.EntelLight footer small::before, .EntelDark footer small::before { content: "Powered by "; font-size: 0.8rem; }
-.EntelLight .app-footer small a, .EntelDark .app-footer small a,
-.EntelLight footer small a,      .EntelDark footer small a { font-size: 0.8rem !important; }
 
 .EntelDark {
   /* --- Core brand (lightened blues for dark surfaces) --- */
