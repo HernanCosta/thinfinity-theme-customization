@@ -215,6 +215,14 @@
   background: transparent !important;
 }
 
+/* Side-menu logo: the .logos block has no background-position (stock
+   defaults to left), so the expanded logo hugs the left edge. Center
+   it within the pane. */
+.CybeleLight .side-menu .content .logos,
+.CybeleDark  .side-menu .content .logos {
+  background-position: center !important;
+}
+
 /* =============================================================
    Left side nav (Home / Favorites / Settings). This is custom
    `.menu-item` markup (SideMenuItem.vue), NOT a PanelMenu — the
