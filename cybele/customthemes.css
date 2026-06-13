@@ -223,6 +223,17 @@
   background-position: center !important;
 }
 
+/* Top-bar logo: the .logos zone is flex-1 (wide) and the logo sits at
+   its far-left edge. Cap the zone to the expanded nav width (14rem =
+   .content.large) and center, so the logo sits centered OVER the left
+   nav column instead of hugging the edge. */
+.CybeleLight .top-bar .logos,
+.CybeleDark  .top-bar .logos {
+  flex: 0 0 14rem !important;
+  max-width: 14rem !important;
+  background-position: center !important;
+}
+
 /* =============================================================
    Left side nav (Home / Favorites / Settings). This is custom
    `.menu-item` markup (SideMenuItem.vue), NOT a PanelMenu — the
