@@ -174,3 +174,36 @@
   /* Form panel (right) stays teal via secondary-bgcolor */
   --login-form-bg: var(--primary-bgcolor);
 }
+
+/* =============================================================
+   SSO provider buttons: grow on hover, bounce on click.
+   Targets the circular provider icon (.auth-circle), inline
+   provider buttons (.sso-buttons button) and the large variant
+   (.sso-button-large). prefers-reduced-motion aware.
+   ============================================================= */
+@keyframes alvils-sso-bounce {
+  0%   { transform: scale(1.08); }
+  30%  { transform: scale(0.90); }
+  55%  { transform: scale(1.12); }
+  80%  { transform: scale(0.97); }
+  100% { transform: scale(1.08); }
+}
+.AlvilsLight .sso-buttons button, .AlvilsLight .auth-circle, .AlvilsLight .sso-button-large,
+.AlvilsDark  .sso-buttons button, .AlvilsDark  .auth-circle, .AlvilsDark  .sso-button-large {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.AlvilsLight .sso-buttons button:hover, .AlvilsLight .auth-circle:hover, .AlvilsLight .sso-button-large:hover,
+.AlvilsDark  .sso-buttons button:hover, .AlvilsDark  .auth-circle:hover, .AlvilsDark  .sso-button-large:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px var(--shadow-color);
+}
+.AlvilsLight .sso-buttons button:active, .AlvilsLight .auth-circle:active, .AlvilsLight .sso-button-large:active,
+.AlvilsDark  .sso-buttons button:active, .AlvilsDark  .auth-circle:active, .AlvilsDark  .sso-button-large:active {
+  animation: alvils-sso-bounce 0.4s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .AlvilsLight .sso-buttons button:hover, .AlvilsLight .auth-circle:hover, .AlvilsLight .sso-button-large:hover,
+  .AlvilsDark  .sso-buttons button:hover, .AlvilsDark  .auth-circle:hover, .AlvilsDark  .sso-button-large:hover { transform: none; box-shadow: none; }
+  .AlvilsLight .sso-buttons button:active, .AlvilsLight .auth-circle:active, .AlvilsLight .sso-button-large:active,
+  .AlvilsDark  .sso-buttons button:active, .AlvilsDark  .auth-circle:active, .AlvilsDark  .sso-button-large:active { animation: none; }
+}

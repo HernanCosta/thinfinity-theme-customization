@@ -474,3 +474,36 @@
   --login-form-bg: var(--primary-bgcolor);
   --login-box-width: 440px;
 }
+
+/* =============================================================
+   SSO provider buttons: grow on hover, bounce on click.
+   Targets the circular provider icon (.auth-circle), inline
+   provider buttons (.sso-buttons button) and the large variant
+   (.sso-button-large). prefers-reduced-motion aware.
+   ============================================================= */
+@keyframes entel-sso-bounce {
+  0%   { transform: scale(1.08); }
+  30%  { transform: scale(0.90); }
+  55%  { transform: scale(1.12); }
+  80%  { transform: scale(0.97); }
+  100% { transform: scale(1.08); }
+}
+.EntelLight .sso-buttons button, .EntelLight .auth-circle, .EntelLight .sso-button-large,
+.EntelDark  .sso-buttons button, .EntelDark  .auth-circle, .EntelDark  .sso-button-large {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.EntelLight .sso-buttons button:hover, .EntelLight .auth-circle:hover, .EntelLight .sso-button-large:hover,
+.EntelDark  .sso-buttons button:hover, .EntelDark  .auth-circle:hover, .EntelDark  .sso-button-large:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px var(--shadow-color);
+}
+.EntelLight .sso-buttons button:active, .EntelLight .auth-circle:active, .EntelLight .sso-button-large:active,
+.EntelDark  .sso-buttons button:active, .EntelDark  .auth-circle:active, .EntelDark  .sso-button-large:active {
+  animation: entel-sso-bounce 0.4s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .EntelLight .sso-buttons button:hover, .EntelLight .auth-circle:hover, .EntelLight .sso-button-large:hover,
+  .EntelDark  .sso-buttons button:hover, .EntelDark  .auth-circle:hover, .EntelDark  .sso-button-large:hover { transform: none; box-shadow: none; }
+  .EntelLight .sso-buttons button:active, .EntelLight .auth-circle:active, .EntelLight .sso-button-large:active,
+  .EntelDark  .sso-buttons button:active, .EntelDark  .auth-circle:active, .EntelDark  .sso-button-large:active { animation: none; }
+}
