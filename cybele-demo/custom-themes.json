@@ -1,0 +1,12 @@
+{
+  "filename": "C:\\ProgramData\\Cybele Software\\Thinfinity\\Workspace\\DB\\CybeleDemo\\customthemes.css",
+  "allowUsersToSwitchTheme": true,
+  "allowBuiltInThemes": true,
+  "defaultTheme": "light-mode",
+  "lightMode": "light-mode",
+  "darkMode": "dark-mode",
+  "themes": [
+    { "class": "CybeleLight", "name": "Cybele Software (light)" },
+    { "class": "CybeleDark",  "name": "Cybele Software (dark)" }
+  ]
+}

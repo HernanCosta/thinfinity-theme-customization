@@ -1,0 +1,596 @@
+/* =============================================================
+   Cybele Software — Custom theme for Thinfinity Workspace
+   Brand (extracted from https://www.cybelesoft.com/ design tokens
+   in the site's entry.css — --blue-cybele-* / --water-green-*):
+     Blue ramp:   #eff7fe 50 / #d0e7fd 100 / #99cbfa 200 / #5dadf7 300
+                  #0b84f4 400 / #085dac 500 / #074f91 600 / #053b6d 700
+                  #032748 800 / #021425 900
+     Water green: #3dcca1 500 / #69d8b6 400 / #238568 700
+     Greys:       #f9f9f9 50 / #d6d6d6 200 / #9c9c9c 400 / #515151 700
+   Logos: official site SVGs (cybele-negative-logo.svg — white
+   wordmark + multicolor butterfly mark, the site's own dark-surface
+   variant). Favicon: real site ICO.
+
+   Policy: style-only theme. No background images; the login brand
+   panel uses a CSS gradient. Logos + favicon are the only binaries.
+
+   Signature touches matching cybelesoft.com:
+     - Dark navy header (#032748) with the negative logo, like the
+       site's top bar — in BOTH themes
+     - Floating pill header + pill buttons (the site's rounded
+       look), done with plain CSS on .top-bar / .p-button
+     - Brand CTA blue reserved for accents; AA-safe #085dac carries
+       text/buttons on light surfaces
+
+   Contrast verified against WCAG 2.1 AA (SC 1.4.3: text >= 4.5:1,
+   SC 1.4.11: UI components >= 3:1):
+     #085dac on #ffffff = 6.6:1   (links, buttons; #0b84f4 is 3.7:1
+                                   and is NOT used for normal text)
+     #ffffff on #085dac = 6.6:1   (button text)
+     #515151 on #ffffff = 7.9:1   (secondary text)
+     #b93a29 on #ffffff = 5.7:1   (danger)
+     #9a5b00 on #ffffff = 5.4:1   (alert)
+     #238568 on #ffffff = 4.5:1   (allowed)
+     #5dadf7 on #021425 = 7.8:1   (links, dark)
+     #021425 on #0b84f4 = 5.0:1   (button text, dark)
+     #0b84f4 vs #021425 = 5.0:1   (button surface vs bg, dark)
+   Dark surfaces follow Material dark-theme guidance using the
+   brand's own navy ramp (#021425 base, not #000), lightened
+   primaries (#5dadf7) for text.
+   ============================================================= */
+
+.CybeleLight {
+  /* --- Core brand --- */
+  --primary-color: #085dac;
+  --dark-primary-color: #053b6d;
+  --light-primary-color: #d0e7fd;
+  --secondary-color: #0b84f4;
+  --tertiary-color: #3dcca1;
+
+  /* --- Surfaces --- */
+  --bgcolor: #021425;
+  --primary-bgcolor: #ffffff;
+  --secondary-bgcolor: #f9f9f9;
+  --tertiary-bgcolor: #eff7fe;
+  --hover-bgcolor: #d0e7fd;
+
+  /* Site-accurate header: cybelesoft.com top bar is dark navy with
+     the negative logo */
+  --header-bgcolor: #032748;
+  --toolbar-bgcolor: var(--tertiary-bgcolor);
+  --sidepanel-header-bgcolor: var(--header-bgcolor);
+  --sidepanel-bgcolor: var(--secondary-bgcolor);
+  --menu-bgcolor: var(--secondary-bgcolor);
+  --dialog-bgcolor: var(--primary-bgcolor);
+  --submenu-bgcolor: var(--tertiary-bgcolor);
+  --light-mode-entity-bg: #085dac14;
+  --CybeleLight-entity-bg: #085dac14;
+  --table-header-bgcolor: var(--hover-bgcolor);
+  --table-body-bgcolor: var(--secondary-bgcolor);
+  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+
+  /* --- Buttons --- */
+  --button-bgcolor: var(--primary-color);
+  --button-txtcolor: #ffffff;
+  --button-bgcolor-h: var(--dark-primary-color);
+  --button-txtcolor-h: #ffffff;
+  --outline-button-color: var(--button-bgcolor);
+  --outline-button-bgcolor-h: var(--button-bgcolor-h);
+  --outline-button-color-h: var(--button-txtcolor-h);
+  --special-button: #ffffff;
+  /* Toggle / InputSwitch: -bgcolor is the ON track (was falling back to
+     the built-in green); brand-blue it. before = knob. */
+  --switcher-button: #c2c2c2;                          /* OFF track */
+  --switcher-button-before: #ffffff;                   /* knob */
+  --switcher-button-bgcolor: var(--primary-color);     /* ON track */
+  --switcher-button-bgcolor-h: #b0b0b0;                /* OFF hover */
+  --switcher-button-h: var(--dark-primary-color);      /* ON hover */
+
+  /* --- Links & nav --- */
+  --link-color: var(--primary-color);
+  --link-color-h: var(--dark-primary-color);
+  --menu-selected-color: var(--dark-primary-color);
+  --menu-selected-bgcolor: var(--light-primary-color);
+
+  /* --- Text --- */
+  --primary-txtcolor: #021425;
+  --secondary-txtcolor: #515151;
+  --heading-color: var(--dark-primary-color);
+
+  /* --- Borders --- */
+  --border-color: #d6d6d6;
+  --light-border-color: #ececec;
+  --separator: #e0e0e0;
+
+  /* --- Status --- */
+  --disabled: #9c9c9c;
+  --danger: #b93a29;
+  --alert: #9a5b00;
+  --allowed: #238568;
+  --shadow-color: #02142519;
+
+  /* --- Dashboard background: none (style-only) --- */
+  --bg-image: none;
+  --bg-size: auto;
+  --bg-blend-mode: normal;
+
+  /* --- Logos: official negative SVG (white + multicolor mark) on
+     the navy header and the navy login panel --- */
+  --desktop-logo: url("<%=@BASEURL%>__themes__/CybeleLogoWhite.svg");
+  --mobile-logo:  url("<%=@BASEURL%>__themes__/CybeleLogoMobileWhite.svg");
+  --login-logo:   url("<%=@BASEURL%>__themes__/CybeleLoginLogo.svg");
+  --logo-bg-size: contain;
+
+  /* --- Login brand panel: navy gradient, no image file --- */
+  --login-brand-bg: linear-gradient(135deg, #021425 0%, #032748 60%, #074f91 100%);
+  --login-brand-bg-size: cover;
+  --login-brand-bg-repeat: no-repeat;
+  --login-brand-bg-position-x: center;
+  --login-brand-bg-position-y: center;
+  --login-brand-bg-blend-mode: normal;
+  --login-form-bg: var(--primary-bgcolor);
+  --login-box-width: 440px;
+}
+
+/* =============================================================
+   Login logo entrance animation (both themes): cartoonish pop
+   from zero with overshoot — same as the Entel pack.
+   Disabled under prefers-reduced-motion.
+   ============================================================= */
+@keyframes cybele-logo-pop {
+  0%   { transform: scale(0);    opacity: 0; }
+  55%  { transform: scale(1.12); opacity: 1; }
+  75%  { transform: scale(0.94); }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+.CybeleLight #customized-logo .logo-img,
+.CybeleDark  #customized-logo .logo-img {
+  animation: cybele-logo-pop 0.9s ease-out both;
+  transform-origin: center center;
+}
+
+/* =============================================================
+   cybelesoft.com signature: pill buttons (.p-button is the
+   PrimeVue button base). The top bar stays a full-width solid
+   navy band — no rounding (operator decision after live test).
+   ============================================================= */
+.CybeleLight .p-button,
+.CybeleDark  .p-button {
+  border-radius: 9999px;
+}
+
+/* =============================================================
+   Settings panel (PrimeVue PanelMenu — Account / Configuration).
+   Items become pill buttons: idle transparent, ONLY active/hover
+   filled (Bootstrap nav-pills / UX Planet sidebar guidance).
+   ============================================================= */
+
+/* ROOT-CAUSE FIX (dark-mode invisible text): PrimeVue's base theme
+   hard-codes `.p-panelmenu-content { background:#ffffff }`. With an
+   idle-transparent pill, the link shows that WHITE card through, so
+   the dark theme's near-white idle text (#eff7fe) became invisible.
+   Pin the content surface to a theme variable instead. Light = white
+   (unchanged), dark = #021425 — idle text now contrasts in both. */
+.CybeleLight .p-panelmenu .p-panelmenu-content,
+.CybeleDark  .p-panelmenu .p-panelmenu-content {
+  background: var(--primary-bgcolor) !important;
+  border-color: var(--border-color) !important;
+}
+
+.CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem-link,
+.CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link {
+  border-radius: 9999px !important;
+  margin: 2px 12px !important;
+  padding: 10px 18px !important; /* stock is "10px 0 !important" */
+  border-right: 0 !important;
+  width: auto !important;
+  background-color: transparent !important;      /* idle: blends with content */
+  color: var(--primary-txtcolor) !important;     /* idle text: readable on content */
+  transition: background-color 0.15s ease-out;
+}
+
+/* Active route and hover: filled pill, like a highlighted button */
+.CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem-link.router-link-active-exact,
+.CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem-link:hover,
+.CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link.router-link-active-exact,
+.CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link:hover {
+  background-color: var(--menu-selected-bgcolor) !important;
+  color: var(--menu-selected-color) !important;
+  border-color: transparent !important;
+}
+
+/* ROOT-CAUSE FIX (grey band behind the pill): PrimeVue base paints
+   #e9ecef on the wrapping .p-menuitem-content for hover/highlight/
+   focus. Selectors below mirror PrimeVue's exact specificity so the
+   neutralization wins in every state — only the link pill shows. */
+.CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content,
+.CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight > .p-menuitem-content,
+.CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover,
+.CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content,
+.CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content,
+.CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight > .p-menuitem-content,
+.CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover,
+.CybeleDark  .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content {
+  background: transparent !important;
+}
+
+/* Side-menu logo: the .logos block has no background-position (stock
+   defaults to left), so the expanded logo hugs the left edge. Center
+   it — nudged a few % left of geometric center because the butterfly
+   mark on the upper-right pulls the perceived center rightward; 44%
+   optically centers the wordmark in the pane. */
+.CybeleLight .side-menu .content .logos,
+.CybeleDark  .side-menu .content .logos {
+  background-position: 42% center !important;
+}
+
+/* Top-bar logo: the .logos zone is flex-1 (wide) and the logo sits at
+   its far-left edge. Cap the zone to the expanded nav width (14rem =
+   .content.large) and center, so the logo sits centered OVER the left
+   nav column instead of hugging the edge. */
+.CybeleLight .top-bar .logos,
+.CybeleDark  .top-bar .logos {
+  flex: 0 0 14rem !important;
+  max-width: 14rem !important;
+  background-position: center !important;
+}
+
+/* =============================================================
+   Left side nav (Home / Favorites / Settings). This is custom
+   `.menu-item` markup (SideMenuItem.vue), NOT a PanelMenu — the
+   highlight lives on `.menu-item:hover` / `.menu-item.selected`.
+   Make each a pill button.
+   ============================================================= */
+.CybeleLight .side-menu .menu-item,
+.CybeleDark  .side-menu .menu-item {
+  border-radius: 9999px;
+  margin: 2px 10px;
+  transition: background-color 0.15s ease-out;
+}
+.CybeleLight .side-menu .menu-item:hover,
+.CybeleLight .side-menu .menu-item.selected,
+.CybeleDark  .side-menu .menu-item:hover,
+.CybeleDark  .side-menu .menu-item.selected {
+  background-color: var(--menu-selected-bgcolor) !important;
+  color: var(--menu-selected-color) !important;
+  border-radius: 9999px !important;
+}
+
+/* Side-menu close "X": replace the full-height dark navy bar
+   (.right-bar, bg = --menu-selected-color in EVERY state — bare,
+   .closable, and .selected) with a small circular chip on the X.
+   Also kill the scrollbar the .closable.auto (overflow:auto) variant
+   spawns on hover (the two grey --border-color thumbs). */
+.CybeleLight .side-menu .menu-item .right-bar,
+.CybeleLight .side-menu .menu-item .right-bar.closable,
+.CybeleLight .side-menu .menu-item.selected .right-bar,
+.CybeleLight .side-menu .menu-item.selected .right-bar.closable,
+.CybeleDark  .side-menu .menu-item .right-bar,
+.CybeleDark  .side-menu .menu-item .right-bar.closable,
+.CybeleDark  .side-menu .menu-item.selected .right-bar,
+.CybeleDark  .side-menu .menu-item.selected .right-bar.closable {
+  background-color: transparent !important;
+  overflow: hidden !important;          /* no scrollbar from .auto/overflow:auto */
+}
+.CybeleLight .side-menu .menu-item .right-bar::-webkit-scrollbar,
+.CybeleDark  .side-menu .menu-item .right-bar::-webkit-scrollbar {
+  display: none !important;
+}
+.CybeleLight .side-menu .menu-item .close-profile .cyb-cross,
+.CybeleDark  .side-menu .menu-item .close-profile .cyb-cross {
+  display: inline-flex !important;        /* clean centered circle (was a */
+  align-items: center !important;         /* padded inline icon -> oval) */
+  justify-content: center !important;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  line-height: 1;
+  color: var(--menu-selected-color) !important;
+  transition: background-color 0.15s ease-out, transform 0.12s ease-out;
+}
+.CybeleLight .side-menu .menu-item .close-profile .cyb-cross:hover,
+.CybeleDark  .side-menu .menu-item .close-profile .cyb-cross:hover {
+  background-color: var(--menu-selected-bgcolor) !important;
+  color: var(--menu-selected-color) !important;
+}
+.CybeleLight .side-menu .menu-item .close-profile .cyb-cross:active,
+.CybeleDark  .side-menu .menu-item .close-profile .cyb-cross:active {
+  transform: scale(0.82);                 /* press feedback */
+}
+
+/* Close "X" buttons in dialogs / side panels: circular hover chip,
+   standard icon-button affordance. */
+.CybeleLight .p-dialog-header-icon,
+.CybeleLight .p-sidebar-close,
+.CybeleLight .p-panel-header-icon,
+.CybeleDark  .p-dialog-header-icon,
+.CybeleDark  .p-sidebar-close,
+.CybeleDark  .p-panel-header-icon {
+  border-radius: 50% !important;
+  transition: background-color 0.15s ease-out;
+}
+.CybeleLight .p-dialog-header-icon:hover,
+.CybeleLight .p-sidebar-close:hover,
+.CybeleLight .p-panel-header-icon:hover,
+.CybeleDark  .p-dialog-header-icon:hover,
+.CybeleDark  .p-sidebar-close:hover,
+.CybeleDark  .p-panel-header-icon:hover {
+  background-color: var(--hover-bgcolor) !important;
+}
+
+/* Avatar/top dropdown menus (PrimeVue Menu/TieredMenu overlays,
+   see _tieredMenu.scss): same pill treatment — idle transparent,
+   hover gets the rounded filled highlight. The hover background
+   lives on .p-menuitem-content (non-highlight items) and on
+   .p-menuitem-link, so both get the radius. */
+.CybeleLight .p-menu .p-menuitem-content,
+.CybeleLight .p-tieredmenu .p-menuitem-content,
+.CybeleDark  .p-menu .p-menuitem-content,
+.CybeleDark  .p-tieredmenu .p-menuitem-content {
+  border-radius: 9999px !important;
+  margin: 2px 8px !important;
+  transition: background-color 0.15s ease-out;
+}
+.CybeleLight .p-menu .p-menuitem-link,
+.CybeleLight .p-tieredmenu .p-menuitem-link,
+.CybeleDark  .p-menu .p-menuitem-link,
+.CybeleDark  .p-tieredmenu .p-menuitem-link {
+  border-radius: 9999px !important;
+  padding: 10px 14px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .CybeleLight #customized-logo .logo-img,
+  .CybeleDark  #customized-logo .logo-img {
+    animation: none;
+  }
+}
+
+/* =============================================================
+   Narrow-window / mobile login header (#login-header, shown at
+   the tablet-v breakpoint when the brand panel is hidden).
+   ROOT CAUSE of the "tiny butterfly only" bug: this element reuses
+   var(--login-logo) — our NEGATIVE (white) logo — on top of the
+   white form, so the white "CYBELE software" wordmark vanished and
+   only the multicolor mark survived; with no explicit height it
+   rendered tiny. Give it real height, and use the logo whose
+   wordmark contrasts with the form background per theme:
+     light form (white)  -> positive (dark) logo
+     dark form (#021425) -> negative (white) logo (the default)   */
+.CybeleLight #login-header .logo-img,
+.CybeleDark  #login-header .logo-img {
+  background-size: contain !important;
+  background-position: center !important;
+  height: 64px !important;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.CybeleLight #login-header .logo-img {
+  background-image: url("<%=@BASEURL%>__themes__/CybeleLogoPositive.svg") !important;
+}
+.CybeleDark #login-header .logo-img {
+  background-image: url("<%=@BASEURL%>__themes__/CybeleLogoWhite.svg") !important;
+}
+
+/* =============================================================
+   Graceful motion. PrimeVue already animates connected overlays
+   (.p-connected-overlay: scaleY .8->1, .12s). Make menus/dropdowns
+   pop more — scale + slight rise with a spring easing, origin at
+   the top so they grow out of their trigger. Pure CSS, runs on
+   every open. Honored: the leave keeps PrimeVue's fade.
+   prefers-reduced-motion strips it.
+   ============================================================= */
+.CybeleLight .p-connected-overlay-enter-from,
+.CybeleDark  .p-connected-overlay-enter-from {
+  opacity: 0 !important;
+  transform: scale(0.9) translateY(-6px) !important;
+}
+.CybeleLight .p-connected-overlay-visible,
+.CybeleDark  .p-connected-overlay-visible {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+}
+.CybeleLight .p-connected-overlay-enter-active,
+.CybeleDark  .p-connected-overlay-enter-active {
+  transform-origin: top center;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.16s ease-out !important;
+}
+
+/* Press feedback on buttons + close icons — a small "pop" on click,
+   the graceful touch where CSS can't animate element removal. */
+.CybeleLight .p-button:active,
+.CybeleDark  .p-button:active,
+.CybeleLight .p-dialog-header-icon:active,
+.CybeleLight .p-sidebar-close:active,
+.CybeleDark  .p-dialog-header-icon:active,
+.CybeleDark  .p-sidebar-close:active {
+  transform: scale(0.94);
+  transition: transform 0.1s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .CybeleLight .p-connected-overlay-enter-active,
+  .CybeleDark  .p-connected-overlay-enter-active {
+    transition: none !important;
+  }
+  .CybeleLight .p-button:active, .CybeleDark .p-button:active,
+  .CybeleLight .p-dialog-header-icon:active, .CybeleDark .p-dialog-header-icon:active,
+  .CybeleLight .p-sidebar-close:active, .CybeleDark .p-sidebar-close:active {
+    transform: none;
+  }
+}
+
+/* =============================================================
+   Login refinements (operator-approved: variant A "Refined" +
+   boxed inputs + clean native font app-wide + tighter spacing).
+   Best-practice basis: keep the single-column layout; fix the
+   typography (the app declares Inter but falls back to Arial Bold)
+   and box the inputs to match the rounded theme.
+   ============================================================= */
+
+/* Clean native font app-wide. The theme class lives on <body>, so
+   this beats the base `body{font-family:Inter,Arial...}` rule by
+   specificity; icon fonts (cyb-icons/primeicons, set on their own
+   <i>) are untouched. */
+.CybeleLight, .CybeleDark {
+  --font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Variant A heading: semibold, tighter tracking, slightly smaller,
+   brand navy — replaces the heavy Arial-bold default. */
+.CybeleLight #login-container .login-title, .CybeleDark #login-container .login-title,
+.CybeleLight #login-container h2,            .CybeleDark #login-container h2 {
+  font-weight: 600 !important;
+  letter-spacing: -0.4px !important;
+  font-size: clamp(22px, 2vw, 28px) !important;
+  line-height: 1.2 !important;
+  color: var(--heading-color) !important;
+}
+
+/* Boxed / softly-rounded inputs (replace the bare underlines) */
+.CybeleLight #login_main input.p-inputtext, .CybeleDark #login_main input.p-inputtext,
+.CybeleLight #login_changePassword input.p-inputtext, .CybeleDark #login_changePassword input.p-inputtext,
+.CybeleLight #radiusChallenge input.p-inputtext, .CybeleDark #radiusChallenge input.p-inputtext {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  padding: 11px 14px !important;
+}
+/* password is a wrapper with an inner borderless input: box the
+   wrapper, keep the inner input borderless */
+.CybeleLight #login_main .p-password.p-component.p-inputwrapper.p-input-icon-right, .CybeleDark #login_main .p-password.p-component.p-inputwrapper.p-input-icon-right,
+.CybeleLight #login_changePassword .p-password.p-component.p-inputwrapper.p-input-icon-right, .CybeleDark #login_changePassword .p-password.p-component.p-inputwrapper.p-input-icon-right {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  padding: 0 12px !important;
+}
+.CybeleLight #login_main input.p-inputtext.p-component.p-password-input, .CybeleDark #login_main input.p-inputtext.p-component.p-password-input {
+  border: none !important;
+}
+
+/* Tighten the vertical gap under the heading */
+.CybeleLight #login-container .header, .CybeleDark #login-container .header {
+  margin-bottom: 0.25rem !important;
+}
+
+/* =============================================================
+   Footer: "Powered by Cybele Software".
+   The footer attribution is product copy rendered by the Workspace
+   layout (FlexSideNavHeader.vue post-login, LauncherPage.vue on
+   /signin) — i18n + a hardcoded "© 2010-2026 by Cybele Software,
+   Inc." link, NOT a theme variable. Style-only override: collapse
+   the stock copyright line (font-size:0 on the <small>, which hides
+   the bare text node + link that CSS can't target individually) and
+   inject the vendor line via ::after. The dynamic product name +
+   version (.hiddenThin, shown post-login on wide) is preserved.
+   NOTE: CSS content-injection workaround — verify on a live footer.
+   ============================================================= */
+.CybeleLight .app-footer small, .CybeleDark .app-footer small,
+.CybeleLight footer small,      .CybeleDark footer small {
+  font-size: 0 !important;
+}
+.CybeleLight .app-footer small .hiddenThin,
+.CybeleDark  .app-footer small .hiddenThin {
+  font-size: 0.8rem !important;
+}
+.CybeleLight .app-footer small::after, .CybeleDark .app-footer small::after,
+.CybeleLight footer small::after,      .CybeleDark footer small::after {
+  content: "Powered by Cybele Software";
+  font-size: 0.8rem;
+}
+
+.CybeleDark {
+  /* --- Core brand (lightened blues for dark surfaces) --- */
+  --primary-color: #5dadf7;
+  --dark-primary-color: #99cbfa;
+  --light-primary-color: #053b6d;
+  --secondary-color: #0b84f4;
+  --tertiary-color: #69d8b6;
+
+  /* --- Surfaces: the brand's own navy ramp --- */
+  --bgcolor: #f9f9f9;
+  --primary-bgcolor: #021425;
+  --secondary-bgcolor: #032748;
+  --tertiary-bgcolor: #053b6d;
+  --hover-bgcolor: #074f91;
+
+  --header-bgcolor: var(--secondary-bgcolor);
+  --toolbar-bgcolor: var(--tertiary-bgcolor);
+  --sidepanel-header-bgcolor: var(--header-bgcolor);
+  --sidepanel-bgcolor: var(--secondary-bgcolor);
+  --menu-bgcolor: var(--secondary-bgcolor);
+  --dialog-bgcolor: var(--primary-bgcolor);
+  --submenu-bgcolor: var(--tertiary-bgcolor);
+  --light-mode-entity-bg: #5dadf722;
+  --CybeleDark-entity-bg: #5dadf722;
+  --table-header-bgcolor: var(--hover-bgcolor);
+  --table-body-bgcolor: var(--secondary-bgcolor);
+  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+
+  /* --- Buttons: brand CTA blue with navy text (white text on
+     #0b84f4 is 3.7:1 and fails SC 1.4.3) --- */
+  --button-bgcolor: #0b84f4;
+  --button-txtcolor: #021425;
+  --button-bgcolor-h: #5dadf7;
+  --button-txtcolor-h: #021425;
+  --outline-button-color: var(--primary-color);
+  --outline-button-bgcolor-h: var(--primary-color);
+  --outline-button-color-h: #021425;
+  --special-button: #ffffff;
+  /* Toggle / InputSwitch (dark): ON = vivid brand blue, white knob */
+  --switcher-button: #4a5a6e;                          /* OFF track */
+  --switcher-button-before: #ffffff;                   /* knob */
+  --switcher-button-bgcolor: #0b84f4;                  /* ON track */
+  --switcher-button-bgcolor-h: #5a6a7e;                /* OFF hover */
+  --switcher-button-h: #5dadf7;                        /* ON hover */
+
+  /* --- Links & nav. Selected bg is a derived mid-blue (#0966c2,
+     between tokens 400/500): the token #053b6d collides with the
+     dark tertiary surface (highlight would be invisible), and
+     white text on it is 5.7:1 (AA) where #0b84f4 is only 3.7:1 --- */
+  --link-color: var(--primary-color);
+  --link-color-h: var(--dark-primary-color);
+  --menu-selected-color: #ffffff;
+  --menu-selected-bgcolor: #0966c2;
+
+  /* --- Text --- */
+  --primary-txtcolor: #eff7fe;
+  --secondary-txtcolor: #9c9c9c;
+  --heading-color: var(--primary-color);
+
+  /* --- Borders --- */
+  --border-color: #053b6d;
+  --light-border-color: #032748;
+  --separator: #053b6d;
+
+  /* --- Status --- */
+  --disabled: #6b6b6b;
+  --danger: #e9695a;
+  --alert: #f5b207;
+  --allowed: #69d8b6;
+  --shadow-color: #00000066;
+
+  /* --- Dashboard background: none (style-only) --- */
+  --bg-image: none;
+  --bg-size: auto;
+  --bg-blend-mode: normal;
+
+  /* --- Logos (official negative SVG everywhere on dark) --- */
+  --desktop-logo: url("<%=@BASEURL%>__themes__/CybeleLogoWhite.svg");
+  --mobile-logo:  url("<%=@BASEURL%>__themes__/CybeleLogoMobileWhite.svg");
+  --login-logo:   url("<%=@BASEURL%>__themes__/CybeleLoginLogo.svg");
+  --logo-bg-size: contain;
+
+  /* --- Login brand panel: navy gradient --- */
+  --login-brand-bg: linear-gradient(135deg, #021425 0%, #032748 60%, #074f91 100%);
+  --login-brand-bg-size: cover;
+  --login-brand-bg-repeat: no-repeat;
+  --login-brand-bg-position-x: center;
+  --login-brand-bg-position-y: center;
+  --login-brand-bg-blend-mode: normal;
+  --login-form-bg: var(--primary-bgcolor);
+  --login-box-width: 440px;
+}
