@@ -322,21 +322,16 @@
 }
 
 /* =============================================================
-   Footer: "Powered by Cybele Software" (CSS content-injection).
+   Footer: "Powered by Cybele Software, Inc." — keep the app's real
+   <a> (exact label + UTM link to cybelesoft.com); collapse the stock
+   copyright text and inject "Powered by " before the link.
    ============================================================= */
 .AlvilsLight .app-footer small, .AlvilsDark .app-footer small,
-.AlvilsLight footer small,      .AlvilsDark footer small {
-  font-size: 0 !important;
-}
-.AlvilsLight .app-footer small .hiddenThin,
-.AlvilsDark  .app-footer small .hiddenThin {
-  font-size: 0.8rem !important;
-}
-.AlvilsLight .app-footer small::after, .AlvilsDark .app-footer small::after,
-.AlvilsLight footer small::after,      .AlvilsDark footer small::after {
-  content: "Powered by Cybele Software";
-  font-size: 0.8rem;
-}
+.AlvilsLight footer small,      .AlvilsDark footer small { font-size: 0 !important; }
+.AlvilsLight .app-footer small::before, .AlvilsDark .app-footer small::before,
+.AlvilsLight footer small::before,      .AlvilsDark footer small::before { content: "Powered by "; font-size: 0.8rem; }
+.AlvilsLight .app-footer small a, .AlvilsDark .app-footer small a,
+.AlvilsLight footer small a,      .AlvilsDark footer small a { font-size: 0.8rem !important; }
 
 .AlvilsDark {
   /* --- Core brand --- */
