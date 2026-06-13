@@ -2,6 +2,15 @@
 
 Copy-paste this prompt to Claude replacing `<URL>` and the optional placeholders.
 
+> **Use the `thinfinity-theme-customization` skill** — it is authoritative and
+> carries the ready-to-fill `customthemes.css` with the MANDATORY perk set every
+> pack must ship: pill buttons, pill nav/menu items (idle transparent, filled on
+> hover/active), circular close-X (+ navy right-bar / hover-scrollbar removal),
+> brand-blue toggles, graceful motion (overlay pop + press feedback + logo pop,
+> reduced-motion aware), responsive login logo, brand-colored header, and the
+> "Powered by Cybele Software" footer. The **Cybele Software pack is the
+> reference build.** This file is the short checklist; the skill is the playbook.
+
 ---
 
 I need a theme customization for **Thinfinity Workspace** based on the branding of the corporate site `<URL>`.
