@@ -103,8 +103,9 @@
   --login-logo:   url("<%=@BASEURL%>__themes__/AlvilsLoginLogoWhite.svg");
   --logo-bg-size: contain;
 
-  /* --- Login brand panel: teal gradient, no image file --- */
-  --login-brand-bg: linear-gradient(135deg, #005a49 0%, #00b7a8 55%, #4fcbdf 100%);
+  /* --- Login brand panel: deep teal gradient (kept dark enough that
+     the white logo + light tagline read; no bright turquoise end) --- */
+  --login-brand-bg: linear-gradient(135deg, #00352b 0%, #006b58 55%, #00937f 100%);
   --login-brand-bg-size: cover;
   --login-brand-bg-repeat: no-repeat;
   --login-brand-bg-position-x: center;
@@ -434,10 +435,8 @@
    prefers-reduced-motion strips it.
    ============================================================= */
 @keyframes alvils-menu-in {
-  0%   { opacity: 0; transform: translateY(-15px) scale(0.95); }
-  60%  { opacity: 1; transform: translateY(0)     scale(1.05); }
-  80%  {              transform: translateY(0)     scale(0.985); }
-  100% {              transform: translateY(0)     scale(1); }
+  0%   { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 .AlvilsLight .p-connected-overlay-enter-active, .AlvilsDark .p-connected-overlay-enter-active,
 .AlvilsLight .p-connected-overlay-leave-active, .AlvilsDark .p-connected-overlay-leave-active {
@@ -445,18 +444,17 @@
 }
 .AlvilsLight .p-menu-overlay, .AlvilsLight .p-tieredmenu-overlay, .AlvilsLight .p-dropdown-panel, .AlvilsLight .p-multiselect-panel, .AlvilsLight .p-overlaypanel,
 .AlvilsDark  .p-menu-overlay, .AlvilsDark  .p-tieredmenu-overlay, .AlvilsDark  .p-dropdown-panel, .AlvilsDark  .p-multiselect-panel, .AlvilsDark  .p-overlaypanel {
-  animation: alvils-menu-in 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: alvils-menu-in 0.34s cubic-bezier(0.4, 0, 0.2, 1) both;
   transform-origin: top center;
 }
 @keyframes alvils-expand-in {
-  0%   { opacity: 0.35; transform: translateY(-8px) scale(0.985); }
-  60%  { opacity: 1;    transform: translateY(0)    scale(1.02); }
-  100% {                transform: translateY(0)    scale(1); }
+  0%   { opacity: 0.4; transform: translateY(-6px); }
+  100% { opacity: 1;   transform: translateY(0); }
 }
 .AlvilsLight .p-panelmenu .p-toggleable-content-enter-active,
 .AlvilsDark  .p-panelmenu .p-toggleable-content-enter-active {
   transition: max-height 0.35s ease-out !important;
-  animation: alvils-expand-in 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: alvils-expand-in 0.42s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: top center;
 }
 .AlvilsLight .p-button:active, .AlvilsDark .p-button:active,

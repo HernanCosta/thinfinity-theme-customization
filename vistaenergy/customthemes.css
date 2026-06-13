@@ -1,11 +1,24 @@
-/* =============================================================
-   Vista Energy — Custom theme for Thinfinity Workspace
-   Brand (extracted from https://www.vistaenergy.com/):
-     Primary violet:     #6748d8
-     Dark indigo:        #1f1740
-     Darker accent:      #35227b
-     Light lavender:     #b2a5ec
-     Very light lilac:   #dad1f6
+﻿/* =============================================================
+   Vista Energy â€” Custom theme for Thinfinity Workspace (v8+)
+   Brand (from vistaenergy.com):
+     Primary violet:   #6748d8
+     Dark indigo:      #35227b / #1f1740
+     Light lavender:   #b2a5ec / #dad1f6
+
+   Style-only theme: no background images (the old hero JPG was dropped
+   for policy parity); login brand panel is a violet CSS gradient.
+   Carries the full perk set (pills, brand toggles, circular close-X,
+   graceful menu slide+bounce, SSO hover/click, responsive login logo,
+   refined login, "Powered by Cybele Software" footer).
+
+   WCAG 2.1 AA (text >= 4.5:1, UI >= 3:1):
+     #6748d8 on #ffffff = 4.7:1   (links, buttons, toggle ON)
+     #ffffff on #6748d8 = 4.7:1   (button text)
+     #5f5f6f on #ffffff = 5.6:1   (secondary text)
+     #b2a5ec on #1f1740 = 7.4:1   (links, dark)
+     #ffffff on #6748d8 = 4.7:1   (selected pill, dark)
+   Dark surfaces use Vista's deep indigo ramp (#1f1740 base, not #000),
+   lightened lavender for text.
    ============================================================= */
 
 .VistaLight {
@@ -23,6 +36,7 @@
   --tertiary-bgcolor: #f1edff;
   --hover-bgcolor: #ebe4fb;
 
+  /* Header: white with the colored logo */
   --header-bgcolor: var(--primary-bgcolor);
   --toolbar-bgcolor: var(--tertiary-bgcolor);
   --sidepanel-header-bgcolor: var(--header-bgcolor);
@@ -45,7 +59,12 @@
   --outline-button-bgcolor-h: var(--button-bgcolor-h);
   --outline-button-color-h: var(--button-txtcolor-h);
   --special-button: #ffffff;
-  --switcher-button: #adadad;
+  /* Toggle: ON track = brand violet (white knob), else built-in green */
+  --switcher-button: #c2c2c2;
+  --switcher-button-before: #ffffff;
+  --switcher-button-bgcolor: var(--primary-color);
+  --switcher-button-bgcolor-h: #b0b0b0;
+  --switcher-button-h: var(--dark-primary-color);
 
   /* --- Links & nav --- */
   --link-color: var(--primary-color);
@@ -55,7 +74,7 @@
 
   /* --- Text --- */
   --primary-txtcolor: #1f1740;
-  --secondary-txtcolor: #6f6f6f;
+  --secondary-txtcolor: #5f5f6f;
   --heading-color: var(--dark-primary-color);
 
   /* --- Borders --- */
@@ -65,24 +84,25 @@
 
   /* --- Status --- */
   --disabled: #adadad;
-  --danger: #e22732;
-  --alert: #fe6862;
-  --allowed: #52a50c;
+  --danger: #c42531;
+  --alert: #9a5b00;
+  --allowed: #3e8a2c;
   --shadow-color: #1f174019;
 
-  /* --- Dashboard background (real Vista hero) --- */
-  --bg-image: url("<%=@BASEURL%>__themes__/VistaHero.jpg");
-  --bg-size: cover;
-  --bg-blend-mode: none;
+  /* --- Dashboard background: none (style-only) --- */
+  --bg-image: none;
+  --bg-size: auto;
+  --bg-blend-mode: normal;
 
-  /* --- Logos (real Vista SVG, violet fill for light bg) --- */
+  /* --- Logos: colored on the white header; white logo on the violet
+     login panel (see narrow-login override below). --- */
   --desktop-logo: url("<%=@BASEURL%>__themes__/VistaLogo.svg");
   --mobile-logo:  url("<%=@BASEURL%>__themes__/VistaLogoMobile.svg");
-  --login-logo:   url("<%=@BASEURL%>__themes__/VistaLoginLogo.svg");
+  --login-logo:   url("<%=@BASEURL%>__themes__/VistaLogoWhite.svg");
   --logo-bg-size: contain;
 
-  /* --- Login brand panel (left side of /signin, v8+) --- */
-  --login-brand-bg: url("<%=@BASEURL%>__themes__/VistaHero.jpg");
+  /* --- Login brand panel: violet gradient, no image file --- */
+  --login-brand-bg: linear-gradient(135deg, #35227b 0%, #6748d8 60%, #b2a5ec 100%);
   --login-brand-bg-size: cover;
   --login-brand-bg-repeat: no-repeat;
   --login-brand-bg-position-x: center;
@@ -92,15 +112,296 @@
   --login-box-width: 440px;
 }
 
+/* =============================================================
+   Login logo entrance animation (both themes): cartoonish pop.
+   ============================================================= */
+@keyframes vista-logo-pop {
+  0%   { transform: scale(0);    opacity: 0; }
+  55%  { transform: scale(1.12); opacity: 1; }
+  75%  { transform: scale(0.94); }
+  100% { transform: scale(1);    opacity: 1; }
+}
+.VistaLight #customized-logo .logo-img,
+.VistaDark  #customized-logo .logo-img {
+  animation: vista-logo-pop 0.9s ease-out both;
+  transform-origin: center center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .VistaLight #customized-logo .logo-img,
+  .VistaDark  #customized-logo .logo-img { animation: none; }
+}
+
+/* =============================================================
+   Pill buttons.
+   ============================================================= */
+.VistaLight .p-button,
+.VistaDark  .p-button { border-radius: 9999px; }
+
+/* Logos: center side-menu logo; cap top-bar logo to 14rem nav width. */
+.VistaLight .side-menu .content .logos,
+.VistaDark  .side-menu .content .logos { background-position: center !important; }
+.VistaLight .top-bar .logos,
+.VistaDark  .top-bar .logos {
+  flex: 0 0 14rem !important;
+  max-width: 14rem !important;
+  background-position: center !important;
+}
+
+/* =============================================================
+   Settings PanelMenu: pill items + the two PrimeVue base fixes.
+   ============================================================= */
+.VistaLight .p-panelmenu .p-panelmenu-content,
+.VistaDark  .p-panelmenu .p-panelmenu-content {
+  background: var(--primary-bgcolor) !important;
+  border-color: var(--border-color) !important;
+}
+.VistaLight .p-panelmenu .p-panelmenu-content .p-menuitem-link,
+.VistaDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link {
+  border-radius: 9999px !important;
+  margin: 2px 12px !important;
+  padding: 10px 18px !important;
+  border-right: 0 !important;
+  width: auto !important;
+  background-color: transparent !important;
+  color: var(--primary-txtcolor) !important;
+  transition: background-color 0.15s ease-out;
+}
+.VistaLight .p-panelmenu .p-panelmenu-content .p-menuitem-link.router-link-active-exact,
+.VistaLight .p-panelmenu .p-panelmenu-content .p-menuitem-link:hover,
+.VistaDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link.router-link-active-exact,
+.VistaDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link:hover {
+  background-color: var(--menu-selected-bgcolor) !important;
+  color: var(--menu-selected-color) !important;
+  border-color: transparent !important;
+}
+.VistaLight .p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content,
+.VistaLight .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight > .p-menuitem-content,
+.VistaLight .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover,
+.VistaLight .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content,
+.VistaDark  .p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content,
+.VistaDark  .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight > .p-menuitem-content,
+.VistaDark  .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover,
+.VistaDark  .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content {
+  background: transparent !important;
+}
+
+/* =============================================================
+   Left side nav (Home/Favorites/Settings) â€” custom .menu-item.
+   ============================================================= */
+.VistaLight .side-menu .menu-item,
+.VistaDark  .side-menu .menu-item {
+  border-radius: 9999px;
+  margin: 2px 10px;
+  transition: background-color 0.15s ease-out;
+}
+.VistaLight .side-menu .menu-item:hover,
+.VistaLight .side-menu .menu-item.selected,
+.VistaDark  .side-menu .menu-item:hover,
+.VistaDark  .side-menu .menu-item.selected {
+  background-color: var(--menu-selected-bgcolor) !important;
+  color: var(--menu-selected-color) !important;
+  border-radius: 9999px !important;
+}
+
+/* Side-menu close X -> circular hover chip; kill navy right-bar +
+   hover scrollbars. */
+.VistaLight .side-menu .menu-item .right-bar,
+.VistaLight .side-menu .menu-item .right-bar.closable,
+.VistaLight .side-menu .menu-item.selected .right-bar,
+.VistaLight .side-menu .menu-item.selected .right-bar.closable,
+.VistaDark  .side-menu .menu-item .right-bar,
+.VistaDark  .side-menu .menu-item .right-bar.closable,
+.VistaDark  .side-menu .menu-item.selected .right-bar,
+.VistaDark  .side-menu .menu-item.selected .right-bar.closable {
+  background-color: transparent !important;
+  overflow: hidden !important;
+}
+.VistaLight .side-menu .menu-item .right-bar::-webkit-scrollbar,
+.VistaDark  .side-menu .menu-item .right-bar::-webkit-scrollbar { display: none !important; }
+.VistaLight .side-menu .menu-item .close-profile .cyb-cross,
+.VistaDark  .side-menu .menu-item .close-profile .cyb-cross {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  line-height: 1;
+  color: var(--menu-selected-color) !important;
+  transition: background-color 0.15s ease-out, transform 0.12s ease-out;
+}
+.VistaLight .side-menu .menu-item .close-profile .cyb-cross:hover,
+.VistaDark  .side-menu .menu-item .close-profile .cyb-cross:hover {
+  background-color: var(--menu-selected-bgcolor) !important;
+  color: var(--menu-selected-color) !important;
+}
+.VistaLight .side-menu .menu-item .close-profile .cyb-cross:active,
+.VistaDark  .side-menu .menu-item .close-profile .cyb-cross:active { transform: scale(0.82); }
+
+/* Dialog/panel close X -> circular hover chip. */
+.VistaLight .p-dialog-header-icon, .VistaLight .p-sidebar-close, .VistaLight .p-panel-header-icon,
+.VistaDark  .p-dialog-header-icon, .VistaDark  .p-sidebar-close, .VistaDark  .p-panel-header-icon {
+  border-radius: 50% !important;
+  transition: background-color 0.15s ease-out;
+}
+.VistaLight .p-dialog-header-icon:hover, .VistaLight .p-sidebar-close:hover, .VistaLight .p-panel-header-icon:hover,
+.VistaDark  .p-dialog-header-icon:hover, .VistaDark  .p-sidebar-close:hover, .VistaDark  .p-panel-header-icon:hover {
+  background-color: var(--hover-bgcolor) !important;
+}
+
+/* Avatar / top dropdown (.p-menu/.p-tieredmenu): pill on CONTENT. */
+.VistaLight .p-menu .p-menuitem-content, .VistaLight .p-tieredmenu .p-menuitem-content,
+.VistaDark  .p-menu .p-menuitem-content, .VistaDark  .p-tieredmenu .p-menuitem-content {
+  border-radius: 9999px !important;
+  margin: 2px 8px !important;
+  transition: background-color 0.15s ease-out;
+}
+.VistaLight .p-menu .p-menuitem-link, .VistaLight .p-tieredmenu .p-menuitem-link,
+.VistaDark  .p-menu .p-menuitem-link, .VistaDark  .p-tieredmenu .p-menuitem-link {
+  border-radius: 9999px !important;
+  padding: 10px 14px !important;
+}
+
+/* =============================================================
+   Graceful motion. Menus slide in and bounce.
+   ============================================================= */
+@keyframes vista-menu-in {
+  0%   { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.VistaLight .p-connected-overlay-enter-active, .VistaDark .p-connected-overlay-enter-active,
+.VistaLight .p-connected-overlay-leave-active, .VistaDark .p-connected-overlay-leave-active { transition: none !important; }
+.VistaLight .p-menu-overlay, .VistaLight .p-tieredmenu-overlay, .VistaLight .p-dropdown-panel, .VistaLight .p-multiselect-panel, .VistaLight .p-overlaypanel,
+.VistaDark  .p-menu-overlay, .VistaDark  .p-tieredmenu-overlay, .VistaDark  .p-dropdown-panel, .VistaDark  .p-multiselect-panel, .VistaDark  .p-overlaypanel {
+  animation: vista-menu-in 0.34s cubic-bezier(0.4, 0, 0.2, 1) both;
+  transform-origin: top center;
+}
+@keyframes vista-expand-in {
+  0%   { opacity: 0.4; transform: translateY(-6px); }
+  100% { opacity: 1;   transform: translateY(0); }
+}
+.VistaLight .p-panelmenu .p-toggleable-content-enter-active,
+.VistaDark  .p-panelmenu .p-toggleable-content-enter-active {
+  transition: max-height 0.35s ease-out !important;
+  animation: vista-expand-in 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top center;
+}
+.VistaLight .p-button:active, .VistaDark .p-button:active,
+.VistaLight .p-dialog-header-icon:active, .VistaDark .p-dialog-header-icon:active,
+.VistaLight .p-sidebar-close:active, .VistaDark .p-sidebar-close:active { transform: scale(0.94); transition: transform 0.1s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .VistaLight .p-menu-overlay, .VistaLight .p-tieredmenu-overlay, .VistaLight .p-dropdown-panel, .VistaLight .p-multiselect-panel, .VistaLight .p-overlaypanel,
+  .VistaDark  .p-menu-overlay, .VistaDark  .p-tieredmenu-overlay, .VistaDark  .p-dropdown-panel, .VistaDark  .p-multiselect-panel, .VistaDark  .p-overlaypanel,
+  .VistaLight .p-panelmenu .p-toggleable-content-enter-active, .VistaDark .p-panelmenu .p-toggleable-content-enter-active { animation: none !important; }
+  .VistaLight .p-button:active, .VistaDark .p-button:active,
+  .VistaLight .p-dialog-header-icon:active, .VistaDark .p-dialog-header-icon:active,
+  .VistaLight .p-sidebar-close:active, .VistaDark .p-sidebar-close:active { transform: none; }
+}
+
+/* =============================================================
+   SSO provider buttons: grow on hover/focus, gentle bounce on click.
+   ============================================================= */
+@keyframes vista-sso-bounce {
+  0%   { transform: scale(1.13); }
+  35%  { transform: scale(1.04); }
+  70%  { transform: scale(1.17); }
+  100% { transform: scale(1.13); }
+}
+.VistaLight .sso-buttons button, .VistaLight .auth-circle, .VistaLight .sso-button-large,
+.VistaDark  .sso-buttons button, .VistaDark  .auth-circle, .VistaDark  .sso-button-large { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+.VistaLight .sso-buttons button:hover, .VistaLight .sso-buttons button:focus-visible, .VistaLight .auth-circle:hover, .VistaLight .auth-circle:focus-visible, .VistaLight .sso-button-large:hover, .VistaLight .sso-button-large:focus-visible,
+.VistaDark  .sso-buttons button:hover, .VistaDark  .sso-buttons button:focus-visible, .VistaDark  .auth-circle:hover, .VistaDark  .auth-circle:focus-visible, .VistaDark  .sso-button-large:hover, .VistaDark  .sso-button-large:focus-visible {
+  transform: scale(1.13); box-shadow: 0 6px 18px var(--shadow-color);
+}
+.VistaLight .sso-buttons button:active, .VistaLight .auth-circle:active, .VistaLight .sso-button-large:active,
+.VistaDark  .sso-buttons button:active, .VistaDark  .auth-circle:active, .VistaDark  .sso-button-large:active { animation: vista-sso-bounce 0.5s cubic-bezier(0.34, 1.4, 0.64, 1); }
+@media (prefers-reduced-motion: reduce) {
+  .VistaLight .sso-buttons button:hover, .VistaLight .auth-circle:hover, .VistaLight .sso-button-large:hover,
+  .VistaDark  .sso-buttons button:hover, .VistaDark  .auth-circle:hover, .VistaDark  .sso-button-large:hover { transform: none; box-shadow: none; }
+  .VistaLight .sso-buttons button:active, .VistaLight .auth-circle:active, .VistaLight .sso-button-large:active,
+  .VistaDark  .sso-buttons button:active, .VistaDark  .auth-circle:active, .VistaDark  .sso-button-large:active { animation: none; }
+}
+
+/* =============================================================
+   Narrow/mobile login header (#login-header): colored logo on the
+   white form (light); white logo on the dark form (dark).
+   ============================================================= */
+.VistaLight #login-header .logo-img,
+.VistaDark  #login-header .logo-img {
+  background-size: contain !important;
+  background-position: center !important;
+  height: 64px !important;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.VistaLight #login-header .logo-img { background-image: url("<%=@BASEURL%>__themes__/VistaLogo.svg") !important; }
+.VistaDark  #login-header .logo-img { background-image: url("<%=@BASEURL%>__themes__/VistaLogoWhite.svg") !important; }
+
+/* =============================================================
+   Login refinements: variant-A heading + boxed inputs + native font
+   + tighter spacing.
+   ============================================================= */
+.VistaLight, .VistaDark {
+  --font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.VistaLight #login-container .login-title, .VistaDark #login-container .login-title,
+.VistaLight #login-container h2,           .VistaDark #login-container h2 {
+  font-weight: 600 !important;
+  letter-spacing: -0.4px !important;
+  font-size: clamp(22px, 2vw, 28px) !important;
+  line-height: 1.2 !important;
+  color: var(--heading-color) !important;
+}
+.VistaLight #login_main input.p-inputtext, .VistaDark #login_main input.p-inputtext,
+.VistaLight #login_changePassword input.p-inputtext, .VistaDark #login_changePassword input.p-inputtext,
+.VistaLight #radiusChallenge input.p-inputtext, .VistaDark #radiusChallenge input.p-inputtext {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  padding: 11px 14px !important;
+}
+.VistaLight #login_main .p-password.p-component.p-inputwrapper.p-input-icon-right, .VistaDark #login_main .p-password.p-component.p-inputwrapper.p-input-icon-right,
+.VistaLight #login_changePassword .p-password.p-component.p-inputwrapper.p-input-icon-right, .VistaDark #login_changePassword .p-password.p-component.p-inputwrapper.p-input-icon-right {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  padding: 0 12px !important;
+}
+.VistaLight #login_main input.p-inputtext.p-component.p-password-input, .VistaDark #login_main input.p-inputtext.p-component.p-password-input {
+  border: none !important;
+}
+.VistaLight #login-container .header, .VistaDark #login-container .header {
+  margin-bottom: 0.25rem !important;
+}
+
+/* =============================================================
+   Footer: "Powered by Cybele Software" (CSS content-injection).
+   ============================================================= */
+.VistaLight .app-footer small, .VistaDark .app-footer small,
+.VistaLight footer small,      .VistaDark footer small { font-size: 0 !important; }
+.VistaLight .app-footer small .hiddenThin, .VistaDark .app-footer small .hiddenThin { font-size: 0.8rem !important; }
+.VistaLight .app-footer small::after, .VistaDark .app-footer small::after,
+.VistaLight footer small::after,      .VistaDark footer small::after {
+  content: "Powered by Cybele Software";
+  font-size: 0.8rem;
+}
+
+/* =============================================================
+   Header icons (notification bell, shortcuts): Vista's light header
+   is white -> brand-violet icons; dark theme header is dark -> white.
+   ============================================================= */
+.VistaLight .top-bar .text-white:not(.bg-primary-900) { color: var(--primary-color) !important; }
+.VistaDark  .top-bar .text-white:not(.bg-primary-900) { color: #ffffff !important; }
+
 .VistaDark {
-  /* --- Core brand (inverted for dark surface, matches vistaenergy.com itself) --- */
+  /* --- Core brand (lightened for dark surfaces) --- */
   --primary-color: #b2a5ec;
   --dark-primary-color: #dad1f6;
   --light-primary-color: #35227b;
   --secondary-color: #6748d8;
   --tertiary-color: #b2a5ec;
 
-  /* --- Surfaces (Vista's deep indigo, #1f1740) --- */
+  /* --- Surfaces (Vista's deep indigo) --- */
   --bgcolor: #faf8ff;
   --primary-bgcolor: #1f1740;
   --secondary-bgcolor: #2a2055;
@@ -129,13 +430,19 @@
   --outline-button-bgcolor-h: var(--primary-color);
   --outline-button-color-h: #1f1740;
   --special-button: #ffffff;
-  --switcher-button: #8d82c9;
+  /* Toggle (dark): ON = brand violet, white knob */
+  --switcher-button: #4a4565;
+  --switcher-button-before: #ffffff;
+  --switcher-button-bgcolor: #6748d8;
+  --switcher-button-bgcolor-h: #5a5575;
+  --switcher-button-h: #b2a5ec;
 
-  /* --- Links & nav --- */
+  /* --- Links & nav. Selected pill must show on the dark indigo
+     surface: #35227b collided with it; use #6748d8 + white text. --- */
   --link-color: var(--primary-color);
   --link-color-h: var(--dark-primary-color);
-  --menu-selected-color: var(--dark-primary-color);
-  --menu-selected-bgcolor: var(--light-primary-color);
+  --menu-selected-color: #ffffff;
+  --menu-selected-bgcolor: #6748d8;
 
   /* --- Text --- */
   --primary-txtcolor: #f5f2ff;
@@ -154,19 +461,19 @@
   --allowed: #32cd32;
   --shadow-color: #00000066;
 
-  /* --- Dashboard background --- */
-  --bg-image: url("<%=@BASEURL%>__themes__/VistaHero.jpg");
-  --bg-size: cover;
-  --bg-blend-mode: multiply;
+  /* --- Dashboard background: none --- */
+  --bg-image: none;
+  --bg-size: auto;
+  --bg-blend-mode: normal;
 
-  /* --- Logos (white fill for dark surface) --- */
+  /* --- Logos: white logo on dark surfaces + violet login panel --- */
   --desktop-logo: url("<%=@BASEURL%>__themes__/VistaLogoWhite.svg");
   --mobile-logo:  url("<%=@BASEURL%>__themes__/VistaLogoMobileWhite.svg");
-  --login-logo:   url("<%=@BASEURL%>__themes__/VistaLoginLogo.svg");
+  --login-logo:   url("<%=@BASEURL%>__themes__/VistaLogoWhite.svg");
   --logo-bg-size: contain;
 
-  /* --- Login brand panel --- */
-  --login-brand-bg: url("<%=@BASEURL%>__themes__/VistaHero.jpg");
+  /* --- Login brand panel: deep violet gradient --- */
+  --login-brand-bg: linear-gradient(135deg, #160d33 0%, #35227b 60%, #6748d8 100%);
   --login-brand-bg-size: cover;
   --login-brand-bg-repeat: no-repeat;
   --login-brand-bg-position-x: center;

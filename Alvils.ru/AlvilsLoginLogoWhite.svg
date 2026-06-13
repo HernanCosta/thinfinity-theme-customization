@@ -2,5 +2,5 @@
   <circle cx="48" cy="60" r="36" fill="#4fcbdf"/>
   <text x="48" y="75" text-anchor="middle" font-family="'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="46" font-weight="800" fill="#0f1a2a">A</text>
   <text x="100" y="72" font-family="'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="54" font-weight="700" fill="#ffffff" letter-spacing="1">Alvils</text>
-  <text x="100" y="100" font-family="'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="14" font-weight="400" fill="#8fa8bb" letter-spacing="0.8">Caring for your health</text>
+  <text x="100" y="100" font-family="'Open Sans','Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="14" font-weight="400" fill="#cfeef4" letter-spacing="0.8">Caring for your health</text>
 </svg>

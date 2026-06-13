@@ -1,21 +1,14 @@
 {
-  "filename": "C:\\customization\\vistaenergy\\customthemes.css",
+  "filename": "C:\\ProgramData\\Cybele Software\\Thinfinity\\Workspace\\DB\\Vista\\customthemes.css",
   "favicon": "VistaFavicon.ico",
   "allowUsersToSwitchTheme": true,
   "allowBuiltInThemes": false,
-  "themeOverriden": true,
   "defaultTheme": "VistaLight",
   "lightMode": "VistaLight",
   "darkMode": "VistaDark",
-  "productName": "Vista Workspace",
+  "productName": "Vista Energy Workspace",
   "themes": [
-    {
-      "class": "VistaLight",
-      "name": "Vista (light)"
-    },
-    {
-      "class": "VistaDark",
-      "name": "Vista (dark)"
-    }
+    { "class": "VistaLight", "name": "Vista (light)" },
+    { "class": "VistaDark",  "name": "Vista (dark)" }
   ]
 }
