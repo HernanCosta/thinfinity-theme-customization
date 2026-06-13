@@ -1,17 +1,33 @@
-﻿/* =============================================================
-   Alvils â€” Custom theme for Thinfinity Workspace
+/* =============================================================
+   Alvils — Custom theme for Thinfinity Workspace (v8+)
    Brand (from alvils.ru):
      Primary turquoise:  #4fcbdf
-     Deep teal (hero):   #005a49
+     Deep teal:          #005a49
      Accent teal:        #00b7a8
-     Dark ink:           #218d9e
+     Amber accent:       #e5a654
+     Dark ink:           #003a30
+
+   Style-only theme: no background images (the old hero JPG was dropped
+   for policy parity); login brand panel is a teal CSS gradient. Carries
+   the full perk set (pills, brand toggles, circular close-X, graceful
+   motion, responsive login logo, refined login, SSO hover/click,
+   "Powered by Cybele Software" footer).
+
+   WCAG 2.1 AA (text >= 4.5:1, UI >= 3:1):
+     #008a9e on #ffffff = 3.9:1 (large/UI only); #005a49 = 6.7:1 (text)
+     #ffffff on #005a49 = 6.7:1   (button text light)
+     #5b7682 on #ffffff = 4.6:1   (secondary text)
+     #002820 on #4fcbdf = 8.9:1   (button text + selected pill, dark)
+     #4fcbdf on #003a30 = 6.1:1   (links, dark)
+   Dark surfaces use the brand's deep-teal ramp (#002820 base, not #000),
+   lightened turquoise for text.
    ============================================================= */
 
 .AlvilsLight {
   /* --- Core brand --- */
-  --primary-color: #4fcbdf;
+  --primary-color: #008a9e;
   --dark-primary-color: #005a49;
-  --light-primary-color: #e0f5fa;
+  --light-primary-color: #d6f1f6;
   --secondary-color: #00b7a8;
   --tertiary-color: #e5a654;
 
@@ -20,8 +36,9 @@
   --primary-bgcolor: #ffffff;
   --secondary-bgcolor: #f5fafd;
   --tertiary-bgcolor: #eaf4f8;
-  --hover-bgcolor: #e0f5fa;
+  --hover-bgcolor: #d6f1f6;
 
+  /* Header: white with the colored logo (site-style) */
   --header-bgcolor: var(--primary-bgcolor);
   --toolbar-bgcolor: var(--tertiary-bgcolor);
   --sidepanel-header-bgcolor: var(--header-bgcolor);
@@ -29,8 +46,8 @@
   --menu-bgcolor: var(--secondary-bgcolor);
   --dialog-bgcolor: var(--primary-bgcolor);
   --submenu-bgcolor: var(--tertiary-bgcolor);
-  --light-mode-entity-bg: #4fcbdf16;
-  --AlvilsLight-entity-bg: #4fcbdf16;
+  --light-mode-entity-bg: #008a9e16;
+  --AlvilsLight-entity-bg: #008a9e16;
   --table-header-bgcolor: var(--hover-bgcolor);
   --table-body-bgcolor: var(--secondary-bgcolor);
   --table-body-bgcolor-h: var(--tertiary-bgcolor);
@@ -44,7 +61,12 @@
   --outline-button-bgcolor-h: var(--button-bgcolor-h);
   --outline-button-color-h: var(--button-txtcolor-h);
   --special-button: #ffffff;
-  --switcher-button: #adadad;
+  /* Toggle: ON track = deep teal (white knob reads) */
+  --switcher-button: #c2c2c2;
+  --switcher-button-before: #ffffff;
+  --switcher-button-bgcolor: var(--dark-primary-color);
+  --switcher-button-bgcolor-h: #b0b0b0;
+  --switcher-button-h: #00735e;
 
   /* --- Links & nav --- */
   --link-color: var(--primary-color);
@@ -54,7 +76,7 @@
 
   /* --- Text --- */
   --primary-txtcolor: #003a30;
-  --secondary-txtcolor: #6b8596;
+  --secondary-txtcolor: #5b7682;
   --heading-color: var(--dark-primary-color);
 
   /* --- Borders --- */
@@ -64,122 +86,220 @@
 
   /* --- Status --- */
   --disabled: #adadad;
-  --danger: #d55050;
-  --alert: #e5a654;
-  --allowed: #8fdb39;
+  --danger: #c43d3d;
+  --alert: #9a5b00;
+  --allowed: #3e8a2c;
   --shadow-color: #005a4919;
 
-  /* --- Login background (real Alvils hero) --- */
-  --bg-image: url("<%=@BASEURL%>__themes__/AlvilsLoginBg.jpg");
-  --bg-size: cover;
-  --bg-blend-mode: none;
+  /* --- Dashboard background: none (style-only) --- */
+  --bg-image: none;
+  --bg-size: auto;
+  --bg-blend-mode: normal;
 
-  /* --- Logos (real brand PNG) --- */
-  --desktop-logo: url("<%=@BASEURL%>__themes__/AlvilsLogo.png");
-  --mobile-logo:  url("<%=@BASEURL%>__themes__/AlvilsLogo.png");
-  --login-logo:   url("<%=@BASEURL%>__themes__/AlvilsLogo.png");
+  /* --- Logos: colored on the white header; white logo on the teal
+     login panel (see narrow-login override below). --- */
+  --desktop-logo: url("<%=@BASEURL%>__themes__/AlvilsLogo.svg");
+  --mobile-logo:  url("<%=@BASEURL%>__themes__/AlvilsLogoMobile.svg");
+  --login-logo:   url("<%=@BASEURL%>__themes__/AlvilsLoginLogoWhite.svg");
   --logo-bg-size: contain;
 
-  /* --- Login brand panel (left side of /signin) --- */
-  --login-brand-bg: url("<%=@BASEURL%>__themes__/AlvilsLoginBg.jpg");
+  /* --- Login brand panel: teal gradient, no image file --- */
+  --login-brand-bg: linear-gradient(135deg, #005a49 0%, #00b7a8 55%, #4fcbdf 100%);
   --login-brand-bg-size: cover;
   --login-brand-bg-repeat: no-repeat;
   --login-brand-bg-position-x: center;
   --login-brand-bg-position-y: center;
   --login-brand-bg-blend-mode: normal;
-  /* Form panel (right) stays teal via secondary-bgcolor */
   --login-form-bg: var(--primary-bgcolor);
+  --login-box-width: 440px;
 }
 
-.AlvilsDark {
-  /* --- Core brand --- */
-  --primary-color: #4fcbdf;
-  --dark-primary-color: #7cdfff;
-  --light-primary-color: #0a3d35;
-  --secondary-color: #17d9c7;
-  --tertiary-color: #e5a654;
+/* =============================================================
+   Login logo entrance animation (both themes): cartoonish pop.
+   ============================================================= */
+@keyframes alvils-logo-pop {
+  0%   { transform: scale(0);    opacity: 0; }
+  55%  { transform: scale(1.12); opacity: 1; }
+  75%  { transform: scale(0.94); }
+  100% { transform: scale(1);    opacity: 1; }
+}
+.AlvilsLight #customized-logo .logo-img,
+.AlvilsDark  #customized-logo .logo-img {
+  animation: alvils-logo-pop 0.9s ease-out both;
+  transform-origin: center center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .AlvilsLight #customized-logo .logo-img,
+  .AlvilsDark  #customized-logo .logo-img { animation: none; }
+}
 
-  /* --- Surfaces (deep teal instead of navy) --- */
-  --bgcolor: #e8f6f2;
-  --primary-bgcolor: #002820;
-  --secondary-bgcolor: #003a30;
-  --tertiary-bgcolor: #004b3e;
-  --hover-bgcolor: #005a49;
+/* =============================================================
+   Pill buttons.
+   ============================================================= */
+.AlvilsLight .p-button,
+.AlvilsDark  .p-button { border-radius: 9999px; }
 
-  --header-bgcolor: var(--primary-bgcolor);
-  --toolbar-bgcolor: var(--tertiary-bgcolor);
-  --sidepanel-header-bgcolor: var(--header-bgcolor);
-  --sidepanel-bgcolor: var(--secondary-bgcolor);
-  --menu-bgcolor: var(--secondary-bgcolor);
-  --dialog-bgcolor: var(--primary-bgcolor);
-  --submenu-bgcolor: var(--tertiary-bgcolor);
-  --light-mode-entity-bg: #4fcbdf22;
-  --AlvilsDark-entity-bg: #4fcbdf22;
-  --table-header-bgcolor: var(--hover-bgcolor);
-  --table-body-bgcolor: var(--secondary-bgcolor);
-  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+/* Logos: center side-menu logo; cap top-bar logo to 14rem nav width. */
+.AlvilsLight .side-menu .content .logos,
+.AlvilsDark  .side-menu .content .logos { background-position: center !important; }
+.AlvilsLight .top-bar .logos,
+.AlvilsDark  .top-bar .logos {
+  flex: 0 0 14rem !important;
+  max-width: 14rem !important;
+  background-position: center !important;
+}
 
-  /* --- Buttons --- */
-  --button-bgcolor: var(--primary-color);
-  --button-txtcolor: #002820;
-  --button-bgcolor-h: var(--dark-primary-color);
-  --button-txtcolor-h: #002820;
-  --outline-button-color: var(--button-bgcolor);
-  --outline-button-bgcolor-h: var(--button-bgcolor-h);
-  --outline-button-color-h: var(--button-txtcolor-h);
-  --special-button: #002820;
-  --switcher-button: #6b8596;
+/* =============================================================
+   Settings PanelMenu: pill items + the two PrimeVue base fixes.
+   ============================================================= */
+.AlvilsLight .p-panelmenu .p-panelmenu-content,
+.AlvilsDark  .p-panelmenu .p-panelmenu-content {
+  background: var(--primary-bgcolor) !important;
+  border-color: var(--border-color) !important;
+}
+.AlvilsLight .p-panelmenu .p-panelmenu-content .p-menuitem-link,
+.AlvilsDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link {
+  border-radius: 9999px !important;
+  margin: 2px 12px !important;
+  padding: 10px 18px !important;
+  border-right: 0 !important;
+  width: auto !important;
+  background-color: transparent !important;
+  color: var(--primary-txtcolor) !important;
+  transition: background-color 0.15s ease-out;
+}
+.AlvilsLight .p-panelmenu .p-panelmenu-content .p-menuitem-link.router-link-active-exact,
+.AlvilsLight .p-panelmenu .p-panelmenu-content .p-menuitem-link:hover,
+.AlvilsDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link.router-link-active-exact,
+.AlvilsDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link:hover {
+  background-color: var(--menu-selected-bgcolor) !important;
+  color: var(--menu-selected-color) !important;
+  border-color: transparent !important;
+}
+.AlvilsLight .p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content,
+.AlvilsLight .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight > .p-menuitem-content,
+.AlvilsLight .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover,
+.AlvilsLight .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content,
+.AlvilsDark  .p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content,
+.AlvilsDark  .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight > .p-menuitem-content,
+.AlvilsDark  .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover,
+.AlvilsDark  .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content {
+  background: transparent !important;
+}
 
-  /* --- Links & nav --- */
-  --link-color: var(--primary-color);
-  --link-color-h: #7cdfff;
-  --menu-selected-color: var(--primary-color);
-  --menu-selected-bgcolor: var(--light-primary-color);
+/* =============================================================
+   Left side nav (Home/Favorites/Settings) — custom .menu-item.
+   ============================================================= */
+.AlvilsLight .side-menu .menu-item,
+.AlvilsDark  .side-menu .menu-item {
+  border-radius: 9999px;
+  margin: 2px 10px;
+  transition: background-color 0.15s ease-out;
+}
+.AlvilsLight .side-menu .menu-item:hover,
+.AlvilsLight .side-menu .menu-item.selected,
+.AlvilsDark  .side-menu .menu-item:hover,
+.AlvilsDark  .side-menu .menu-item.selected {
+  background-color: var(--menu-selected-bgcolor) !important;
+  color: var(--menu-selected-color) !important;
+  border-radius: 9999px !important;
+}
 
-  /* --- Text --- */
-  --primary-txtcolor: #e8f6f2;
-  --secondary-txtcolor: #8fbbb0;
-  --heading-color: var(--primary-color);
+/* Side-menu close X -> circular hover chip; kill navy right-bar +
+   hover scrollbars. */
+.AlvilsLight .side-menu .menu-item .right-bar,
+.AlvilsLight .side-menu .menu-item .right-bar.closable,
+.AlvilsLight .side-menu .menu-item.selected .right-bar,
+.AlvilsLight .side-menu .menu-item.selected .right-bar.closable,
+.AlvilsDark  .side-menu .menu-item .right-bar,
+.AlvilsDark  .side-menu .menu-item .right-bar.closable,
+.AlvilsDark  .side-menu .menu-item.selected .right-bar,
+.AlvilsDark  .side-menu .menu-item.selected .right-bar.closable {
+  background-color: transparent !important;
+  overflow: hidden !important;
+}
+.AlvilsLight .side-menu .menu-item .right-bar::-webkit-scrollbar,
+.AlvilsDark  .side-menu .menu-item .right-bar::-webkit-scrollbar { display: none !important; }
+.AlvilsLight .side-menu .menu-item .close-profile .cyb-cross,
+.AlvilsDark  .side-menu .menu-item .close-profile .cyb-cross {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  line-height: 1;
+  color: var(--menu-selected-color) !important;
+  transition: background-color 0.15s ease-out, transform 0.12s ease-out;
+}
+.AlvilsLight .side-menu .menu-item .close-profile .cyb-cross:hover,
+.AlvilsDark  .side-menu .menu-item .close-profile .cyb-cross:hover {
+  background-color: var(--menu-selected-bgcolor) !important;
+  color: var(--menu-selected-color) !important;
+}
+.AlvilsLight .side-menu .menu-item .close-profile .cyb-cross:active,
+.AlvilsDark  .side-menu .menu-item .close-profile .cyb-cross:active { transform: scale(0.82); }
 
-  /* --- Borders --- */
-  --border-color: #2c6057;
-  --light-border-color: #1e4840;
-  --separator: #2c6057;
+/* Dialog/panel close X -> circular hover chip. */
+.AlvilsLight .p-dialog-header-icon, .AlvilsLight .p-sidebar-close, .AlvilsLight .p-panel-header-icon,
+.AlvilsDark  .p-dialog-header-icon, .AlvilsDark  .p-sidebar-close, .AlvilsDark  .p-panel-header-icon {
+  border-radius: 50% !important;
+  transition: background-color 0.15s ease-out;
+}
+.AlvilsLight .p-dialog-header-icon:hover, .AlvilsLight .p-sidebar-close:hover, .AlvilsLight .p-panel-header-icon:hover,
+.AlvilsDark  .p-dialog-header-icon:hover, .AlvilsDark  .p-sidebar-close:hover, .AlvilsDark  .p-panel-header-icon:hover {
+  background-color: var(--hover-bgcolor) !important;
+}
 
-  /* --- Status --- */
-  --disabled: #6b8596;
-  --danger: #ec4949;
-  --alert: #e5a654;
-  --allowed: #8fdb39;
-  --shadow-color: #00000066;
+/* Avatar / top dropdown (.p-menu/.p-tieredmenu): pill on CONTENT. */
+.AlvilsLight .p-menu .p-menuitem-content, .AlvilsLight .p-tieredmenu .p-menuitem-content,
+.AlvilsDark  .p-menu .p-menuitem-content, .AlvilsDark  .p-tieredmenu .p-menuitem-content {
+  border-radius: 9999px !important;
+  margin: 2px 8px !important;
+  transition: background-color 0.15s ease-out;
+}
+.AlvilsLight .p-menu .p-menuitem-link, .AlvilsLight .p-tieredmenu .p-menuitem-link,
+.AlvilsDark  .p-menu .p-menuitem-link, .AlvilsDark  .p-tieredmenu .p-menuitem-link {
+  border-radius: 9999px !important;
+  padding: 10px 14px !important;
+}
 
-  /* --- Login background (real Alvils hero) --- */
-  --bg-image: url("<%=@BASEURL%>__themes__/AlvilsLoginBg.jpg");
-  --bg-size: cover;
-  --bg-blend-mode: none;
-
-  /* --- Logos (same PNG, works on dark teal too) --- */
-  --desktop-logo: url("<%=@BASEURL%>__themes__/AlvilsLogo.png");
-  --mobile-logo:  url("<%=@BASEURL%>__themes__/AlvilsLogo.png");
-  --login-logo:   url("<%=@BASEURL%>__themes__/AlvilsLogo.png");
-  --logo-bg-size: contain;
-
-  /* --- Login brand panel (left side of /signin) --- */
-  --login-brand-bg: url("<%=@BASEURL%>__themes__/AlvilsLoginBg.jpg");
-  --login-brand-bg-size: cover;
-  --login-brand-bg-repeat: no-repeat;
-  --login-brand-bg-position-x: center;
-  --login-brand-bg-position-y: center;
-  --login-brand-bg-blend-mode: normal;
-  /* Form panel (right) stays teal via secondary-bgcolor */
-  --login-form-bg: var(--primary-bgcolor);
+/* =============================================================
+   Graceful motion: overlays pop; buttons/close icons press-scale.
+   ============================================================= */
+.AlvilsLight .p-connected-overlay-enter-from,
+.AlvilsDark  .p-connected-overlay-enter-from {
+  opacity: 0 !important;
+  transform: scale(0.9) translateY(-6px) !important;
+}
+.AlvilsLight .p-connected-overlay-visible,
+.AlvilsDark  .p-connected-overlay-visible {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+}
+.AlvilsLight .p-connected-overlay-enter-active,
+.AlvilsDark  .p-connected-overlay-enter-active {
+  transform-origin: top center;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.16s ease-out !important;
+}
+.AlvilsLight .p-button:active, .AlvilsDark .p-button:active,
+.AlvilsLight .p-dialog-header-icon:active, .AlvilsDark .p-dialog-header-icon:active,
+.AlvilsLight .p-sidebar-close:active, .AlvilsDark .p-sidebar-close:active {
+  transform: scale(0.94);
+  transition: transform 0.1s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .AlvilsLight .p-connected-overlay-enter-active,
+  .AlvilsDark  .p-connected-overlay-enter-active { transition: none !important; }
+  .AlvilsLight .p-button:active, .AlvilsDark .p-button:active,
+  .AlvilsLight .p-dialog-header-icon:active, .AlvilsDark .p-dialog-header-icon:active,
+  .AlvilsLight .p-sidebar-close:active, .AlvilsDark .p-sidebar-close:active { transform: none; }
 }
 
 /* =============================================================
    SSO provider buttons: grow on hover, bounce on click.
-   Targets the circular provider icon (.auth-circle), inline
-   provider buttons (.sso-buttons button) and the large variant
-   (.sso-button-large). prefers-reduced-motion aware.
    ============================================================= */
 @keyframes alvils-sso-bounce {
   0%   { transform: scale(1.08); }
@@ -206,4 +326,166 @@
   .AlvilsDark  .sso-buttons button:hover, .AlvilsDark  .auth-circle:hover, .AlvilsDark  .sso-button-large:hover { transform: none; box-shadow: none; }
   .AlvilsLight .sso-buttons button:active, .AlvilsLight .auth-circle:active, .AlvilsLight .sso-button-large:active,
   .AlvilsDark  .sso-buttons button:active, .AlvilsDark  .auth-circle:active, .AlvilsDark  .sso-button-large:active { animation: none; }
+}
+
+/* =============================================================
+   Narrow/mobile login header (#login-header): colored logo on the
+   white form (light); white logo on the dark form (dark).
+   ============================================================= */
+.AlvilsLight #login-header .logo-img,
+.AlvilsDark  #login-header .logo-img {
+  background-size: contain !important;
+  background-position: center !important;
+  height: 64px !important;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.AlvilsLight #login-header .logo-img {
+  background-image: url("<%=@BASEURL%>__themes__/AlvilsLoginLogo.svg") !important;
+}
+.AlvilsDark #login-header .logo-img {
+  background-image: url("<%=@BASEURL%>__themes__/AlvilsLoginLogoWhite.svg") !important;
+}
+
+/* =============================================================
+   Login refinements: variant-A heading + boxed inputs + native font
+   + tighter spacing.
+   ============================================================= */
+.AlvilsLight, .AlvilsDark {
+  --font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.AlvilsLight #login-container .login-title, .AlvilsDark #login-container .login-title,
+.AlvilsLight #login-container h2,           .AlvilsDark #login-container h2 {
+  font-weight: 600 !important;
+  letter-spacing: -0.4px !important;
+  font-size: clamp(22px, 2vw, 28px) !important;
+  line-height: 1.2 !important;
+  color: var(--heading-color) !important;
+}
+.AlvilsLight #login_main input.p-inputtext, .AlvilsDark #login_main input.p-inputtext,
+.AlvilsLight #login_changePassword input.p-inputtext, .AlvilsDark #login_changePassword input.p-inputtext,
+.AlvilsLight #radiusChallenge input.p-inputtext, .AlvilsDark #radiusChallenge input.p-inputtext {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  padding: 11px 14px !important;
+}
+.AlvilsLight #login_main .p-password.p-component.p-inputwrapper.p-input-icon-right, .AlvilsDark #login_main .p-password.p-component.p-inputwrapper.p-input-icon-right,
+.AlvilsLight #login_changePassword .p-password.p-component.p-inputwrapper.p-input-icon-right, .AlvilsDark #login_changePassword .p-password.p-component.p-inputwrapper.p-input-icon-right {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  padding: 0 12px !important;
+}
+.AlvilsLight #login_main input.p-inputtext.p-component.p-password-input, .AlvilsDark #login_main input.p-inputtext.p-component.p-password-input {
+  border: none !important;
+}
+.AlvilsLight #login-container .header, .AlvilsDark #login-container .header {
+  margin-bottom: 0.25rem !important;
+}
+
+/* =============================================================
+   Footer: "Powered by Cybele Software" (CSS content-injection).
+   ============================================================= */
+.AlvilsLight .app-footer small, .AlvilsDark .app-footer small,
+.AlvilsLight footer small,      .AlvilsDark footer small {
+  font-size: 0 !important;
+}
+.AlvilsLight .app-footer small .hiddenThin,
+.AlvilsDark  .app-footer small .hiddenThin {
+  font-size: 0.8rem !important;
+}
+.AlvilsLight .app-footer small::after, .AlvilsDark .app-footer small::after,
+.AlvilsLight footer small::after,      .AlvilsDark footer small::after {
+  content: "Powered by Cybele Software";
+  font-size: 0.8rem;
+}
+
+.AlvilsDark {
+  /* --- Core brand --- */
+  --primary-color: #4fcbdf;
+  --dark-primary-color: #7cdfff;
+  --light-primary-color: #0a3d35;
+  --secondary-color: #17d9c7;
+  --tertiary-color: #e5a654;
+
+  /* --- Surfaces (deep teal ramp) --- */
+  --bgcolor: #e8f6f2;
+  --primary-bgcolor: #002820;
+  --secondary-bgcolor: #003a30;
+  --tertiary-bgcolor: #004b3e;
+  --hover-bgcolor: #005a49;
+
+  --header-bgcolor: var(--secondary-bgcolor);
+  --toolbar-bgcolor: var(--tertiary-bgcolor);
+  --sidepanel-header-bgcolor: var(--header-bgcolor);
+  --sidepanel-bgcolor: var(--secondary-bgcolor);
+  --menu-bgcolor: var(--secondary-bgcolor);
+  --dialog-bgcolor: var(--primary-bgcolor);
+  --submenu-bgcolor: var(--tertiary-bgcolor);
+  --light-mode-entity-bg: #4fcbdf22;
+  --AlvilsDark-entity-bg: #4fcbdf22;
+  --table-header-bgcolor: var(--hover-bgcolor);
+  --table-body-bgcolor: var(--secondary-bgcolor);
+  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+
+  /* --- Buttons: turquoise with dark text --- */
+  --button-bgcolor: var(--primary-color);
+  --button-txtcolor: #002820;
+  --button-bgcolor-h: var(--dark-primary-color);
+  --button-txtcolor-h: #002820;
+  --outline-button-color: var(--button-bgcolor);
+  --outline-button-bgcolor-h: var(--button-bgcolor-h);
+  --outline-button-color-h: var(--button-txtcolor-h);
+  --special-button: #002820;
+  /* Toggle (dark): ON = accent teal, white knob */
+  --switcher-button: #3a5a52;
+  --switcher-button-before: #ffffff;
+  --switcher-button-bgcolor: #00b7a8;
+  --switcher-button-bgcolor-h: #4a6a62;
+  --switcher-button-h: #17d9c7;
+
+  /* --- Links & nav. Selected pill must show on the deep-teal surface:
+     #0a3d35 collided with it; use turquoise #4fcbdf + dark text. --- */
+  --link-color: var(--primary-color);
+  --link-color-h: #7cdfff;
+  --menu-selected-color: #002820;
+  --menu-selected-bgcolor: #4fcbdf;
+
+  /* --- Text --- */
+  --primary-txtcolor: #e8f6f2;
+  --secondary-txtcolor: #8fbbb0;
+  --heading-color: var(--primary-color);
+
+  /* --- Borders --- */
+  --border-color: #2c6057;
+  --light-border-color: #1e4840;
+  --separator: #2c6057;
+
+  /* --- Status --- */
+  --disabled: #6b8596;
+  --danger: #ec4949;
+  --alert: #e5a654;
+  --allowed: #8fdb39;
+  --shadow-color: #00000066;
+
+  /* --- Dashboard background: none --- */
+  --bg-image: none;
+  --bg-size: auto;
+  --bg-blend-mode: normal;
+
+  /* --- Logos: white logo on dark surfaces + teal login panel --- */
+  --desktop-logo: url("<%=@BASEURL%>__themes__/AlvilsLogoWhite.svg");
+  --mobile-logo:  url("<%=@BASEURL%>__themes__/AlvilsLogoMobileWhite.svg");
+  --login-logo:   url("<%=@BASEURL%>__themes__/AlvilsLoginLogoWhite.svg");
+  --logo-bg-size: contain;
+
+  /* --- Login brand panel: deep teal gradient --- */
+  --login-brand-bg: linear-gradient(135deg, #002820 0%, #005a49 60%, #00b7a8 100%);
+  --login-brand-bg-size: cover;
+  --login-brand-bg-repeat: no-repeat;
+  --login-brand-bg-position-x: center;
+  --login-brand-bg-position-y: center;
+  --login-brand-bg-blend-mode: normal;
+  --login-form-bg: var(--primary-bgcolor);
+  --login-box-width: 440px;
 }

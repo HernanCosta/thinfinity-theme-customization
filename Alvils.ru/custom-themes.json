@@ -1,21 +1,14 @@
 {
-  "filename": "C:\\customization\\Alvils.ru\\customthemes.css",
+  "filename": "C:\\ProgramData\\Cybele Software\\Thinfinity\\Workspace\\DB\\Alvils\\customthemes.css",
   "favicon": "AlvilsFavicon.ico",
   "allowUsersToSwitchTheme": true,
-  "allowBuiltInThemes": true,
-  "themeOverriden": true,
+  "allowBuiltInThemes": false,
   "defaultTheme": "AlvilsLight",
   "lightMode": "AlvilsLight",
   "darkMode": "AlvilsDark",
   "productName": "Alvils Workspace",
   "themes": [
-    {
-      "class": "AlvilsLight",
-      "name": "Alvils (light)"
-    },
-    {
-      "class": "AlvilsDark",
-      "name": "Alvils (dark)"
-    }
+    { "class": "AlvilsLight", "name": "Alvils (light)" },
+    { "class": "AlvilsDark",  "name": "Alvils (dark)" }
   ]
 }
