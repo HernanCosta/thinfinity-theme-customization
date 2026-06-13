@@ -422,6 +422,59 @@
 }
 
 /* =============================================================
+   Login refinements (operator-approved: variant A "Refined" +
+   boxed inputs + clean native font app-wide + tighter spacing).
+   Best-practice basis: keep the single-column layout; fix the
+   typography (the app declares Inter but falls back to Arial Bold)
+   and box the inputs to match the rounded theme.
+   ============================================================= */
+
+/* Clean native font app-wide. The theme class lives on <body>, so
+   this beats the base `body{font-family:Inter,Arial...}` rule by
+   specificity; icon fonts (cyb-icons/primeicons, set on their own
+   <i>) are untouched. */
+.CybeleLight, .CybeleDark {
+  --font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Variant A heading: semibold, tighter tracking, slightly smaller,
+   brand navy — replaces the heavy Arial-bold default. */
+.CybeleLight #login-container .login-title, .CybeleDark #login-container .login-title,
+.CybeleLight #login-container h2,            .CybeleDark #login-container h2 {
+  font-weight: 600 !important;
+  letter-spacing: -0.4px !important;
+  font-size: clamp(22px, 2vw, 28px) !important;
+  line-height: 1.2 !important;
+  color: var(--heading-color) !important;
+}
+
+/* Boxed / softly-rounded inputs (replace the bare underlines) */
+.CybeleLight #login_main input.p-inputtext, .CybeleDark #login_main input.p-inputtext,
+.CybeleLight #login_changePassword input.p-inputtext, .CybeleDark #login_changePassword input.p-inputtext,
+.CybeleLight #radiusChallenge input.p-inputtext, .CybeleDark #radiusChallenge input.p-inputtext {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  padding: 11px 14px !important;
+}
+/* password is a wrapper with an inner borderless input: box the
+   wrapper, keep the inner input borderless */
+.CybeleLight #login_main .p-password.p-component.p-inputwrapper.p-input-icon-right, .CybeleDark #login_main .p-password.p-component.p-inputwrapper.p-input-icon-right,
+.CybeleLight #login_changePassword .p-password.p-component.p-inputwrapper.p-input-icon-right, .CybeleDark #login_changePassword .p-password.p-component.p-inputwrapper.p-input-icon-right {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  padding: 0 12px !important;
+}
+.CybeleLight #login_main input.p-inputtext.p-component.p-password-input, .CybeleDark #login_main input.p-inputtext.p-component.p-password-input {
+  border: none !important;
+}
+
+/* Tighten the vertical gap under the heading */
+.CybeleLight #login-container .header, .CybeleDark #login-container .header {
+  margin-bottom: 0.25rem !important;
+}
+
+/* =============================================================
    Footer: "Powered by Cybele Software".
    The footer attribution is product copy rendered by the Workspace
    layout (FlexSideNavHeader.vue post-login, LauncherPage.vue on
