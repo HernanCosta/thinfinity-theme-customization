@@ -1,6 +1,6 @@
-/* =============================================================
-   Entel — Custom theme for Thinfinity Workspace (v8+)
-   Brand (extracted from https://www.entel.cl/ — main.css v1.5.8.4.2):
+﻿/* =============================================================
+   Entel â€” Custom theme for Thinfinity Workspace (v8+)
+   Brand (extracted from https://www.entel.cl/ â€” main.css v1.5.8.4.2):
      Primary blue:       #002eff  (296 hits in site CSS)
      Dark blue:          #0022bf
      Light blue:         #8097ff
@@ -199,7 +199,7 @@
 }
 
 /* =============================================================
-   Left side nav (Home/Favorites/Settings) — custom .menu-item.
+   Left side nav (Home/Favorites/Settings) â€” custom .menu-item.
    ============================================================= */
 .EntelLight .side-menu .menu-item,
 .EntelDark  .side-menu .menu-item {
@@ -278,7 +278,7 @@
 
 /* =============================================================
    Graceful motion. Menus slide in and bounce: drop from above,
-   overshoot a touch bigger, then settle — noticeable but not loud.
+   overshoot a touch bigger, then settle â€” noticeable but not loud.
    A keyframe ANIMATION (plays on element insert) owns the entrance;
    PrimeVue's own overlay transition is neutralized so they don't
    fight. prefers-reduced-motion strips it all.
@@ -336,7 +336,7 @@
 
 /* =============================================================
    Narrow/mobile login header (#login-header): full logo on the form
-   bg per theme — colored "e)" on the white form, white on dark.
+   bg per theme â€” colored "e)" on the white form, white on dark.
    ============================================================= */
 .EntelLight #login-header .logo-img,
 .EntelDark  #login-header .logo-img {
@@ -501,7 +501,7 @@
 
 /* =============================================================
    SSO provider buttons: grow on hover/focus (a bit larger now),
-   gentle bounce on click (smoother than before — soft ease, no
+   gentle bounce on click (smoother than before â€” soft ease, no
    hard dip). Targets .auth-circle, .sso-buttons button,
    .sso-button-large. prefers-reduced-motion aware.
    ============================================================= */
@@ -530,3 +530,11 @@
   .EntelLight .sso-buttons button:active, .EntelLight .auth-circle:active, .EntelLight .sso-button-large:active,
   .EntelDark  .sso-buttons button:active, .EntelDark  .auth-circle:active, .EntelDark  .sso-button-large:active { animation: none; }
 }
+
+/* =============================================================
+   Header icons (notification bell, shortcuts) must contrast the
+   header. Entel's light header is white -> brand-color icons;
+   dark theme header is dark -> white icons.
+   ============================================================= */
+.EntelLight .top-bar .text-white:not(.bg-primary-900) { color: var(--primary-color) !important; }
+.EntelDark  .top-bar .text-white:not(.bg-primary-900) { color: #ffffff !important; }

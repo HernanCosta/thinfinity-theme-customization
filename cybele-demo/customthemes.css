@@ -1,13 +1,13 @@
-/* =============================================================
-   Cybele Software — Custom theme for Thinfinity Workspace
+﻿/* =============================================================
+   Cybele Software â€” Custom theme for Thinfinity Workspace
    Brand (extracted from https://www.cybelesoft.com/ design tokens
-   in the site's entry.css — --blue-cybele-* / --water-green-*):
+   in the site's entry.css â€” --blue-cybele-* / --water-green-*):
      Blue ramp:   #eff7fe 50 / #d0e7fd 100 / #99cbfa 200 / #5dadf7 300
                   #0b84f4 400 / #085dac 500 / #074f91 600 / #053b6d 700
                   #032748 800 / #021425 900
      Water green: #3dcca1 500 / #69d8b6 400 / #238568 700
      Greys:       #f9f9f9 50 / #d6d6d6 200 / #9c9c9c 400 / #515151 700
-   Logos: official site SVGs (cybele-negative-logo.svg — white
+   Logos: official site SVGs (cybele-negative-logo.svg â€” white
    wordmark + multicolor butterfly mark, the site's own dark-surface
    variant). Favicon: real site ICO.
 
@@ -16,7 +16,7 @@
 
    Signature touches matching cybelesoft.com:
      - Dark navy header (#032748) with the negative logo, like the
-       site's top bar — in BOTH themes
+       site's top bar â€” in BOTH themes
      - Floating pill header + pill buttons (the site's rounded
        look), done with plain CSS on .top-bar / .p-button
      - Brand CTA blue reserved for accents; AA-safe #085dac carries
@@ -134,7 +134,7 @@
 
 /* =============================================================
    Login logo entrance animation (both themes): cartoonish pop
-   from zero with overshoot — same as the Entel pack.
+   from zero with overshoot â€” same as the Entel pack.
    Disabled under prefers-reduced-motion.
    ============================================================= */
 @keyframes cybele-logo-pop {
@@ -153,7 +153,7 @@
 /* =============================================================
    cybelesoft.com signature: pill buttons (.p-button is the
    PrimeVue button base). The top bar stays a full-width solid
-   navy band — no rounding (operator decision after live test).
+   navy band â€” no rounding (operator decision after live test).
    ============================================================= */
 .CybeleLight .p-button,
 .CybeleDark  .p-button {
@@ -161,7 +161,7 @@
 }
 
 /* =============================================================
-   Settings panel (PrimeVue PanelMenu — Account / Configuration).
+   Settings panel (PrimeVue PanelMenu â€” Account / Configuration).
    Items become pill buttons: idle transparent, ONLY active/hover
    filled (Bootstrap nav-pills / UX Planet sidebar guidance).
    ============================================================= */
@@ -171,7 +171,7 @@
    idle-transparent pill, the link shows that WHITE card through, so
    the dark theme's near-white idle text (#eff7fe) became invisible.
    Pin the content surface to a theme variable instead. Light = white
-   (unchanged), dark = #021425 — idle text now contrasts in both. */
+   (unchanged), dark = #021425 â€” idle text now contrasts in both. */
 .CybeleLight .p-panelmenu .p-panelmenu-content,
 .CybeleDark  .p-panelmenu .p-panelmenu-content {
   background: var(--primary-bgcolor) !important;
@@ -203,7 +203,7 @@
 /* ROOT-CAUSE FIX (grey band behind the pill): PrimeVue base paints
    #e9ecef on the wrapping .p-menuitem-content for hover/highlight/
    focus. Selectors below mirror PrimeVue's exact specificity so the
-   neutralization wins in every state — only the link pill shows. */
+   neutralization wins in every state â€” only the link pill shows. */
 .CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content,
 .CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight > .p-menuitem-content,
 .CybeleLight .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover,
@@ -217,7 +217,7 @@
 
 /* Side-menu logo: the .logos block has no background-position (stock
    defaults to left), so the expanded logo hugs the left edge. Center
-   it — nudged a few % left of geometric center because the butterfly
+   it â€” nudged a few % left of geometric center because the butterfly
    mark on the upper-right pulls the perceived center rightward; 44%
    optically centers the wordmark in the pane. */
 .CybeleLight .side-menu .content .logos,
@@ -238,7 +238,7 @@
 
 /* =============================================================
    Left side nav (Home / Favorites / Settings). This is custom
-   `.menu-item` markup (SideMenuItem.vue), NOT a PanelMenu — the
+   `.menu-item` markup (SideMenuItem.vue), NOT a PanelMenu â€” the
    highlight lives on `.menu-item:hover` / `.menu-item.selected`.
    Make each a pill button.
    ============================================================= */
@@ -258,7 +258,7 @@
 }
 
 /* Side-menu close "X": replace the full-height dark navy bar
-   (.right-bar, bg = --menu-selected-color in EVERY state — bare,
+   (.right-bar, bg = --menu-selected-color in EVERY state â€” bare,
    .closable, and .selected) with a small circular chip on the X.
    Also kill the scrollbar the .closable.auto (overflow:auto) variant
    spawns on hover (the two grey --border-color thumbs). */
@@ -321,7 +321,7 @@
 }
 
 /* Avatar/top dropdown menus (PrimeVue Menu/TieredMenu overlays,
-   see _tieredMenu.scss): same pill treatment — idle transparent,
+   see _tieredMenu.scss): same pill treatment â€” idle transparent,
    hover gets the rounded filled highlight. The hover background
    lives on .p-menuitem-content (non-highlight items) and on
    .p-menuitem-link, so both get the radius. */
@@ -352,7 +352,7 @@
    Narrow-window / mobile login header (#login-header, shown at
    the tablet-v breakpoint when the brand panel is hidden).
    ROOT CAUSE of the "tiny butterfly only" bug: this element reuses
-   var(--login-logo) — our NEGATIVE (white) logo — on top of the
+   var(--login-logo) â€” our NEGATIVE (white) logo â€” on top of the
    white form, so the white "CYBELE software" wordmark vanished and
    only the multicolor mark survived; with no explicit height it
    rendered tiny. Give it real height, and use the logo whose
@@ -375,55 +375,6 @@
 }
 
 /* =============================================================
-   Graceful motion. PrimeVue already animates connected overlays
-   (.p-connected-overlay: scaleY .8->1, .12s). Make menus/dropdowns
-   pop more — scale + slight rise with a spring easing, origin at
-   the top so they grow out of their trigger. Pure CSS, runs on
-   every open. Honored: the leave keeps PrimeVue's fade.
-   prefers-reduced-motion strips it.
-   ============================================================= */
-.CybeleLight .p-connected-overlay-enter-from,
-.CybeleDark  .p-connected-overlay-enter-from {
-  opacity: 0 !important;
-  transform: scale(0.9) translateY(-6px) !important;
-}
-.CybeleLight .p-connected-overlay-visible,
-.CybeleDark  .p-connected-overlay-visible {
-  opacity: 1 !important;
-  transform: scale(1) translateY(0) !important;
-}
-.CybeleLight .p-connected-overlay-enter-active,
-.CybeleDark  .p-connected-overlay-enter-active {
-  transform-origin: top center;
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
-              opacity 0.16s ease-out !important;
-}
-
-/* Press feedback on buttons + close icons — a small "pop" on click,
-   the graceful touch where CSS can't animate element removal. */
-.CybeleLight .p-button:active,
-.CybeleDark  .p-button:active,
-.CybeleLight .p-dialog-header-icon:active,
-.CybeleLight .p-sidebar-close:active,
-.CybeleDark  .p-dialog-header-icon:active,
-.CybeleDark  .p-sidebar-close:active {
-  transform: scale(0.94);
-  transition: transform 0.1s ease-out;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .CybeleLight .p-connected-overlay-enter-active,
-  .CybeleDark  .p-connected-overlay-enter-active {
-    transition: none !important;
-  }
-  .CybeleLight .p-button:active, .CybeleDark .p-button:active,
-  .CybeleLight .p-dialog-header-icon:active, .CybeleDark .p-dialog-header-icon:active,
-  .CybeleLight .p-sidebar-close:active, .CybeleDark .p-sidebar-close:active {
-    transform: none;
-  }
-}
-
-/* =============================================================
    Login refinements (operator-approved: variant A "Refined" +
    boxed inputs + clean native font app-wide + tighter spacing).
    Best-practice basis: keep the single-column layout; fix the
@@ -441,7 +392,7 @@
 }
 
 /* Variant A heading: semibold, tighter tracking, slightly smaller,
-   brand navy — replaces the heavy Arial-bold default. */
+   brand navy â€” replaces the heavy Arial-bold default. */
 .CybeleLight #login-container .login-title, .CybeleDark #login-container .login-title,
 .CybeleLight #login-container h2,            .CybeleDark #login-container h2 {
   font-weight: 600 !important;
@@ -480,13 +431,13 @@
    Footer: "Powered by Cybele Software".
    The footer attribution is product copy rendered by the Workspace
    layout (FlexSideNavHeader.vue post-login, LauncherPage.vue on
-   /signin) — i18n + a hardcoded "© 2010-2026 by Cybele Software,
+   /signin) â€” i18n + a hardcoded "Â© 2010-2026 by Cybele Software,
    Inc." link, NOT a theme variable. Style-only override: collapse
    the stock copyright line (font-size:0 on the <small>, which hides
    the bare text node + link that CSS can't target individually) and
    inject the vendor line via ::after. The dynamic product name +
    version (.hiddenThin, shown post-login on wide) is preserved.
-   NOTE: CSS content-injection workaround — verify on a live footer.
+   NOTE: CSS content-injection workaround â€” verify on a live footer.
    ============================================================= */
 .CybeleLight .app-footer small, .CybeleDark .app-footer small,
 .CybeleLight footer small,      .CybeleDark footer small {
@@ -596,30 +547,74 @@
 }
 
 /* =============================================================
-   SSO provider buttons: grow on hover, bounce on click.
-   Targets the circular provider icon (.auth-circle), inline
-   provider buttons (.sso-buttons button) and the large variant
-   (.sso-button-large). prefers-reduced-motion aware.
+   Graceful motion. Menus slide in and bounce: drop from above,
+   overshoot a touch bigger, then settle. A keyframe animation owns
+   the entrance; PrimeVue's overlay transition is neutralized.
+   prefers-reduced-motion strips it.
+   ============================================================= */
+@keyframes cybele-menu-in {
+  0%   { opacity: 0; transform: translateY(-15px) scale(0.95); }
+  60%  { opacity: 1; transform: translateY(0)     scale(1.05); }
+  80%  {              transform: translateY(0)     scale(0.985); }
+  100% {              transform: translateY(0)     scale(1); }
+}
+.CybeleLight .p-connected-overlay-enter-active, .CybeleDark .p-connected-overlay-enter-active,
+.CybeleLight .p-connected-overlay-leave-active, .CybeleDark .p-connected-overlay-leave-active {
+  transition: none !important;
+}
+.CybeleLight .p-menu-overlay, .CybeleLight .p-tieredmenu-overlay, .CybeleLight .p-dropdown-panel, .CybeleLight .p-multiselect-panel, .CybeleLight .p-overlaypanel,
+.CybeleDark  .p-menu-overlay, .CybeleDark  .p-tieredmenu-overlay, .CybeleDark  .p-dropdown-panel, .CybeleDark  .p-multiselect-panel, .CybeleDark  .p-overlaypanel {
+  animation: cybele-menu-in 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: top center;
+}
+@keyframes cybele-expand-in {
+  0%   { opacity: 0.35; transform: translateY(-8px) scale(0.985); }
+  60%  { opacity: 1;    transform: translateY(0)    scale(1.02); }
+  100% {                transform: translateY(0)    scale(1); }
+}
+.CybeleLight .p-panelmenu .p-toggleable-content-enter-active,
+.CybeleDark  .p-panelmenu .p-toggleable-content-enter-active {
+  transition: max-height 0.35s ease-out !important;
+  animation: cybele-expand-in 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: top center;
+}
+.CybeleLight .p-button:active, .CybeleDark .p-button:active,
+.CybeleLight .p-dialog-header-icon:active, .CybeleDark .p-dialog-header-icon:active,
+.CybeleLight .p-sidebar-close:active, .CybeleDark .p-sidebar-close:active {
+  transform: scale(0.94);
+  transition: transform 0.1s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .CybeleLight .p-menu-overlay, .CybeleLight .p-tieredmenu-overlay, .CybeleLight .p-dropdown-panel, .CybeleLight .p-multiselect-panel, .CybeleLight .p-overlaypanel,
+  .CybeleDark  .p-menu-overlay, .CybeleDark  .p-tieredmenu-overlay, .CybeleDark  .p-dropdown-panel, .CybeleDark  .p-multiselect-panel, .CybeleDark  .p-overlaypanel,
+  .CybeleLight .p-panelmenu .p-toggleable-content-enter-active,
+  .CybeleDark  .p-panelmenu .p-toggleable-content-enter-active { animation: none !important; }
+  .CybeleLight .p-button:active, .CybeleDark .p-button:active,
+  .CybeleLight .p-dialog-header-icon:active, .CybeleDark .p-dialog-header-icon:active,
+  .CybeleLight .p-sidebar-close:active, .CybeleDark .p-sidebar-close:active { transform: none; }
+}
+
+/* =============================================================
+   SSO provider buttons: grow on hover/focus, gentle bounce on click.
    ============================================================= */
 @keyframes cybele-sso-bounce {
-  0%   { transform: scale(1.08); }
-  30%  { transform: scale(0.90); }
-  55%  { transform: scale(1.12); }
-  80%  { transform: scale(0.97); }
-  100% { transform: scale(1.08); }
+  0%   { transform: scale(1.13); }
+  35%  { transform: scale(1.04); }
+  70%  { transform: scale(1.17); }
+  100% { transform: scale(1.13); }
 }
 .CybeleLight .sso-buttons button, .CybeleLight .auth-circle, .CybeleLight .sso-button-large,
 .CybeleDark  .sso-buttons button, .CybeleDark  .auth-circle, .CybeleDark  .sso-button-large {
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
-.CybeleLight .sso-buttons button:hover, .CybeleLight .auth-circle:hover, .CybeleLight .sso-button-large:hover,
-.CybeleDark  .sso-buttons button:hover, .CybeleDark  .auth-circle:hover, .CybeleDark  .sso-button-large:hover {
-  transform: scale(1.08);
-  box-shadow: 0 4px 14px var(--shadow-color);
+.CybeleLight .sso-buttons button:hover, .CybeleLight .sso-buttons button:focus-visible, .CybeleLight .auth-circle:hover, .CybeleLight .auth-circle:focus-visible, .CybeleLight .sso-button-large:hover, .CybeleLight .sso-button-large:focus-visible,
+.CybeleDark  .sso-buttons button:hover, .CybeleDark  .sso-buttons button:focus-visible, .CybeleDark  .auth-circle:hover, .CybeleDark  .auth-circle:focus-visible, .CybeleDark  .sso-button-large:hover, .CybeleDark  .sso-button-large:focus-visible {
+  transform: scale(1.13);
+  box-shadow: 0 6px 18px var(--shadow-color);
 }
 .CybeleLight .sso-buttons button:active, .CybeleLight .auth-circle:active, .CybeleLight .sso-button-large:active,
 .CybeleDark  .sso-buttons button:active, .CybeleDark  .auth-circle:active, .CybeleDark  .sso-button-large:active {
-  animation: cybele-sso-bounce 0.4s ease;
+  animation: cybele-sso-bounce 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
 }
 @media (prefers-reduced-motion: reduce) {
   .CybeleLight .sso-buttons button:hover, .CybeleLight .auth-circle:hover, .CybeleLight .sso-button-large:hover,
@@ -627,3 +622,11 @@
   .CybeleLight .sso-buttons button:active, .CybeleLight .auth-circle:active, .CybeleLight .sso-button-large:active,
   .CybeleDark  .sso-buttons button:active, .CybeleDark  .auth-circle:active, .CybeleDark  .sso-button-large:active { animation: none; }
 }
+
+/* =============================================================
+   Header icons (notification bell, shortcuts) must contrast the
+   header (app maps .text-white -> --primary-txtcolor, which only
+   contrasts a light header). Pin per the header color.
+   ============================================================= */
+.CybeleLight .top-bar .text-white:not(.bg-primary-900) { color: #ffffff !important; }
+.CybeleDark  .top-bar .text-white:not(.bg-primary-900) { color: #ffffff !important; }

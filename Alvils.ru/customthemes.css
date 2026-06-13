@@ -1,5 +1,5 @@
-/* =============================================================
-   Alvils — Custom theme for Thinfinity Workspace (v8+)
+﻿/* =============================================================
+   Alvils â€” Custom theme for Thinfinity Workspace (v8+)
    Brand (from alvils.ru):
      Primary turquoise:  #4fcbdf
      Deep teal:          #005a49
@@ -188,7 +188,7 @@
 }
 
 /* =============================================================
-   Left side nav (Home/Favorites/Settings) — custom .menu-item.
+   Left side nav (Home/Favorites/Settings) â€” custom .menu-item.
    ============================================================= */
 .AlvilsLight .side-menu .menu-item,
 .AlvilsDark  .side-menu .menu-item {
@@ -263,69 +263,6 @@
 .AlvilsDark  .p-menu .p-menuitem-link, .AlvilsDark  .p-tieredmenu .p-menuitem-link {
   border-radius: 9999px !important;
   padding: 10px 14px !important;
-}
-
-/* =============================================================
-   Graceful motion: overlays pop; buttons/close icons press-scale.
-   ============================================================= */
-.AlvilsLight .p-connected-overlay-enter-from,
-.AlvilsDark  .p-connected-overlay-enter-from {
-  opacity: 0 !important;
-  transform: scale(0.9) translateY(-6px) !important;
-}
-.AlvilsLight .p-connected-overlay-visible,
-.AlvilsDark  .p-connected-overlay-visible {
-  opacity: 1 !important;
-  transform: scale(1) translateY(0) !important;
-}
-.AlvilsLight .p-connected-overlay-enter-active,
-.AlvilsDark  .p-connected-overlay-enter-active {
-  transform-origin: top center;
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
-              opacity 0.16s ease-out !important;
-}
-.AlvilsLight .p-button:active, .AlvilsDark .p-button:active,
-.AlvilsLight .p-dialog-header-icon:active, .AlvilsDark .p-dialog-header-icon:active,
-.AlvilsLight .p-sidebar-close:active, .AlvilsDark .p-sidebar-close:active {
-  transform: scale(0.94);
-  transition: transform 0.1s ease-out;
-}
-@media (prefers-reduced-motion: reduce) {
-  .AlvilsLight .p-connected-overlay-enter-active,
-  .AlvilsDark  .p-connected-overlay-enter-active { transition: none !important; }
-  .AlvilsLight .p-button:active, .AlvilsDark .p-button:active,
-  .AlvilsLight .p-dialog-header-icon:active, .AlvilsDark .p-dialog-header-icon:active,
-  .AlvilsLight .p-sidebar-close:active, .AlvilsDark .p-sidebar-close:active { transform: none; }
-}
-
-/* =============================================================
-   SSO provider buttons: grow on hover, bounce on click.
-   ============================================================= */
-@keyframes alvils-sso-bounce {
-  0%   { transform: scale(1.08); }
-  30%  { transform: scale(0.90); }
-  55%  { transform: scale(1.12); }
-  80%  { transform: scale(0.97); }
-  100% { transform: scale(1.08); }
-}
-.AlvilsLight .sso-buttons button, .AlvilsLight .auth-circle, .AlvilsLight .sso-button-large,
-.AlvilsDark  .sso-buttons button, .AlvilsDark  .auth-circle, .AlvilsDark  .sso-button-large {
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.AlvilsLight .sso-buttons button:hover, .AlvilsLight .auth-circle:hover, .AlvilsLight .sso-button-large:hover,
-.AlvilsDark  .sso-buttons button:hover, .AlvilsDark  .auth-circle:hover, .AlvilsDark  .sso-button-large:hover {
-  transform: scale(1.08);
-  box-shadow: 0 4px 14px var(--shadow-color);
-}
-.AlvilsLight .sso-buttons button:active, .AlvilsLight .auth-circle:active, .AlvilsLight .sso-button-large:active,
-.AlvilsDark  .sso-buttons button:active, .AlvilsDark  .auth-circle:active, .AlvilsDark  .sso-button-large:active {
-  animation: alvils-sso-bounce 0.4s ease;
-}
-@media (prefers-reduced-motion: reduce) {
-  .AlvilsLight .sso-buttons button:hover, .AlvilsLight .auth-circle:hover, .AlvilsLight .sso-button-large:hover,
-  .AlvilsDark  .sso-buttons button:hover, .AlvilsDark  .auth-circle:hover, .AlvilsDark  .sso-button-large:hover { transform: none; box-shadow: none; }
-  .AlvilsLight .sso-buttons button:active, .AlvilsLight .auth-circle:active, .AlvilsLight .sso-button-large:active,
-  .AlvilsDark  .sso-buttons button:active, .AlvilsDark  .auth-circle:active, .AlvilsDark  .sso-button-large:active { animation: none; }
 }
 
 /* =============================================================
@@ -489,3 +426,88 @@
   --login-form-bg: var(--primary-bgcolor);
   --login-box-width: 440px;
 }
+
+/* =============================================================
+   Graceful motion. Menus slide in and bounce: drop from above,
+   overshoot a touch bigger, then settle. A keyframe animation owns
+   the entrance; PrimeVue's overlay transition is neutralized.
+   prefers-reduced-motion strips it.
+   ============================================================= */
+@keyframes alvils-menu-in {
+  0%   { opacity: 0; transform: translateY(-15px) scale(0.95); }
+  60%  { opacity: 1; transform: translateY(0)     scale(1.05); }
+  80%  {              transform: translateY(0)     scale(0.985); }
+  100% {              transform: translateY(0)     scale(1); }
+}
+.AlvilsLight .p-connected-overlay-enter-active, .AlvilsDark .p-connected-overlay-enter-active,
+.AlvilsLight .p-connected-overlay-leave-active, .AlvilsDark .p-connected-overlay-leave-active {
+  transition: none !important;
+}
+.AlvilsLight .p-menu-overlay, .AlvilsLight .p-tieredmenu-overlay, .AlvilsLight .p-dropdown-panel, .AlvilsLight .p-multiselect-panel, .AlvilsLight .p-overlaypanel,
+.AlvilsDark  .p-menu-overlay, .AlvilsDark  .p-tieredmenu-overlay, .AlvilsDark  .p-dropdown-panel, .AlvilsDark  .p-multiselect-panel, .AlvilsDark  .p-overlaypanel {
+  animation: alvils-menu-in 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: top center;
+}
+@keyframes alvils-expand-in {
+  0%   { opacity: 0.35; transform: translateY(-8px) scale(0.985); }
+  60%  { opacity: 1;    transform: translateY(0)    scale(1.02); }
+  100% {                transform: translateY(0)    scale(1); }
+}
+.AlvilsLight .p-panelmenu .p-toggleable-content-enter-active,
+.AlvilsDark  .p-panelmenu .p-toggleable-content-enter-active {
+  transition: max-height 0.35s ease-out !important;
+  animation: alvils-expand-in 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: top center;
+}
+.AlvilsLight .p-button:active, .AlvilsDark .p-button:active,
+.AlvilsLight .p-dialog-header-icon:active, .AlvilsDark .p-dialog-header-icon:active,
+.AlvilsLight .p-sidebar-close:active, .AlvilsDark .p-sidebar-close:active {
+  transform: scale(0.94);
+  transition: transform 0.1s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .AlvilsLight .p-menu-overlay, .AlvilsLight .p-tieredmenu-overlay, .AlvilsLight .p-dropdown-panel, .AlvilsLight .p-multiselect-panel, .AlvilsLight .p-overlaypanel,
+  .AlvilsDark  .p-menu-overlay, .AlvilsDark  .p-tieredmenu-overlay, .AlvilsDark  .p-dropdown-panel, .AlvilsDark  .p-multiselect-panel, .AlvilsDark  .p-overlaypanel,
+  .AlvilsLight .p-panelmenu .p-toggleable-content-enter-active,
+  .AlvilsDark  .p-panelmenu .p-toggleable-content-enter-active { animation: none !important; }
+  .AlvilsLight .p-button:active, .AlvilsDark .p-button:active,
+  .AlvilsLight .p-dialog-header-icon:active, .AlvilsDark .p-dialog-header-icon:active,
+  .AlvilsLight .p-sidebar-close:active, .AlvilsDark .p-sidebar-close:active { transform: none; }
+}
+
+/* =============================================================
+   SSO provider buttons: grow on hover/focus, gentle bounce on click.
+   ============================================================= */
+@keyframes alvils-sso-bounce {
+  0%   { transform: scale(1.13); }
+  35%  { transform: scale(1.04); }
+  70%  { transform: scale(1.17); }
+  100% { transform: scale(1.13); }
+}
+.AlvilsLight .sso-buttons button, .AlvilsLight .auth-circle, .AlvilsLight .sso-button-large,
+.AlvilsDark  .sso-buttons button, .AlvilsDark  .auth-circle, .AlvilsDark  .sso-button-large {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.AlvilsLight .sso-buttons button:hover, .AlvilsLight .sso-buttons button:focus-visible, .AlvilsLight .auth-circle:hover, .AlvilsLight .auth-circle:focus-visible, .AlvilsLight .sso-button-large:hover, .AlvilsLight .sso-button-large:focus-visible,
+.AlvilsDark  .sso-buttons button:hover, .AlvilsDark  .sso-buttons button:focus-visible, .AlvilsDark  .auth-circle:hover, .AlvilsDark  .auth-circle:focus-visible, .AlvilsDark  .sso-button-large:hover, .AlvilsDark  .sso-button-large:focus-visible {
+  transform: scale(1.13);
+  box-shadow: 0 6px 18px var(--shadow-color);
+}
+.AlvilsLight .sso-buttons button:active, .AlvilsLight .auth-circle:active, .AlvilsLight .sso-button-large:active,
+.AlvilsDark  .sso-buttons button:active, .AlvilsDark  .auth-circle:active, .AlvilsDark  .sso-button-large:active {
+  animation: alvils-sso-bounce 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .AlvilsLight .sso-buttons button:hover, .AlvilsLight .auth-circle:hover, .AlvilsLight .sso-button-large:hover,
+  .AlvilsDark  .sso-buttons button:hover, .AlvilsDark  .auth-circle:hover, .AlvilsDark  .sso-button-large:hover { transform: none; box-shadow: none; }
+  .AlvilsLight .sso-buttons button:active, .AlvilsLight .auth-circle:active, .AlvilsLight .sso-button-large:active,
+  .AlvilsDark  .sso-buttons button:active, .AlvilsDark  .auth-circle:active, .AlvilsDark  .sso-button-large:active { animation: none; }
+}
+
+/* =============================================================
+   Header icons (notification bell, shortcuts) must contrast the
+   header (app maps .text-white -> --primary-txtcolor, which only
+   contrasts a light header). Pin per the header color.
+   ============================================================= */
+.AlvilsLight .top-bar .text-white:not(.bg-primary-900) { color: var(--primary-color) !important; }
+.AlvilsDark  .top-bar .text-white:not(.bg-primary-900) { color: #ffffff !important; }
