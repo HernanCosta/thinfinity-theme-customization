@@ -217,10 +217,12 @@
 
 /* Side-menu logo: the .logos block has no background-position (stock
    defaults to left), so the expanded logo hugs the left edge. Center
-   it within the pane. */
+   it — nudged a few % left of geometric center because the butterfly
+   mark on the upper-right pulls the perceived center rightward; 44%
+   optically centers the wordmark in the pane. */
 .CybeleLight .side-menu .content .logos,
 .CybeleDark  .side-menu .content .logos {
-  background-position: center !important;
+  background-position: 42% center !important;
 }
 
 /* Top-bar logo: the .logos zone is flex-1 (wide) and the logo sits at
