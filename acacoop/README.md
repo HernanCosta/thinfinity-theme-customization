@@ -31,12 +31,13 @@ config JSON is read only from the DB folder.
    ```
 
 4. Open the Workspace URL and hard-refresh (**Ctrl+Shift+R**), or use an
-   incognito window. Check `/signin`: ACA mark (white + orange arc)
-   popping in over the indigo gradient panel, indigo Sign in button,
-   ACA favicon, tab title "ACA Coop Workspace". After login the header
-   bar is brand indigo with the white logo, like the site, and the
-   footer reads "ACA Coop Workspace v<version>" (the `productName`
-   field drives the tab title AND the footer text — no file edits).
+   incognito window. Check `/signin`: the full **color ACA lockup** (mark +
+   "Asociación de Cooperativas Argentinas") popping in over a light
+   indigo-tinted panel, indigo Sign in button, boxed inputs, ACA favicon,
+   tab title "ACA Coop Workspace". After login the header bar is brand
+   indigo with the white logo; settings menu / side nav / avatar dropdown
+   are pill buttons; toggles are indigo; close-X buttons are circular; the
+   footer reads "ACA Coop Workspace v<version>. Powered by Cybele Software".
 
 ## Uninstall
 
@@ -54,15 +55,16 @@ Nothing else is touched: no files in `Program Files`, no registry changes.
 | `customthemes.css` | Theme classes `AcaCoopLight` / `AcaCoopDark` (all v8+ variables incl. undocumented `--login-brand-bg*`) |
 | `custom-themes.json` | Theme config (goes in the DB folder, not inside `AcaCoop\`) |
 | `AcaCoopFavicon.ico` | Real favicon from acacoop.com.ar (16/32px multi-icon) |
-| `AcaCoopLogoWhite.png` | Original white wordmark from the site — on the indigo header, like the site |
+| `AcaCoopLogoWhite.png` | Official white wordmark — on the indigo header / dark surfaces |
 | `AcaCoopLogoMobileWhite.png` | Same mark for the mobile header |
-| `AcaCoopLoginLogo.svg` | Vector recreation of the ACA mark, negative variant (white letters/bottom arc, official orange `#f5951d` top arc) |
+| `AcaCoopLoginColor.png` | Official **color lockup** (mark + wordmark, blue/orange, transparent bg) — login brand panel + narrow login header on the white form |
 
-Style-only theme: no background images are shipped. The header bar is
-brand indigo with the white logo (matching acacoop.com.ar); the login
-brand panel is an indigo gradient with the mark popping in on load
-(`prefers-reduced-motion` aware); the dashboard background is a flat
-brand surface.
+Full perk set: pill buttons, pill nav/menu/dropdown items, brand-indigo
+toggles, circular close-X, graceful overlay+press motion, SSO hover/click,
+refined login (boxed inputs, native font), "Powered by Cybele Software"
+footer. Style-only: no background images. The header bar is brand indigo
+with the white logo (matching acacoop.com.ar); the login brand panel is a
+light indigo gradient carrying the color lockup (so blue/orange reads).
 
 Brand sources: acacoop.com.ar inline styles + `hello.css` overrides
 (`#282c87` indigo, `#ff9100` orange — the teal in `style.css` is the stock

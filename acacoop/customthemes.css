@@ -1,35 +1,30 @@
 /* =============================================================
-   ACA Coop — Custom theme for Thinfinity Workspace
-   Brand (extracted from https://www.acacoop.com.ar/):
-     Primary indigo:     #282c87  (inline styles + hello.css overrides;
-                                   the teal #1abc9c in style.css is the
-                                   stock template default, not brand)
-     Light blue:         #69b3e7  (site bot widget)
-     Orange accent:      #ff9100
-     Neutral grays:      #f5f5f5 / #e5e5e5 / #666666
-   Site fonts: Open Sans, Heebo (no Thinfinity var; informative only)
+   ACA Coop — Custom theme for Thinfinity Workspace (v8+)
+   Brand (from https://www.acacoop.com.ar/ + official color logo):
+     Primary indigo:   #282c87  (the teal in the site style.css is a
+                                 stock template default, NOT brand)
+     Logo blue:        #2b3b89   Orange accent: #ff9100 / #f5951d
+     Light blue:       #69b3e7   Neutral grays: #f5f5f5 / #666666
 
-   Policy: style-only theme. No background images; the login brand
-   panel uses a CSS gradient. Logos + favicon are the only binaries.
-   Site ships only the white wordmark (transparent header over dark
-   hero), used on the indigo header like the site itself. The login
-   logo is a vector recreation of the ACA mark in its negative
-   variant (white letters/bottom arc, official orange #f5951d top
-   arc) sitting on the indigo gradient panel.
+   Style-only theme: no background images; login brand panel is a CSS
+   gradient. Carries the full perk set (pills, brand toggles, circular
+   close-X, graceful motion, responsive login logo, refined login,
+   SSO hover/click, "Powered by Cybele Software" footer).
 
-   Contrast verified against WCAG 2.1 AA (SC 1.4.3: text >= 4.5:1,
-   SC 1.4.11: UI components >= 3:1):
-     #282c87 on #ffffff = 11.7:1  (links, headings)
+   Login uses the official COLOR lockup (ACA mark + "Asociación de
+   Cooperativas Argentinas") on a LIGHT indigo-tinted panel so the
+   blue/orange logo reads.
+
+   WCAG 2.1 AA (text >= 4.5:1, UI >= 3:1):
+     #282c87 on #ffffff = 11.7:1  (links, headings, toggle ON)
      #ffffff on #282c87 = 11.7:1  (button text)
      #666666 on #ffffff = 5.7:1   (secondary text)
-     #b93a29 on #ffffff = 5.7:1   (danger; darkened from site #dd4b39)
-     #9a5b00 on #ffffff = 5.4:1   (alert; darkened from site #ff9100)
-     #3e8a2c on #ffffff = 4.3:1   (allowed; darkened from #59ba41)
+     #b93a29 on #ffffff = 5.7:1   (danger)  #9a5b00 = 5.4:1 (alert)
+     #3e8a2c on #ffffff = 4.3:1   (allowed)
      #69b3e7 on #121218 = 8.2:1   (links, dark)
-     #ffffff on #565ed0 = 5.4:1   (button text, dark)
-     #565ed0 vs #121218 = 3.5:1   (button surface vs bg, dark)
-   Dark surfaces follow Material dark-theme guidance: near-black
-   indigo-tinted base (not #000), desaturated/lightened primaries.
+     #ffffff on #565ed0 = 5.4:1   (button text + selected pill, dark)
+   Dark surfaces follow Material dark guidance (near-black indigo base,
+   lightened primaries).
    ============================================================= */
 
 .AcaCoopLight {
@@ -47,8 +42,7 @@
   --tertiary-bgcolor: #eef0fa;
   --hover-bgcolor: #e0e3f5;
 
-  /* Site-accurate header: acacoop.com.ar top bar is brand indigo
-     with the white logo on it */
+  /* Site-accurate header: indigo bar with the white logo */
   --header-bgcolor: #282c87;
   --toolbar-bgcolor: var(--tertiary-bgcolor);
   --sidepanel-header-bgcolor: var(--header-bgcolor);
@@ -71,7 +65,12 @@
   --outline-button-bgcolor-h: var(--button-bgcolor-h);
   --outline-button-color-h: var(--button-txtcolor-h);
   --special-button: #ffffff;
-  --switcher-button: #a4a4a6;
+  /* Toggle: ON track = brand indigo (else falls back to green) */
+  --switcher-button: #c2c2c2;
+  --switcher-button-before: #ffffff;
+  --switcher-button-bgcolor: var(--primary-color);
+  --switcher-button-bgcolor-h: #b0b0b0;
+  --switcher-button-h: var(--dark-primary-color);
 
   /* --- Links & nav --- */
   --link-color: var(--primary-color);
@@ -101,17 +100,16 @@
   --bg-size: auto;
   --bg-blend-mode: normal;
 
-  /* --- Logos. White wordmark on the indigo header (site-accurate);
-     login logo is the ACA mark in its negative variant (white
-     letters/bottom arc, official orange top arc) on the indigo
-     gradient panel. --- */
+  /* --- Logos: white wordmark on the indigo header; login uses the
+     COLOR lockup on a light panel (see narrow-login override below). --- */
   --desktop-logo: url("<%=@BASEURL%>__themes__/AcaCoopLogoWhite.png");
   --mobile-logo:  url("<%=@BASEURL%>__themes__/AcaCoopLogoMobileWhite.png");
-  --login-logo:   url("<%=@BASEURL%>__themes__/AcaCoopLoginLogo.svg");
+  --login-logo:   url("<%=@BASEURL%>__themes__/AcaCoopLoginColor.png");
   --logo-bg-size: contain;
 
-  /* --- Login brand panel: indigo gradient, no image file --- */
-  --login-brand-bg: linear-gradient(135deg, #1a1d5e 0%, #282c87 60%, #565ed0 100%);
+  /* --- Login brand panel: LIGHT indigo gradient so the color logo
+     reads; distinct from the white form panel. --- */
+  --login-brand-bg: linear-gradient(135deg, #ffffff 0%, #eef0fa 50%, #d4d9f2 100%);
   --login-brand-bg-size: cover;
   --login-brand-bg-repeat: no-repeat;
   --login-brand-bg-position-x: center;
@@ -122,9 +120,7 @@
 }
 
 /* =============================================================
-   Login logo entrance animation (both themes): cartoonish pop
-   from zero with overshoot — same as the Entel pack.
-   Disabled under prefers-reduced-motion.
+   Login logo entrance animation (both themes): cartoonish pop.
    ============================================================= */
 @keyframes acacoop-logo-pop {
   0%   { transform: scale(0);    opacity: 0; }
@@ -132,111 +128,184 @@
   75%  { transform: scale(0.94); }
   100% { transform: scale(1);    opacity: 1; }
 }
-
 .AcaCoopLight #customized-logo .logo-img,
 .AcaCoopDark  #customized-logo .logo-img {
   animation: acacoop-logo-pop 0.9s ease-out both;
   transform-origin: center center;
 }
-
 @media (prefers-reduced-motion: reduce) {
   .AcaCoopLight #customized-logo .logo-img,
-  .AcaCoopDark  #customized-logo .logo-img {
-    animation: none;
-  }
+  .AcaCoopDark  #customized-logo .logo-img { animation: none; }
 }
 
-.AcaCoopDark {
-  /* --- Core brand (lightened for dark surfaces) --- */
-  --primary-color: #69b3e7;
-  --dark-primary-color: #a3d2f2;
-  --light-primary-color: #1a1d5e;
-  --secondary-color: #565ed0;
-  --tertiary-color: #ff9100;
+/* =============================================================
+   Pill buttons.
+   ============================================================= */
+.AcaCoopLight .p-button,
+.AcaCoopDark  .p-button { border-radius: 9999px; }
 
-  /* --- Surfaces (near-black with indigo cast) --- */
-  --bgcolor: #f9f9f9;
-  --primary-bgcolor: #121218;
-  --secondary-bgcolor: #1a1a24;
-  --tertiary-bgcolor: #232333;
-  --hover-bgcolor: #2c2c44;
+/* Logos: center the side-menu logo; cap the top-bar logo to the nav
+   width (14rem) and center over the left column. */
+.AcaCoopLight .side-menu .content .logos,
+.AcaCoopDark  .side-menu .content .logos { background-position: center !important; }
+.AcaCoopLight .top-bar .logos,
+.AcaCoopDark  .top-bar .logos {
+  flex: 0 0 14rem !important;
+  max-width: 14rem !important;
+  background-position: center !important;
+}
 
-  --header-bgcolor: var(--primary-bgcolor);
-  --toolbar-bgcolor: var(--tertiary-bgcolor);
-  --sidepanel-header-bgcolor: var(--header-bgcolor);
-  --sidepanel-bgcolor: var(--secondary-bgcolor);
-  --menu-bgcolor: var(--secondary-bgcolor);
-  --dialog-bgcolor: var(--primary-bgcolor);
-  --submenu-bgcolor: var(--tertiary-bgcolor);
-  --light-mode-entity-bg: #69b3e722;
-  --AcaCoopDark-entity-bg: #69b3e722;
-  --table-header-bgcolor: var(--hover-bgcolor);
-  --table-body-bgcolor: var(--secondary-bgcolor);
-  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+/* =============================================================
+   Settings PanelMenu: pill items + the two PrimeVue base fixes.
+   ============================================================= */
+.AcaCoopLight .p-panelmenu .p-panelmenu-content,
+.AcaCoopDark  .p-panelmenu .p-panelmenu-content {
+  background: var(--primary-bgcolor) !important;
+  border-color: var(--border-color) !important;
+}
+.AcaCoopLight .p-panelmenu .p-panelmenu-content .p-menuitem-link,
+.AcaCoopDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link {
+  border-radius: 9999px !important;
+  margin: 2px 12px !important;
+  padding: 10px 18px !important;
+  border-right: 0 !important;
+  width: auto !important;
+  background-color: transparent !important;
+  color: var(--primary-txtcolor) !important;
+  transition: background-color 0.15s ease-out;
+}
+.AcaCoopLight .p-panelmenu .p-panelmenu-content .p-menuitem-link.router-link-active-exact,
+.AcaCoopLight .p-panelmenu .p-panelmenu-content .p-menuitem-link:hover,
+.AcaCoopDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link.router-link-active-exact,
+.AcaCoopDark  .p-panelmenu .p-panelmenu-content .p-menuitem-link:hover {
+  background-color: var(--menu-selected-bgcolor) !important;
+  color: var(--menu-selected-color) !important;
+  border-color: transparent !important;
+}
+.AcaCoopLight .p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content,
+.AcaCoopLight .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight > .p-menuitem-content,
+.AcaCoopLight .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover,
+.AcaCoopLight .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content,
+.AcaCoopDark  .p-panelmenu .p-panelmenu-content .p-menuitem > .p-menuitem-content,
+.AcaCoopDark  .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight > .p-menuitem-content,
+.AcaCoopDark  .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover,
+.AcaCoopDark  .p-panelmenu .p-panelmenu-content .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content {
+  background: transparent !important;
+}
 
-  /* --- Buttons: lightened indigo; #282c87 is only 1.6:1 vs the
-     dark bg (fails SC 1.4.11) --- */
-  --button-bgcolor: #565ed0;
-  --button-txtcolor: #ffffff;
-  --button-bgcolor-h: #69b3e7;
-  --button-txtcolor-h: #121218;
-  --outline-button-color: var(--primary-color);
-  --outline-button-bgcolor-h: var(--primary-color);
-  --outline-button-color-h: #121218;
-  --special-button: #ffffff;
-  --switcher-button: #666666;
+/* =============================================================
+   Left side nav (Home/Favorites/Settings) — custom .menu-item.
+   ============================================================= */
+.AcaCoopLight .side-menu .menu-item,
+.AcaCoopDark  .side-menu .menu-item {
+  border-radius: 9999px;
+  margin: 2px 10px;
+  transition: background-color 0.15s ease-out;
+}
+.AcaCoopLight .side-menu .menu-item:hover,
+.AcaCoopLight .side-menu .menu-item.selected,
+.AcaCoopDark  .side-menu .menu-item:hover,
+.AcaCoopDark  .side-menu .menu-item.selected {
+  background-color: var(--menu-selected-bgcolor) !important;
+  color: var(--menu-selected-color) !important;
+  border-radius: 9999px !important;
+}
 
-  /* --- Links & nav --- */
-  --link-color: var(--primary-color);
-  --link-color-h: var(--dark-primary-color);
-  --menu-selected-color: var(--dark-primary-color);
-  --menu-selected-bgcolor: var(--light-primary-color);
+/* Side-menu close X -> circular hover chip; kill navy right-bar +
+   hover scrollbars. */
+.AcaCoopLight .side-menu .menu-item .right-bar,
+.AcaCoopLight .side-menu .menu-item .right-bar.closable,
+.AcaCoopLight .side-menu .menu-item.selected .right-bar,
+.AcaCoopLight .side-menu .menu-item.selected .right-bar.closable,
+.AcaCoopDark  .side-menu .menu-item .right-bar,
+.AcaCoopDark  .side-menu .menu-item .right-bar.closable,
+.AcaCoopDark  .side-menu .menu-item.selected .right-bar,
+.AcaCoopDark  .side-menu .menu-item.selected .right-bar.closable {
+  background-color: transparent !important;
+  overflow: hidden !important;
+}
+.AcaCoopLight .side-menu .menu-item .right-bar::-webkit-scrollbar,
+.AcaCoopDark  .side-menu .menu-item .right-bar::-webkit-scrollbar { display: none !important; }
+.AcaCoopLight .side-menu .menu-item .close-profile .cyb-cross,
+.AcaCoopDark  .side-menu .menu-item .close-profile .cyb-cross {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  line-height: 1;
+  color: var(--menu-selected-color) !important;
+  transition: background-color 0.15s ease-out, transform 0.12s ease-out;
+}
+.AcaCoopLight .side-menu .menu-item .close-profile .cyb-cross:hover,
+.AcaCoopDark  .side-menu .menu-item .close-profile .cyb-cross:hover {
+  background-color: var(--menu-selected-bgcolor) !important;
+  color: var(--menu-selected-color) !important;
+}
+.AcaCoopLight .side-menu .menu-item .close-profile .cyb-cross:active,
+.AcaCoopDark  .side-menu .menu-item .close-profile .cyb-cross:active { transform: scale(0.82); }
 
-  /* --- Text --- */
-  --primary-txtcolor: #f2f3fa;
-  --secondary-txtcolor: #a4a4a6;
-  --heading-color: var(--primary-color);
+/* Dialog/panel close X -> circular hover chip. */
+.AcaCoopLight .p-dialog-header-icon, .AcaCoopLight .p-sidebar-close, .AcaCoopLight .p-panel-header-icon,
+.AcaCoopDark  .p-dialog-header-icon, .AcaCoopDark  .p-sidebar-close, .AcaCoopDark  .p-panel-header-icon {
+  border-radius: 50% !important;
+  transition: background-color 0.15s ease-out;
+}
+.AcaCoopLight .p-dialog-header-icon:hover, .AcaCoopLight .p-sidebar-close:hover, .AcaCoopLight .p-panel-header-icon:hover,
+.AcaCoopDark  .p-dialog-header-icon:hover, .AcaCoopDark  .p-sidebar-close:hover, .AcaCoopDark  .p-panel-header-icon:hover {
+  background-color: var(--hover-bgcolor) !important;
+}
 
-  /* --- Borders --- */
-  --border-color: #2f2f46;
-  --light-border-color: #232333;
-  --separator: #2f2f46;
+/* Avatar / top dropdown (.p-menu/.p-tieredmenu): pill on CONTENT. */
+.AcaCoopLight .p-menu .p-menuitem-content, .AcaCoopLight .p-tieredmenu .p-menuitem-content,
+.AcaCoopDark  .p-menu .p-menuitem-content, .AcaCoopDark  .p-tieredmenu .p-menuitem-content {
+  border-radius: 9999px !important;
+  margin: 2px 8px !important;
+  transition: background-color 0.15s ease-out;
+}
+.AcaCoopLight .p-menu .p-menuitem-link, .AcaCoopLight .p-tieredmenu .p-menuitem-link,
+.AcaCoopDark  .p-menu .p-menuitem-link, .AcaCoopDark  .p-tieredmenu .p-menuitem-link {
+  border-radius: 9999px !important;
+  padding: 10px 14px !important;
+}
 
-  /* --- Status --- */
-  --disabled: #666666;
-  --danger: #e9695a;
-  --alert: #ff9100;
-  --allowed: #59ba41;
-  --shadow-color: #00000066;
-
-  /* --- Dashboard background: none (style-only) --- */
-  --bg-image: none;
-  --bg-size: auto;
-  --bg-blend-mode: normal;
-
-  /* --- Logos (white wordmark for dark surfaces; login logo is the
-     color SVG mark on the same light panel as the light theme) --- */
-  --desktop-logo: url("<%=@BASEURL%>__themes__/AcaCoopLogoWhite.png");
-  --mobile-logo:  url("<%=@BASEURL%>__themes__/AcaCoopLogoMobileWhite.png");
-  --login-logo:   url("<%=@BASEURL%>__themes__/AcaCoopLoginLogo.svg");
-  --logo-bg-size: contain;
-
-  /* --- Login brand panel: deep indigo gradient --- */
-  --login-brand-bg: linear-gradient(135deg, #0d0f33 0%, #1a1d5e 60%, #282c87 100%);
-  --login-brand-bg-size: cover;
-  --login-brand-bg-repeat: no-repeat;
-  --login-brand-bg-position-x: center;
-  --login-brand-bg-position-y: center;
-  --login-brand-bg-blend-mode: normal;
-  --login-form-bg: var(--primary-bgcolor);
-  --login-box-width: 440px;
+/* =============================================================
+   Graceful motion: overlays pop; buttons/close icons press-scale.
+   ============================================================= */
+.AcaCoopLight .p-connected-overlay-enter-from,
+.AcaCoopDark  .p-connected-overlay-enter-from {
+  opacity: 0 !important;
+  transform: scale(0.9) translateY(-6px) !important;
+}
+.AcaCoopLight .p-connected-overlay-visible,
+.AcaCoopDark  .p-connected-overlay-visible {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+}
+.AcaCoopLight .p-connected-overlay-enter-active,
+.AcaCoopDark  .p-connected-overlay-enter-active {
+  transform-origin: top center;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.16s ease-out !important;
+}
+.AcaCoopLight .p-button:active, .AcaCoopDark .p-button:active,
+.AcaCoopLight .p-dialog-header-icon:active, .AcaCoopDark .p-dialog-header-icon:active,
+.AcaCoopLight .p-sidebar-close:active, .AcaCoopDark .p-sidebar-close:active {
+  transform: scale(0.94);
+  transition: transform 0.1s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .AcaCoopLight .p-connected-overlay-enter-active,
+  .AcaCoopDark  .p-connected-overlay-enter-active { transition: none !important; }
+  .AcaCoopLight .p-button:active, .AcaCoopDark .p-button:active,
+  .AcaCoopLight .p-dialog-header-icon:active, .AcaCoopDark .p-dialog-header-icon:active,
+  .AcaCoopLight .p-sidebar-close:active, .AcaCoopDark .p-sidebar-close:active { transform: none; }
 }
 
 /* =============================================================
    SSO provider buttons: grow on hover, bounce on click.
-   Targets the circular provider icon (.auth-circle), inline
-   provider buttons (.sso-buttons button) and the large variant
-   (.sso-button-large). prefers-reduced-motion aware.
    ============================================================= */
 @keyframes acacoop-sso-bounce {
   0%   { transform: scale(1.08); }
@@ -263,4 +332,168 @@
   .AcaCoopDark  .sso-buttons button:hover, .AcaCoopDark  .auth-circle:hover, .AcaCoopDark  .sso-button-large:hover { transform: none; box-shadow: none; }
   .AcaCoopLight .sso-buttons button:active, .AcaCoopLight .auth-circle:active, .AcaCoopLight .sso-button-large:active,
   .AcaCoopDark  .sso-buttons button:active, .AcaCoopDark  .auth-circle:active, .AcaCoopDark  .sso-button-large:active { animation: none; }
+}
+
+/* =============================================================
+   Narrow/mobile login header (#login-header): color lockup on the
+   white form (light theme); white wordmark on the dark form (dark).
+   ============================================================= */
+.AcaCoopLight #login-header .logo-img,
+.AcaCoopDark  #login-header .logo-img {
+  background-size: contain !important;
+  background-position: center !important;
+  height: 64px !important;
+  max-width: 320px;
+  margin: 0 auto;
+}
+.AcaCoopLight #login-header .logo-img {
+  background-image: url("<%=@BASEURL%>__themes__/AcaCoopLoginColor.png") !important;
+}
+.AcaCoopDark #login-header .logo-img {
+  background-image: url("<%=@BASEURL%>__themes__/AcaCoopLogoWhite.png") !important;
+}
+
+/* =============================================================
+   Login refinements: variant-A heading + boxed inputs + native font
+   + tighter spacing.
+   ============================================================= */
+.AcaCoopLight, .AcaCoopDark {
+  --font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.AcaCoopLight #login-container .login-title, .AcaCoopDark #login-container .login-title,
+.AcaCoopLight #login-container h2,           .AcaCoopDark #login-container h2 {
+  font-weight: 600 !important;
+  letter-spacing: -0.4px !important;
+  font-size: clamp(22px, 2vw, 28px) !important;
+  line-height: 1.2 !important;
+  color: var(--heading-color) !important;
+}
+.AcaCoopLight #login_main input.p-inputtext, .AcaCoopDark #login_main input.p-inputtext,
+.AcaCoopLight #login_changePassword input.p-inputtext, .AcaCoopDark #login_changePassword input.p-inputtext,
+.AcaCoopLight #radiusChallenge input.p-inputtext, .AcaCoopDark #radiusChallenge input.p-inputtext {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  padding: 11px 14px !important;
+}
+.AcaCoopLight #login_main .p-password.p-component.p-inputwrapper.p-input-icon-right, .AcaCoopDark #login_main .p-password.p-component.p-inputwrapper.p-input-icon-right,
+.AcaCoopLight #login_changePassword .p-password.p-component.p-inputwrapper.p-input-icon-right, .AcaCoopDark #login_changePassword .p-password.p-component.p-inputwrapper.p-input-icon-right {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  padding: 0 12px !important;
+}
+.AcaCoopLight #login_main input.p-inputtext.p-component.p-password-input, .AcaCoopDark #login_main input.p-inputtext.p-component.p-password-input {
+  border: none !important;
+}
+.AcaCoopLight #login-container .header, .AcaCoopDark #login-container .header {
+  margin-bottom: 0.25rem !important;
+}
+
+/* =============================================================
+   Footer: "Powered by Cybele Software" (CSS content-injection).
+   ============================================================= */
+.AcaCoopLight .app-footer small, .AcaCoopDark .app-footer small,
+.AcaCoopLight footer small,      .AcaCoopDark footer small {
+  font-size: 0 !important;
+}
+.AcaCoopLight .app-footer small .hiddenThin,
+.AcaCoopDark  .app-footer small .hiddenThin {
+  font-size: 0.8rem !important;
+}
+.AcaCoopLight .app-footer small::after, .AcaCoopDark .app-footer small::after,
+.AcaCoopLight footer small::after,      .AcaCoopDark footer small::after {
+  content: "Powered by Cybele Software";
+  font-size: 0.8rem;
+}
+
+.AcaCoopDark {
+  /* --- Core brand (lightened for dark surfaces) --- */
+  --primary-color: #69b3e7;
+  --dark-primary-color: #a3d2f2;
+  --light-primary-color: #1a1d5e;
+  --secondary-color: #565ed0;
+  --tertiary-color: #ff9100;
+
+  /* --- Surfaces (near-black with indigo cast) --- */
+  --bgcolor: #f9f9f9;
+  --primary-bgcolor: #121218;
+  --secondary-bgcolor: #1a1a24;
+  --tertiary-bgcolor: #232333;
+  --hover-bgcolor: #2c2c44;
+
+  --header-bgcolor: var(--secondary-bgcolor);
+  --toolbar-bgcolor: var(--tertiary-bgcolor);
+  --sidepanel-header-bgcolor: var(--header-bgcolor);
+  --sidepanel-bgcolor: var(--secondary-bgcolor);
+  --menu-bgcolor: var(--secondary-bgcolor);
+  --dialog-bgcolor: var(--primary-bgcolor);
+  --submenu-bgcolor: var(--tertiary-bgcolor);
+  --light-mode-entity-bg: #69b3e722;
+  --AcaCoopDark-entity-bg: #69b3e722;
+  --table-header-bgcolor: var(--hover-bgcolor);
+  --table-body-bgcolor: var(--secondary-bgcolor);
+  --table-body-bgcolor-h: var(--tertiary-bgcolor);
+
+  /* --- Buttons: lightened indigo (#282c87 is 1.6:1 on dark) --- */
+  --button-bgcolor: #565ed0;
+  --button-txtcolor: #ffffff;
+  --button-bgcolor-h: #69b3e7;
+  --button-txtcolor-h: #121218;
+  --outline-button-color: var(--primary-color);
+  --outline-button-bgcolor-h: var(--primary-color);
+  --outline-button-color-h: #121218;
+  --special-button: #ffffff;
+  /* Toggle (dark): ON = #565ed0, white knob */
+  --switcher-button: #4a4a55;
+  --switcher-button-before: #ffffff;
+  --switcher-button-bgcolor: #565ed0;
+  --switcher-button-bgcolor-h: #5a5a66;
+  --switcher-button-h: #69b3e7;
+
+  /* --- Links & nav. Selected pill must show on the near-black
+     surface: #1a1d5e collided with it; use #565ed0 + white (5.4:1). --- */
+  --link-color: var(--primary-color);
+  --link-color-h: var(--dark-primary-color);
+  --menu-selected-color: #ffffff;
+  --menu-selected-bgcolor: #565ed0;
+
+  /* --- Text --- */
+  --primary-txtcolor: #f2f3fa;
+  --secondary-txtcolor: #a4a4a6;
+  --heading-color: var(--primary-color);
+
+  /* --- Borders --- */
+  --border-color: #2f2f46;
+  --light-border-color: #232333;
+  --separator: #2f2f46;
+
+  /* --- Status --- */
+  --disabled: #666666;
+  --danger: #e9695a;
+  --alert: #ff9100;
+  --allowed: #59ba41;
+  --shadow-color: #00000066;
+
+  /* --- Dashboard background: none --- */
+  --bg-image: none;
+  --bg-size: auto;
+  --bg-blend-mode: normal;
+
+  /* --- Logos: white wordmark on dark surfaces; login uses the COLOR
+     lockup on the light brand panel (same as light theme). --- */
+  --desktop-logo: url("<%=@BASEURL%>__themes__/AcaCoopLogoWhite.png");
+  --mobile-logo:  url("<%=@BASEURL%>__themes__/AcaCoopLogoMobileWhite.png");
+  --login-logo:   url("<%=@BASEURL%>__themes__/AcaCoopLoginColor.png");
+  --logo-bg-size: contain;
+
+  /* --- Login brand panel: LIGHT indigo gradient (so the color logo
+     reads, same as light theme) --- */
+  --login-brand-bg: linear-gradient(135deg, #ffffff 0%, #eef0fa 50%, #d4d9f2 100%);
+  --login-brand-bg-size: cover;
+  --login-brand-bg-repeat: no-repeat;
+  --login-brand-bg-position-x: center;
+  --login-brand-bg-position-y: center;
+  --login-brand-bg-blend-mode: normal;
+  --login-form-bg: var(--primary-bgcolor);
+  --login-box-width: 440px;
 }
