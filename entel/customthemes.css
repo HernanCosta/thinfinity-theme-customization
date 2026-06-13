@@ -387,14 +387,17 @@
 }
 
 /* =============================================================
-   Footer: "Powered by Cybele Software, Inc." — keep the app's real
-   <a> (exact label + UTM link to cybelesoft.com); collapse the stock
-   copyright text and inject "Powered by " before the link.
+   Footer: "<product> v<ver>. Powered by Cybele Software, Inc."
+   Keep the product name + version (.hiddenThin, post-login) AND the
+   app's real <a> (exact label + UTM link). Collapse only the stock
+   "All rights reserved (c)..." copyright text and inject "Powered by "
+   in front of the link.
    ============================================================= */
 .EntelLight .app-footer small, .EntelDark .app-footer small,
 .EntelLight footer small,      .EntelDark footer small { font-size: 0 !important; }
-.EntelLight .app-footer small::before, .EntelDark .app-footer small::before,
-.EntelLight footer small::before,      .EntelDark footer small::before { content: "Powered by "; font-size: 0.8rem; }
+.EntelLight .app-footer small .hiddenThin, .EntelDark .app-footer small .hiddenThin { font-size: 0.8rem !important; }
+.EntelLight .app-footer small .hiddenThin::after, .EntelDark .app-footer small .hiddenThin::after { content: "Powered by "; font-size: 0.8rem; }
+.EntelLight footer small::before, .EntelDark footer small::before { content: "Powered by "; font-size: 0.8rem; }
 .EntelLight .app-footer small a, .EntelDark .app-footer small a,
 .EntelLight footer small a,      .EntelDark footer small a { font-size: 0.8rem !important; }
 

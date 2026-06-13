@@ -327,14 +327,17 @@
 }
 
 /* =============================================================
-   Footer: "Powered by Cybele Software, Inc." — keep the app's real
-   <a> (exact label + UTM link to cybelesoft.com); collapse the stock
-   copyright text and inject "Powered by " before the link.
+   Footer: "<product> v<ver>. Powered by Cybele Software, Inc."
+   Keep the product name + version (.hiddenThin, post-login) AND the
+   app's real <a> (exact label + UTM link). Collapse only the stock
+   "All rights reserved (c)..." copyright text and inject "Powered by "
+   in front of the link.
    ============================================================= */
 .AcaCoopLight .app-footer small, .AcaCoopDark .app-footer small,
 .AcaCoopLight footer small,      .AcaCoopDark footer small { font-size: 0 !important; }
-.AcaCoopLight .app-footer small::before, .AcaCoopDark .app-footer small::before,
-.AcaCoopLight footer small::before,      .AcaCoopDark footer small::before { content: "Powered by "; font-size: 0.8rem; }
+.AcaCoopLight .app-footer small .hiddenThin, .AcaCoopDark .app-footer small .hiddenThin { font-size: 0.8rem !important; }
+.AcaCoopLight .app-footer small .hiddenThin::after, .AcaCoopDark .app-footer small .hiddenThin::after { content: "Powered by "; font-size: 0.8rem; }
+.AcaCoopLight footer small::before, .AcaCoopDark footer small::before { content: "Powered by "; font-size: 0.8rem; }
 .AcaCoopLight .app-footer small a, .AcaCoopDark .app-footer small a,
 .AcaCoopLight footer small a,      .AcaCoopDark footer small a { font-size: 0.8rem !important; }
 
